@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IT Leadership Job Alerts</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2d3148;
+      --text: #e2e4ef;
+      --muted: #8b90a8;
+      --accent: #5b8def;
+      --green: #3ecf8e;
+      --yellow: #f0c060;
+      --red: #e05b5b;
+      --badge-new-bg: #1e3a2f;
+      --badge-new-text: #3ecf8e;
+      --badge-remote-bg: #1e2a3e;
+      --badge-remote-text: #5b8def;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+    }
+    header h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    header p { color: var(--muted); font-size: 13px; }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .toolbar input[type="text"] {
+      flex: 1;
+      min-width: 180px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 12px;
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+    }
+    .toolbar input[type="text"]:focus { border-color: var(--accent); }
+
+    .toolbar select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 10px;
+      color: var(--text);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .rss-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #4a2010;
+      color: #f0a060;
+      border-radius: 6px;
+      padding: 7px 12px;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .rss-link:hover { background: #5a2818; }
+
+    .stats {
+      padding: 10px 24px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .stats b { color: var(--text); }
+
+    .table-wrap {
+      padding: 0 24px 40px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    thead th {
+      text-align: left;
+      padding: 10px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      white-space: nowrap;
+      user-select: none;
+    }
+    thead th:hover { color: var(--text); }
+    thead th.sorted { color: var(--accent); }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s;
+    }
+    tbody tr:hover { background: var(--surface); }
+    td { padding: 11px 12px; vertical-align: top; }
+
+    .job-title a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .job-title a:hover { color: var(--accent); text-decoration: underline; }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-new { background: var(--badge-new-bg); color: var(--badge-new-text); }
+    .badge-remote { background: var(--badge-remote-bg); color: var(--badge-remote-text); }
+
+    .platform-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .col-date { white-space: nowrap; color: var(--muted); font-size: 12px; }
+    .col-loc { font-size: 12px; color: var(--muted); max-width: 160px; }
+
+    .empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+    .empty p { margin-top: 8px; font-size: 13px; }
+
+    #loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>IT Leadership Job Alerts</h1>
+  <p>Director / VP / Head of IT roles in Operations, Infrastructure &amp; Service Delivery — Remote or Jacksonville, FL</p>
+</header>
+
+<div class="toolbar">
+  <input type="text" id="search" placeholder="Filter by title, company, or location …">
+  <select id="platform-filter">
+    <option value="">All platforms</option>
+    <option value="Greenhouse">Greenhouse</option>
+    <option value="Lever">Lever</option>
+    <option value="Workday">Workday</option>
+  </select>
+  <select id="sort-by">
+    <option value="first_seen">Sort: Newest first</option>
+    <option value="company">Sort: Company A–Z</option>
+    <option value="title">Sort: Title A–Z</option>
+  </select>
+  <a class="rss-link" id="rss-link" href="job_feed.xml" target="_blank">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="6.18" cy="17.82" r="2.18"/>
+      <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+    </svg>
+    Subscribe RSS
+  </a>
+</div>
+
+<div class="stats" id="stats">Loading …</div>
+
+<div class="table-wrap">
+  <div id="loading">Loading job data …</div>
+  <table id="jobs-table" style="display:none">
+    <thead>
+      <tr>
+        <th data-col="title">Title</th>
+        <th data-col="company">Company</th>
+        <th data-col="location">Location</th>
+        <th data-col="platform_source">Platform</th>
+        <th data-col="first_seen" class="sorted">Added</th>
+        <th>Apply</th>
+      </tr>
+    </thead>
+    <tbody id="jobs-body"></tbody>
+  </table>
+  <div id="no-results" class="empty" style="display:none">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8b90a8" stroke-width="1.5">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <p>No jobs match the current filter.</p>
+  </div>
+</div>
+
+<script>
+  let allJobs = [];
+  let sortCol = 'first_seen';
+  let sortAsc = false;
+
+  const TODAY = new Date().toISOString().slice(0, 10);
+  function daysSince(dateStr) {
+    if (!dateStr) return 999;
+    return Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
+  }
+
+  function isRemote(loc) {
+    if (!loc) return false;
+    const l = loc.toLowerCase();
+    return l.includes('remote') || l.includes('anywhere') || l.includes('worldwide')
+        || l.includes('work from home') || l.includes('wfh');
+  }
+
+  function renderTable() {
+    const query = document.getElementById('search').value.toLowerCase().trim();
+    const platFilter = document.getElementById('platform-filter').value;
+
+    let jobs = allJobs.filter(j => {
+      if (platFilter && j.platform_source !== platFilter) return false;
+      if (!query) return true;
+      return (j.title + ' ' + j.company + ' ' + j.location).toLowerCase().includes(query);
+    });
+
+    jobs.sort((a, b) => {
+      let av = (a[sortCol] || '').toLowerCase();
+      let bv = (b[sortCol] || '').toLowerCase();
+      if (av < bv) return sortAsc ? -1 : 1;
+      if (av > bv) return sortAsc ? 1 : -1;
+      return 0;
+    });
+
+    const tbody = document.getElementById('jobs-body');
+    tbody.innerHTML = '';
+
+    if (!jobs.length) {
+      document.getElementById('jobs-table').style.display = 'none';
+      document.getElementById('no-results').style.display = 'block';
+      return;
+    }
+
+    document.getElementById('jobs-table').style.display = 'table';
+    document.getElementById('no-results').style.display = 'none';
+
+    for (const job of jobs) {
+      const isNew = daysSince(job.first_seen) <= 7;
+      const remote = isRemote(job.location);
+      const newBadge = isNew ? '<span class="badge badge-new" title="Added in the last 7 days">NEW</span> ' : '';
+      const remoteBadge = remote ? '<span class="badge badge-remote">Remote</span>' : '';
+      const loc = job.location || '—';
+      const added = job.first_seen || '—';
+      const url = job.application_url || '#';
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="job-title">${newBadge}<a href="${escHtml(url)}" target="_blank" rel="noopener">${escHtml(job.title)}</a></td>
+        <td>${escHtml(job.company)}</td>
+        <td class="col-loc">${remoteBadge} ${escHtml(loc)}</td>
+        <td><span class="platform-pill">${escHtml(job.platform_source)}</span></td>
+        <td class="col-date">${escHtml(added)}</td>
+        <td><a href="${escHtml(url)}" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-size:12px;">Apply →</a></td>
+      `;
+      tbody.appendChild(row);
+    }
+
+    // Update stats
+    const total = allJobs.length;
+    const newCount = allJobs.filter(j => daysSince(j.first_seen) <= 7).length;
+    document.getElementById('stats').innerHTML =
+      `Showing <b>${jobs.length}</b> of <b>${total}</b> open matches — <b>${newCount}</b> added in the last 7 days`;
+  }
+
+  function escHtml(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // Sort on header click
+  document.querySelectorAll('thead th[data-col]').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      if (sortCol === col) { sortAsc = !sortAsc; }
+      else { sortCol = col; sortAsc = col !== 'first_seen'; }
+      document.querySelectorAll('thead th').forEach(t => t.classList.remove('sorted'));
+      th.classList.add('sorted');
+      renderTable();
+    });
+  });
+
+  document.getElementById('search').addEventListener('input', renderTable);
+  document.getElementById('platform-filter').addEventListener('change', renderTable);
+  document.getElementById('sort-by').addEventListener('change', e => {
+    sortCol = e.target.value;
+    sortAsc = sortCol !== 'first_seen';
+    renderTable();
+  });
+
+  // Load jobs_db.json
+  fetch('jobs_db.json?_=' + Date.now())
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(data => {
+      allJobs = data.jobs || [];
+      document.getElementById('loading').style.display = 'none';
+      const updated = data.last_updated
+        ? new Date(data.last_updated).toLocaleString('en-US', {dateStyle:'medium', timeStyle:'short'})
+        : '—';
+      document.querySelector('header p').textContent =
+        `Director / VP / Head of IT roles — Remote or Jacksonville, FL · Last updated: ${updated}`;
+
+      // Update RSS link to absolute path once we know the base
+      const rssLink = document.getElementById('rss-link');
+      rssLink.href = 'job_feed.xml';
+
+      renderTable();
+    })
+    .catch(err => {
+      document.getElementById('loading').innerHTML =
+        `<p style="color:var(--muted)">Could not load jobs_db.json.<br>
+        Run <code>python alerts/main.py</code> locally, or wait for the GitHub Action to complete.<br>
+        <small style="color:#666">${err}</small></p>`;
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+# companies.yaml — Single source of truth for which companies to monitor.
+#
+# HOW TO ADD A COMPANY
+# --------------------
+# Greenhouse: find the slug at https://boards.greenhouse.io/<slug>
+#   Add:  - slug: "the-slug"
+#           name: "Company Name"
+#
+# Lever: find the slug at https://jobs.lever.co/<slug>
+#   Add:  - slug: "the-slug"
+#           name: "Company Name"
+#
+# Workday: format is "company|wd#|site_id"
+#   Find it from: https://<company>.wd<N>.myworkdayjobs.com/en-US/<site_id>
+#   Add:  - slug: "company|wd5|site_id"
+#           name: "Company Name"
+#
+# Slugs that return 404 or have no jobs are logged and silently skipped each run.
+# Remove dead slugs from this file or let the discovery module flag them.
+
+# ============================================================
+# GREENHOUSE
+# ============================================================
+greenhouse:
+
+  # --- IT Services & MSPs ---
+  - slug: "connectwise"
+    name: "ConnectWise"
+    tags: [msp, it-services]
+
+  - slug: "datto"
+    name: "Datto"
+    tags: [msp, backup]
+
+  - slug: "dattojobs"
+    name: "Datto (alt board)"
+    tags: [msp, backup]
+
+  - slug: "nttdatausa"
+    name: "NTT Data USA"
+    tags: [it-services, managed-services]
+
+  - slug: "accenturefederalservices"
+    name: "Accenture Federal Services"
+    tags: [consulting, federal-it]
+
+  - slug: "kforce"
+    name: "Kforce"
+    tags: [staffing, it-services]
+
+  - slug: "ciscomeraki"
+    name: "Cisco Meraki"
+    tags: [networking, it-services]
+
+  # --- Security & Monitoring ---
+  - slug: "beyondtrust"
+    name: "BeyondTrust"
+    tags: [security, pam]
+
+  - slug: "tenableinc"
+    name: "Tenable"
+    tags: [security, vulnerability-management]
+
+  - slug: "exabeam"
+    name: "Exabeam"
+    tags: [security, siem]
+
+  - slug: "illumio"
+    name: "Illumio"
+    tags: [security, microsegmentation]
+
+  - slug: "okta"
+    name: "Okta"
+    tags: [security, identity]
+
+  - slug: "pingidentity"
+    name: "Ping Identity"
+    tags: [security, identity]
+
+  - slug: "darktracelimited"
+    name: "Darktrace"
+    tags: [security, ai]
+
+  - slug: "legatosecurity"
+    name: "Legato Security"
+    tags: [security, msp]
+
+  # --- Observability / Monitoring ---
+  - slug: "datadog"
+    name: "Datadog"
+    tags: [monitoring, observability]
+
+  - slug: "pagerduty"
+    name: "PagerDuty"
+    tags: [monitoring, incident-management]
+
+  - slug: "elastic"
+    name: "Elastic"
+    tags: [observability, search]
+
+  - slug: "sumologic"
+    name: "Sumo Logic"
+    tags: [observability, siem]
+
+  - slug: "grafanalabs"
+    name: "Grafana Labs"
+    tags: [observability]
+
+  - slug: "catchpoint"
+    name: "Catchpoint"
+    tags: [observability, synthetic-monitoring]
+
+  # --- Cloud & Infrastructure ---
+  - slug: "cloudflare"
+    name: "Cloudflare"
+    tags: [cloud, networking, security]
+
+  - slug: "fastly"
+    name: "Fastly"
+    tags: [cdn, cloud]
+
+  - slug: "sentinelone"
+    name: "SentinelOne"
+    tags: [security, edr]
+
+  - slug: "crowdstrike"
+    name: "CrowdStrike"
+    tags: [security, edr]
+
+  - slug: "zscaler"
+    name: "Zscaler"
+    tags: [security, cloud-networking]
+
+  - slug: "logicmonitor"
+    name: "LogicMonitor"
+    tags: [monitoring, msp-tools]
+
+  - slug: "kaseya"
+    name: "Kaseya"
+    tags: [msp-tools, rmm]
+
+  - slug: "netskope"
+    name: "Netskope"
+    tags: [security, sase]
+
+  - slug: "servicenow"
+    name: "ServiceNow"
+    tags: [itsm, platform]
+
+  - slug: "splunk"
+    name: "Splunk"
+    tags: [observability, siem]
+
+  # --- Enterprise / Consulting ---
+  - slug: "gartner"
+    name: "Gartner"
+    tags: [research, consulting]
+
+  - slug: "ibmjobs"
+    name: "IBM"
+    tags: [consulting, it-services]
+
+  - slug: "cognizant"
+    name: "Cognizant"
+    tags: [it-services, consulting]
+
+  - slug: "infosys"
+    name: "Infosys"
+    tags: [it-services]
+
+  - slug: "wipro"
+    name: "Wipro"
+    tags: [it-services]
+
+  - slug: "hcltech"
+    name: "HCL Technologies"
+    tags: [it-services]
+
+# ============================================================
+# LEVER
+# ============================================================
+lever:
+
+  # --- Cloud & MSP ---
+  - slug: "rackspace"
+    name: "Rackspace"
+    tags: [cloud, msp]
+
+  - slug: "dynatrace"
+    name: "Dynatrace"
+    tags: [monitoring, observability]
+
+  - slug: "pagerduty"
+    name: "PagerDuty"
+    tags: [monitoring, incident-management]
+
+  - slug: "logicmonitor"
+    name: "LogicMonitor"
+    tags: [monitoring, msp-tools]
+
+  - slug: "netskope"
+    name: "Netskope"
+    tags: [security, sase]
+
+  - slug: "cloudflare"
+    name: "Cloudflare"
+    tags: [cloud, networking]
+
+  - slug: "rubrik"
+    name: "Rubrik"
+    tags: [backup, cloud]
+
+  - slug: "cohesity"
+    name: "Cohesity"
+    tags: [backup, data-management]
+
+  - slug: "druva"
+    name: "Druva"
+    tags: [backup, cloud]
+
+  - slug: "egnyte"
+    name: "Egnyte"
+    tags: [cloud, content-management]
+
+  - slug: "vectra"
+    name: "Vectra AI"
+    tags: [security, ndr]
+
+  - slug: "threatconnect"
+    name: "ThreatConnect"
+    tags: [security, threat-intel]
+
+  - slug: "mcaconnect"
+    name: "MCA Connect"
+    tags: [it-services, erp]
+
+  - slug: "swiftconnect"
+    name: "SwiftConnect"
+    tags: [it-services]
+
+  # --- Healthcare IT ---
+  - slug: "connectrn"
+    name: "ConnectRN"
+    tags: [healthcare, staffing]
+
+  # --- Enterprise / Telecom ---
+  - slug: "lumen"
+    name: "Lumen Technologies"
+    tags: [telecom, networking]
+
+  - slug: "windstream"
+    name: "Windstream"
+    tags: [telecom, managed-services]
+
+  - slug: "zayo"
+    name: "Zayo"
+    tags: [telecom, networking]
+
+# ============================================================
+# WORKDAY
+# ============================================================
+# Format: "company|wd<number>|site_id"
+workday:
+
+  # --- Big Tech / Infrastructure Vendors ---
+  - slug: "cisco|wd5|cisco_careers"
+    name: "Cisco"
+    tags: [networking, enterprise-tech]
+
+  - slug: "dell|wd1|external"
+    name: "Dell Technologies"
+    tags: [hardware, enterprise-tech]
+
+  - slug: "hpe|wd5|jobsathpe"
+    name: "Hewlett Packard Enterprise"
+    tags: [hardware, servers, enterprise-tech]
+
+  - slug: "hp|wd5|externalcareersite"
+    name: "HP Inc."
+    tags: [hardware]
+
+  - slug: "broadcom|wd1|external_career"
+    name: "Broadcom"
+    tags: [semiconductors, enterprise-tech]
+
+  - slug: "bmc|wd1|bmc"
+    name: "BMC Software"
+    tags: [itsm, it-operations]
+
+  - slug: "commvault|wd1|commvault"
+    name: "Commvault"
+    tags: [backup, data-management]
+
+  - slug: "flexerasoftware|wd1|flexerasoftware"
+    name: "Flexera"
+    tags: [it-asset-management]
+
+  - slug: "hitachi|wd1|hitachi"
+    name: "Hitachi"
+    tags: [enterprise-tech, infrastructure]
+
+  - slug: "unisys|wd5|external"
+    name: "Unisys"
+    tags: [it-services, managed-services]
+
+  # --- Telecom / ISP ---
+  - slug: "att|wd1|attgeneral"
+    name: "AT&T"
+    tags: [telecom, enterprise]
+
+  - slug: "verizon|wd12|verizon-careers"
+    name: "Verizon"
+    tags: [telecom, enterprise]
+
+  - slug: "comcast|wd5|comcast_careers"
+    name: "Comcast"
+    tags: [telecom, media]
+
+  - slug: "cox|wd1|cox_external_career_site_1"
+    name: "Cox Communications"
+    tags: [telecom, managed-services]
+
+  # --- Defense / Government IT ---
+  - slug: "mantech|wd1|external"
+    name: "ManTech"
+    tags: [defense, federal-it]
+
+  - slug: "leidos|wd5|external"
+    name: "Leidos"
+    tags: [defense, federal-it]
+
+  - slug: "caci|wd1|external"
+    name: "CACI International"
+    tags: [defense, federal-it]
+
+  - slug: "gdit|wd5|external_career_site"
+    name: "General Dynamics IT"
+    tags: [defense, federal-it, it-services]
+
+  # --- Consulting / Big 4 ---
+  - slug: "accenture|wd103|accenturecareers"
+    name: "Accenture"
+    tags: [consulting, it-services]
+
+  - slug: "gartner|wd5|ext"
+    name: "Gartner"
+    tags: [research, consulting]
+
+  # --- Healthcare / Insurance ---
+  - slug: "cigna|wd5|cignacareers"
+    name: "Cigna"
+    tags: [healthcare, insurance]
+
+  - slug: "adventisthealthcare|wd1|adventisthealthcarecareers"
+    name: "Adventist HealthCare"
+    tags: [healthcare]
+
+  - slug: "alignmenthealthcare|wd12|ahc_external"
+    name: "Alignment Healthcare"
+    tags: [healthcare]
+
+  # --- Enterprise / Large Corp ---
+  - slug: "generalmotors|wd5|careers_gm"
+    name: "General Motors"
+    tags: [automotive, enterprise]
+
+  - slug: "newchartertech|wd12|ctsi"
+    name: "NewCharter Technologies (CTSI)"
+    tags: [msp, it-services]
+
+  - slug: "newchartertech|wd12|bnmc"
+    name: "NewCharter Technologies (BNMC)"
+    tags: [msp, it-services]
+
+  - slug: "newchartertech|wd12|dstech"
+    name: "NewCharter Technologies (DS Tech)"
+    tags: [msp, it-services]
+
+  - slug: "newchartertech|wd12|cyber74"
+    name: "NewCharter Technologies (Cyber74)"
+    tags: [msp, security]

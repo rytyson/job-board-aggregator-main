@@ -1,0 +1,70 @@
+name: Job Alert System
+
+on:
+  # Run automatically after the main scraper finishes (scrape-jobs.yml).
+  # This guarantees we always filter freshly-scraped data.
+  workflow_run:
+    workflows: ["Update Job Listings"]
+    types: [completed]
+
+  # Daily fallback at 14:00 UTC in case the main scraper didn't trigger this.
+  schedule:
+    - cron: "0 14 * * *"
+
+  workflow_dispatch:  # Manual trigger via GitHub Actions UI
+
+jobs:
+  run-alerts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    permissions:
+      contents: write  # Required to commit output files back to the repo
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install --quiet requests pyyaml
+
+      - name: Run job alert system
+        id: alerts
+        run: |
+          cd alerts
+          python main.py
+          echo "new_jobs=$(python -c "
+          import json, os
+          try:
+              feed = open('../job_feed.xml').read()
+              import re
+              items = len(re.findall('<item>', feed))
+              # subtract the 'no new matches' sentinel item
+              print(max(0, items - 1) if 'No new matches' in feed else items)
+          except:
+              print(0)
+          ")" >> $GITHUB_OUTPUT
+
+      - name: Commit updated files
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add job_feed.xml jobs_db.json seen_jobs.json
+          git diff --staged --quiet || git commit -m \
+            "Job alerts update — $(date +'%Y-%m-%d %H:%M UTC') (${{ steps.alerts.outputs.new_jobs }} new)"
+          git push
+
+      - name: Summary
+        run: |
+          echo "### Job Alert Run Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**New jobs this run:** ${{ steps.alerts.outputs.new_jobs }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Timestamp:** $(date +'%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📡 [View RSS feed](https://raw.githubusercontent.com/${{ github.repository }}/main/job_feed.xml)" >> $GITHUB_STEP_SUMMARY
+          echo "📋 [View alerts page](https://${{ github.repository_owner }}.github.io/job-board-aggregator-main/alerts.html)" >> $GITHUB_STEP_SUMMARY
