@@ -168,7 +168,59 @@ def _extract_date(text: str) -> str | None:
     return None
 
 
+
+# Lever / BambooHR put annual salary without a nearby label — just dollars + "a year"
+_SALARY_ANNUAL_RE = re.compile(
+    r'\$\s*(\d{1,3}(?:,\d{3})*)\s*[kK]?\s*[-–—]\s*\$?\s*(\d{1,3}(?:,\d{3})*)\s*[kK]?\s*'
+    r'(?:a\s+year|per\s+year|annually|\/year|\/yr)\b',
+    re.IGNORECASE,
+)
+_SALARY_SINGLE_ANNUAL_RE = re.compile(
+    r'\$\s*(\d{1,3}(?:,\d{3})*)\s*[kK]?\s*'
+    r'(?:a\s+year|per\s+year|annually|\/year|\/yr)\b',
+    re.IGNORECASE,
+)
+
+
+def _parse_salary_match(lo_str: str, hi_str: str | None) -> str | None:
+    try:
+        lo = float(lo_str.replace(',', ''))
+        if lo < 1000:
+            lo *= 1000
+        lo = int(lo)
+        if lo < 25_000 or lo > 2_000_000:
+            return None
+        if hi_str:
+            hi = float(hi_str.replace(',', ''))
+            if hi < 1000:
+                hi *= 1000
+            hi = int(hi)
+            if hi < lo:
+                hi, lo = lo, hi
+            if hi > 2_000_000:
+                return None
+            return f"${lo:,} – ${hi:,}"
+        return f"${lo:,}"
+    except (ValueError, TypeError):
+        return None
+
+
 def _extract_salary(text: str) -> str | None:
+    # Pass 1: "$X – $Y a year" pattern (Lever, BambooHR, others without label)
+    m = _SALARY_ANNUAL_RE.search(text)
+    if m:
+        result = _parse_salary_match(m.group(1), m.group(2))
+        if result:
+            return result
+
+    # Pass 2: "$X a year" (single value, annual)
+    m = _SALARY_SINGLE_ANNUAL_RE.search(text)
+    if m:
+        result = _parse_salary_match(m.group(1), None)
+        if result:
+            return result
+
+    # Pass 3: salary label nearby, then dollar amount
     text_lower = text.lower()
     for label in _SALARY_LABELS:
         pos = text_lower.find(label)
@@ -176,26 +228,9 @@ def _extract_salary(text: str) -> str | None:
             continue
         chunk = text[max(0, pos - 20):pos + 400]
         for m in _SALARY_RE.finditer(chunk):
-            try:
-                lo = float(m.group(1).replace(',', ''))
-                if lo < 1000:
-                    lo *= 1000
-                lo = int(lo)
-                if lo < 25_000 or lo > 2_000_000:
-                    continue
-                if m.group(2):
-                    hi = float(m.group(2).replace(',', ''))
-                    if hi < 1000:
-                        hi *= 1000
-                    hi = int(hi)
-                    if hi < lo:
-                        hi, lo = lo, hi
-                    if hi > 2_000_000:
-                        continue
-                    return f"${lo:,} – ${hi:,}"
-                return f"${lo:,}"
-            except (ValueError, TypeError):
-                continue
+            result = _parse_salary_match(m.group(1), m.group(2))
+            if result:
+                return result
     return None
 
 
@@ -374,6 +409,84 @@ async def _extract_icims_location(page, body_text: str, page_title: str) -> str 
     return None
 
 
+# ── Greenhouse embed verifier ─────────────────────────────────────────────────
+
+def _check_greenhouse_embed(url: str, page_html: str, job: dict, checked_at: str) -> dict | None:
+    """
+    For URLs containing ?gh_jid=ID (Greenhouse job embedded on a company site),
+    verify liveness via the Greenhouse boards API.
+
+    Strategy:
+      1. Look for 'boards.greenhouse.io/SLUG' in the page HTML (most reliable).
+      2. Derive slug from the URL domain as a fallback.
+
+    Returns enriched job dict if liveness can be determined, else None.
+    """
+    import requests as req
+    from urllib.parse import urlparse
+
+    gh_jid = re.search(r'gh_jid=(\d+)', url)
+    if not gh_jid:
+        return None
+    job_id = gh_jid.group(1)
+
+    def _dead() -> dict:
+        return {**job, 'is_live': False, 'salary_posted': None,
+                'date_posted': None, 'location_verified': None,
+                'liveness_checked_at': checked_at}
+
+    def _from_api(data: dict) -> dict:
+        loc = (data.get('location') or {}).get('name', '') or ''
+        dp = (data.get('updated_at') or '')[:10] or None
+        return {**job, 'is_live': True, 'salary_posted': None,
+                'date_posted': dp, 'location_verified': loc or None,
+                'liveness_checked_at': checked_at}
+
+    def _try_api(slug: str) -> dict | None:
+        api = f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs/{job_id}"
+        try:
+            r = req.get(api, headers={'User-Agent': 'Mozilla/5.0'}, timeout=8)
+            if r.status_code == 200:
+                return _from_api(r.json())
+            if r.status_code == 404:
+                return _dead()
+        except Exception:
+            pass
+        return None
+
+    # Method 1: Greenhouse embed script — ?for=COMPANY_SLUG (most reliable)
+    # e.g. boards.greenhouse.io/embed/job_board/js?for=oasishealthpartners
+    m = re.search(
+        r'boards\.greenhouse\.io/embed/job_board(?:/js)?\?for=([a-z0-9\-_]+)',
+        page_html, re.IGNORECASE,
+    )
+    if m:
+        result = _try_api(m.group(1))
+        if result is not None:
+            return result
+
+    # Method 2: direct job URL in HTML — boards.greenhouse.io/SLUG/jobs/ID
+    m = re.search(
+        r'boards\.greenhouse\.io/([a-z0-9][a-z0-9\-_]{2,})/jobs/' + re.escape(job_id),
+        page_html, re.IGNORECASE,
+    )
+    if m:
+        result = _try_api(m.group(1))
+        if result is not None:
+            return result
+
+    # Method 3: derive slug from domain
+    parsed = urlparse(url)
+    domain = parsed.netloc.lower()
+    # "jobs.elastic.co" → "elastic", "oasishealth.com" → "oasishealth"
+    domain_slug = re.sub(r'^(jobs\.|www\.|careers\.)', '', domain).split('.')[0]
+    result = _try_api(domain_slug)
+    if result is not None:
+        return result
+
+    return None  # couldn't determine via API — caller falls back to page inspection
+
+
 # ── Workday CXS API path ──────────────────────────────────────────────────────
 
 def _check_workday_api(job: dict, checked_at: str) -> dict | None:
@@ -477,7 +590,11 @@ async def _verify_one(page, job: dict, checked_at: str) -> dict:
             return _closed()
 
     try:
-        await page.goto(url, wait_until='domcontentloaded', timeout=30_000)
+        nav_resp = await page.goto(url, wait_until='domcontentloaded', timeout=30_000)
+
+        # ── HTTP status check: Lever returns 404 for removed jobs ───────────
+        if nav_resp and nav_resp.status >= 400:
+            return _closed()
 
         # Allow JS-heavy SPAs (iCIMS, BambooHR, Ashby) to finish rendering
         try:
@@ -512,6 +629,20 @@ async def _verify_one(page, job: dict, checked_at: str) -> dict:
                 #  iCIMS continues below with body-text checks)
                 if 'icims.com' not in final_url.lower():
                     return _closed()
+
+        # ── Greenhouse embed: verify via API before relying on page text ─────
+        # Company-website Greenhouse embeds (e.g. ?gh_jid=12345) return HTTP 200
+        # even when the job is gone — the Greenhouse widget just shows an error
+        # inside an iframe that body text can't always capture.
+        if 'gh_jid=' in url.lower():
+            try:
+                page_html = await page.content()
+            except Exception:
+                page_html = ''
+            gh_result = _check_greenhouse_embed(url, page_html, job, checked_at)
+            if gh_result is not None:
+                return gh_result
+            # API couldn't determine liveness — fall through to page inspection
 
         # ── Collect all rendered text (main frame + child frames) ───────────
         body_text = await _all_text(page)
