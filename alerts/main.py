@@ -81,8 +81,9 @@ def run(dry_run: bool = False, mode: str = "chunks") -> int:
         print("      No matching jobs found. Check filters in config.py.")
 
     # ── 2. Liveness check + salary extraction ────────────────────────────
-    print(f"\n[2/6] Checking liveness & salary for {len(matching_jobs)} job(s) …")
-    print("      (fetches each posting URL in parallel — takes ~30–90 seconds)")
+    print(f"\n[2/6] Verifying {len(matching_jobs)} job(s) via headless Playwright …")
+    print("      Workday → CXS API  |  All others → full browser render (JS executed)")
+    print("      Takes 5–20 minutes depending on job count. Accuracy over speed.")
     matching_jobs = check_jobs_liveness(matching_jobs)
     live_jobs = [j for j in matching_jobs if j.get("is_live", True)]
     closed_count = len(matching_jobs) - len(live_jobs)

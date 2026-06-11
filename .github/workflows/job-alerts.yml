@@ -16,7 +16,7 @@ on:
 jobs:
   run-alerts:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 90
 
     permissions:
       contents: write  # Required to commit output files back to the repo
@@ -30,8 +30,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dependencies
-        run: pip install --quiet requests pyyaml
+      - name: Install Python dependencies
+        run: pip install --quiet requests pyyaml playwright
+
+      - name: Install Playwright browser (Chromium + system deps)
+        run: playwright install --with-deps chromium
 
       - name: Run job alert system
         id: alerts

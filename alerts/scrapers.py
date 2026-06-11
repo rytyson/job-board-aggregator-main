@@ -954,18 +954,16 @@ def _check_one(job: dict) -> dict:
                 "date_posted": None, "liveness_checked_at": checked_at}
 
 
-def check_jobs_liveness(jobs: list[dict], max_workers: int = 15) -> list[dict]:
-    """Check liveness + salary for all jobs in parallel. Returns enriched list."""
-    results: list[dict] = []
-    total = len(jobs)
+def check_jobs_liveness(jobs: list[dict], max_workers: int = 5) -> list[dict]:
+    """
+    Verify each job posting using a headless Playwright browser.
 
-    with ThreadPoolExecutor(max_workers=max_workers) as pool:
-        futures = {pool.submit(_check_one, job): job for job in jobs}
-        for future in as_completed(futures):
-            results.append(future.result())
-            done = len(results)
-            if done % 20 == 0 or done == total:
-                live = sum(1 for r in results if r.get("is_live", True))
-                print(f"  Liveness: {done}/{total} checked — {live} live so far …")
+    Every page is fully rendered (JavaScript executed) before inspection, so
+    JS SPAs like iCIMS and Workday are handled correctly.  Workday jobs use
+    the faster CXS JSON API for liveness + date; all other platforms use
+    Playwright.
 
-    return results
+    Extracts per-job: is_live, salary_posted, date_posted, location_verified.
+    """
+    from page_verifier import verify_all_jobs
+    return verify_all_jobs(jobs, max_concurrent=max_workers)

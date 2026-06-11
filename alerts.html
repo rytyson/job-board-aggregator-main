@@ -373,11 +373,23 @@
     return Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
   }
 
-  function isRemote(loc) {
-    if (!loc) return false;
-    const l = loc.toLowerCase();
-    return l.includes('remote') || l.includes('anywhere')
-        || l.includes('work from home') || l.includes('wfh');
+  function isRemote(job) {
+    const loc = (job.location_verified || job.location || '').toLowerCase();
+    return loc.includes('remote') || loc.includes('anywhere')
+        || loc.includes('work from home') || loc.includes('wfh');
+  }
+
+  // Return the best available location string for display, or null if unknown.
+  // For iCIMS jobs where the chunk defaulted to "United States" (unverified),
+  // return null so we show a warning instead of wrong data.
+  function displayLocation(job) {
+    if (job.location_verified) return job.location_verified;
+    if (job.platform_source === 'iCIMS'
+        && job.location === 'United States'
+        && job.liveness_checked_at) {
+      return null;  // was not verified — don't show the unverified default
+    }
+    return job.location || null;
   }
 
   function fmtDate(dateStr) {
@@ -422,7 +434,7 @@
       if (platFilter && job.platform_source !== platFilter) return false;
 
       if (query) {
-        const hay = (job.title + ' ' + job.company + ' ' + (job.location || '')).toLowerCase();
+        const hay = (job.title + ' ' + job.company + ' ' + (job.location_verified || job.location || '')).toLowerCase();
         if (!hay.includes(query)) return false;
       }
 
@@ -480,9 +492,9 @@
     for (const job of jobs) {
       const status  = statuses[job.job_id]?.status || null;
       const isNew   = daysSince(job.first_seen) <= 7;
-      const remote  = isRemote(job.location);
+      const remote  = isRemote(job);
       const url     = escHtml(job.application_url || '#');
-      const loc     = escHtml(job.location || '—');
+      const locStr  = displayLocation(job);
       // date_posted is only set when the liveness check extracted it from the
       // actual page — it's the real post date. first_seen is when our system
       // first spotted the job in the chunks. Show which one we're using.
@@ -492,6 +504,11 @@
 
       const newBadge    = isNew ? '<span class="badge badge-new">NEW</span> ' : '';
       const remoteBadge = remote ? '<span class="badge badge-remote">Remote</span> ' : '';
+      // Location cell: show verified location, fall back to chunk location,
+      // or show a warning when iCIMS couldn't be verified (don't show wrong data)
+      const locHtml = locStr
+        ? `${remoteBadge}${escHtml(locStr)}`
+        : `${remoteBadge}<span style="font-size:11px;color:var(--muted);font-style:italic">⚠ Location unverified</span>`;
 
       // Salary cell
       const salaryHtml = job.salary_posted
@@ -519,7 +536,7 @@
       row.innerHTML = `
         <td class="job-title">${newBadge}<a href="${url}" target="_blank" rel="noopener">${escHtml(job.title)}</a></td>
         <td>${escHtml(job.company)}</td>
-        <td class="col-loc">${remoteBadge}${loc}</td>
+        <td class="col-loc">${locHtml}</td>
         <td>${salaryHtml}</td>
         <td class="col-date" title="${escHtml(dateLabel)}: ${escHtml(postedDate || '')}">
           <span style="font-size:10px;color:var(--muted);display:block;line-height:1.2">${escHtml(dateLabel)}</span>
