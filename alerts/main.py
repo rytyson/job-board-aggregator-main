@@ -38,7 +38,7 @@ from dedup import (
 )
 from discovery import validate_existing_companies
 from feed_generator import generate_rss_feed, save_jobs_db
-from scrapers import fetch_all_jobs, fetch_all_jobs_from_chunks, load_companies
+from scrapers import check_jobs_liveness, fetch_all_jobs, fetch_all_jobs_from_chunks, load_companies
 
 logging.basicConfig(
     level=logging.INFO,
@@ -65,34 +65,45 @@ def run(dry_run: bool = False, mode: str = "chunks") -> int:
 
     # ── 1. Load / scrape jobs ─────────────────────────────────────────────
     if mode == "chunks":
-        print("\n[1/5] Reading pre-built job chunks (21,000+ companies) …")
+        print("\n[1/6] Reading pre-built job chunks (21,000+ companies) …")
         matching_jobs = fetch_all_jobs_from_chunks()
     else:
-        print("\n[1/5] Loading company list for live scrape …")
+        print("\n[1/6] Loading company list for live scrape …")
         companies = load_companies()
         total_companies = sum(len(v) for v in companies.values())
         print(f"      {total_companies} companies across 3 platforms")
-        print("\n[2/5] Fetching and filtering jobs …")
+        print("\n[2/6] Fetching and filtering jobs …")
         matching_jobs = fetch_all_jobs(companies)
 
-    print(f"\n      {len(matching_jobs)} jobs matched filters")
+    print(f"\n      {len(matching_jobs)} jobs matched keyword/location filters")
 
     if not matching_jobs:
         print("      No matching jobs found. Check filters in config.py.")
 
-    # ── 2. Dedup ──────────────────────────────────────────────────────────
-    print("\n[2/5] Running deduplication …")
+    # ── 2. Liveness check + salary extraction ────────────────────────────
+    print(f"\n[2/6] Checking liveness & salary for {len(matching_jobs)} job(s) …")
+    print("      (fetches each posting URL in parallel — takes ~30–90 seconds)")
+    matching_jobs = check_jobs_liveness(matching_jobs)
+    live_jobs = [j for j in matching_jobs if j.get("is_live", True)]
+    closed_count = len(matching_jobs) - len(live_jobs)
+    salary_count = sum(1 for j in live_jobs if j.get("salary_posted"))
+    print(f"      ✓ {len(live_jobs)} live  |  {closed_count} closed/expired (excluded)")
+    print(f"      ✓ {salary_count} postings with salary data")
+    matching_jobs = live_jobs  # drop closed jobs before dedup
+
+    # ── 3. Dedup ──────────────────────────────────────────────────────────
+    print("\n[3/6] Running deduplication …")
     seen = load_seen_jobs()
     new_jobs, existing_jobs, seen = partition_jobs(matching_jobs, seen)
     print(f"      New: {len(new_jobs)}  |  Previously seen (still open): {len(existing_jobs)}")
 
-    # ── 3. Prune stale entries ────────────────────────────────────────────
-    print("\n[3/5] Pruning stale entries …")
+    # ── 4. Prune stale entries ────────────────────────────────────────────
+    print("\n[4/6] Pruning stale entries …")
     current_ids = {j["job_id"] for j in matching_jobs}
     seen = prune_seen_jobs(seen, current_ids)
 
-    # ── 4. Write outputs ──────────────────────────────────────────────────
-    print("\n[4/5] Writing output files …")
+    # ── 5. Write outputs ──────────────────────────────────────────────────
+    print("\n[5/6] Writing output files …")
 
     if dry_run:
         print("      DRY-RUN mode — no files written")
@@ -104,6 +115,8 @@ def run(dry_run: bool = False, mode: str = "chunks") -> int:
     generate_rss_feed(new_jobs)
     save_seen_jobs(seen)
 
+    # ── 6. Summary ────────────────────────────────────────────────────────
+    print("\n[6/6] Done.")
     _print_summary(new_jobs, matching_jobs)
 
     print(f"\n  Output files:")

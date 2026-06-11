@@ -29,6 +29,7 @@
       line-height: 1.5;
     }
 
+    /* ── Header ─────────────────────────────────────────────────────────── */
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -37,11 +38,12 @@
     header h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
     header p { color: var(--muted); font-size: 13px; }
 
+    /* ── Toolbar row 1: search + filters ─────────────────────────────────── */
     .toolbar {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 14px 24px;
+      gap: 10px;
+      padding: 12px 24px;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
       flex-wrap: wrap;
@@ -58,7 +60,6 @@
       outline: none;
     }
     .toolbar input[type="text"]:focus { border-color: var(--accent); }
-
     .toolbar select {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -68,7 +69,6 @@
       font-size: 13px;
       cursor: pointer;
     }
-
     .rss-link {
       display: inline-flex;
       align-items: center;
@@ -84,6 +84,62 @@
     }
     .rss-link:hover { background: #5a2818; }
 
+    /* ── Toolbar row 2: status tabs + toggles ────────────────────────────── */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .status-tabs { display: flex; gap: 0; }
+    .tab-btn {
+      padding: 10px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--muted);
+      white-space: nowrap;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-count {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      background: var(--bg);
+      color: var(--muted);
+      padding: 1px 5px;
+      border-radius: 10px;
+      margin-left: 4px;
+      min-width: 18px;
+      text-align: center;
+    }
+    .tab-btn.active .tab-count { background: #1e2a4e; color: var(--accent); }
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+      padding: 10px 0;
+    }
+    .toggle-group label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .toggle-group input[type="checkbox"] { cursor: pointer; accent-color: var(--accent); }
+
+    /* ── Stats bar ───────────────────────────────────────────────────────── */
     .stats {
       padding: 10px 24px;
       font-size: 12px;
@@ -91,18 +147,12 @@
     }
     .stats b { color: var(--text); }
 
-    .table-wrap {
-      padding: 0 24px 40px;
-      overflow-x: auto;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 16px;
-    }
+    /* ── Table ───────────────────────────────────────────────────────────── */
+    .table-wrap { padding: 0 24px 40px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
     thead th {
       text-align: left;
-      padding: 10px 12px;
+      padding: 10px 10px;
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
@@ -115,12 +165,17 @@
     }
     thead th:hover { color: var(--text); }
     thead th.sorted { color: var(--accent); }
+    thead th.sorted::after { content: attr(data-arrow); margin-left: 4px; opacity: 0.8; }
+    thead th.no-sort { cursor: default; }
+    thead th.no-sort:hover { color: var(--muted); }
     tbody tr {
       border-bottom: 1px solid var(--border);
       transition: background 0.1s;
     }
     tbody tr:hover { background: var(--surface); }
-    td { padding: 11px 12px; vertical-align: top; }
+    tbody tr.row-applied { opacity: 0.55; }
+    tbody tr.row-ignored { opacity: 0.40; }
+    td { padding: 10px 10px; vertical-align: top; }
 
     .job-title a {
       color: var(--text);
@@ -131,13 +186,13 @@
 
     .badge {
       display: inline-block;
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 4px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       white-space: nowrap;
     }
-    .badge-new { background: var(--badge-new-bg); color: var(--badge-new-text); }
+    .badge-new  { background: var(--badge-new-bg);    color: var(--badge-new-text); }
     .badge-remote { background: var(--badge-remote-bg); color: var(--badge-remote-text); }
 
     .platform-pill {
@@ -150,50 +205,100 @@
       color: var(--muted);
     }
 
-    .col-date { white-space: nowrap; color: var(--muted); font-size: 12px; }
-    .col-loc { font-size: 12px; color: var(--muted); max-width: 160px; }
+    .col-date  { white-space: nowrap; color: var(--muted); font-size: 12px; }
+    .col-loc   { font-size: 12px; color: var(--muted); max-width: 150px; }
+    .col-salary { font-size: 12px; color: var(--green); white-space: nowrap; }
+    .col-salary.no-salary { color: var(--muted); }
 
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--green);
+      white-space: nowrap;
+    }
+    .verified-badge.old { color: var(--muted); }
+
+    /* ── Action buttons ──────────────────────────────────────────────────── */
+    .action-btns { display: flex; gap: 4px; }
+    .action-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .action-btn:hover { border-color: var(--accent); color: var(--text); }
+    .action-btn.st-saved    { background: #2a2510; border-color: var(--yellow); color: var(--yellow); }
+    .action-btn.st-applied  { background: #1a2e1a; border-color: var(--green);  color: var(--green);  }
+    .action-btn.st-ignored  { background: #2a1a1a; border-color: var(--red);    color: var(--red);    }
+
+    .apply-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .apply-link:hover { text-decoration: underline; }
+
+    /* ── Empty / loading states ──────────────────────────────────────────── */
     .empty {
       text-align: center;
       padding: 60px 20px;
       color: var(--muted);
     }
     .empty p { margin-top: 8px; font-size: 13px; }
-
-    #loading {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--muted);
-    }
+    #loading  { text-align: center; padding: 60px 20px; color: var(--muted); }
   </style>
 </head>
 <body>
 
 <header>
   <h1>IT Leadership Job Alerts</h1>
-  <p>Director / VP / Head of IT roles in Operations, Infrastructure &amp; Service Delivery — Remote or Jacksonville, FL</p>
+  <p id="header-sub">Director / VP / Head of IT roles in Operations, Infrastructure &amp; Service Delivery — Remote or Jacksonville, FL</p>
 </header>
 
+<!-- Toolbar row 1: search + platform + RSS -->
 <div class="toolbar">
-  <input type="text" id="search" placeholder="Filter by title, company, or location …">
+  <input type="text" id="search" placeholder="Search title, company, or location …">
   <select id="platform-filter">
     <option value="">All platforms</option>
+    <option value="Ashby">Ashby</option>
+    <option value="BambooHR">BambooHR</option>
     <option value="Greenhouse">Greenhouse</option>
+    <option value="iCIMS">iCIMS</option>
     <option value="Lever">Lever</option>
     <option value="Workday">Workday</option>
   </select>
-  <select id="sort-by">
-    <option value="first_seen">Sort: Newest first</option>
-    <option value="company">Sort: Company A–Z</option>
-    <option value="title">Sort: Title A–Z</option>
-  </select>
-  <a class="rss-link" id="rss-link" href="job_feed.xml" target="_blank">
+  <a class="rss-link" href="job_feed.xml" target="_blank">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
       <circle cx="6.18" cy="17.82" r="2.18"/>
       <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
     </svg>
     Subscribe RSS
   </a>
+</div>
+
+<!-- Toolbar row 2: status tabs + hide toggle -->
+<div class="status-bar">
+  <div class="status-tabs">
+    <button class="tab-btn active" data-tab="">All <span class="tab-count" id="cnt-all">0</span></button>
+    <button class="tab-btn" data-tab="saved">Saved <span class="tab-count" id="cnt-saved">0</span></button>
+    <button class="tab-btn" data-tab="applied">Applied <span class="tab-count" id="cnt-applied">0</span></button>
+    <button class="tab-btn" data-tab="ignored">Ignored <span class="tab-count" id="cnt-ignored">0</span></button>
+  </div>
+  <div class="toggle-group">
+    <label>
+      <input type="checkbox" id="hide-actioned">
+      Hide applied &amp; ignored
+    </label>
+  </div>
 </div>
 
 <div class="stats" id="stats">Loading …</div>
@@ -203,12 +308,15 @@
   <table id="jobs-table" style="display:none">
     <thead>
       <tr>
-        <th data-col="title">Title</th>
-        <th data-col="company">Company</th>
-        <th data-col="location">Location</th>
-        <th data-col="platform_source">Platform</th>
-        <th data-col="first_seen" class="sorted">Added</th>
-        <th>Apply</th>
+        <th data-col="title" data-arrow="↑">Title</th>
+        <th data-col="company" data-arrow="↑">Company</th>
+        <th data-col="location" data-arrow="↑">Location</th>
+        <th data-col="salary_posted" data-arrow="↑">Salary</th>
+        <th data-col="first_seen" class="sorted" data-arrow="↓">Posted</th>
+        <th data-col="liveness_checked_at" data-arrow="↑">Verified</th>
+        <th data-col="platform_source" data-arrow="↑">Platform</th>
+        <th class="no-sort">Actions</th>
+        <th class="no-sort">Apply</th>
       </tr>
     </thead>
     <tbody id="jobs-body"></tbody>
@@ -222,11 +330,44 @@
 </div>
 
 <script>
+  // ── Data ──────────────────────────────────────────────────────────────────
   let allJobs = [];
   let sortCol = 'first_seen';
   let sortAsc = false;
+  let activeTab = '';   // '' | 'saved' | 'applied' | 'ignored'
 
-  const TODAY = new Date().toISOString().slice(0, 10);
+  // ── localStorage ─────────────────────────────────────────────────────────
+  const STORAGE_KEY = 'it-job-statuses';
+
+  function loadStatuses() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch (_) { return {}; }
+  }
+
+  function setStatus(jobId, status) {
+    const statuses = loadStatuses();
+    const existing = statuses[jobId]?.status;
+    if (existing === status) {
+      delete statuses[jobId];   // clicking the active button clears it
+    } else {
+      statuses[jobId] = { status, timestamp: new Date().toISOString() };
+    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(statuses));
+    updateTabCounts();
+    renderTable();
+  }
+
+  function getStatus(jobId) {
+    return loadStatuses()[jobId]?.status || null;
+  }
+
+  // ── Helpers ───────────────────────────────────────────────────────────────
+  function escHtml(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
   function daysSince(dateStr) {
     if (!dateStr) return 999;
     return Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
@@ -235,25 +376,75 @@
   function isRemote(loc) {
     if (!loc) return false;
     const l = loc.toLowerCase();
-    return l.includes('remote') || l.includes('anywhere') || l.includes('worldwide')
+    return l.includes('remote') || l.includes('anywhere')
         || l.includes('work from home') || l.includes('wfh');
   }
 
-  function renderTable() {
-    const query = document.getElementById('search').value.toLowerCase().trim();
-    const platFilter = document.getElementById('platform-filter').value;
+  function fmtDate(dateStr) {
+    if (!dateStr) return '—';
+    const d = new Date(dateStr + (dateStr.length === 10 ? 'T12:00:00' : ''));
+    if (isNaN(d)) return dateStr;
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
 
-    let jobs = allJobs.filter(j => {
-      if (platFilter && j.platform_source !== platFilter) return false;
-      if (!query) return true;
-      return (j.title + ' ' + j.company + ' ' + j.location).toLowerCase().includes(query);
+  function fmtVerified(isoStr) {
+    if (!isoStr) return '';
+    const d = new Date(isoStr);
+    if (isNaN(d)) return '';
+    const days = Math.floor((Date.now() - d.getTime()) / 86400000);
+    if (days === 0) return 'Today';
+    if (days === 1) return 'Yesterday';
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  // ── Tab counts ────────────────────────────────────────────────────────────
+  function updateTabCounts() {
+    const statuses = loadStatuses();
+    const counts = { saved: 0, applied: 0, ignored: 0 };
+    for (const job of allJobs) {
+      const s = statuses[job.job_id]?.status;
+      if (s && counts[s] !== undefined) counts[s]++;
+    }
+    document.getElementById('cnt-all').textContent = allJobs.length;
+    document.getElementById('cnt-saved').textContent = counts.saved;
+    document.getElementById('cnt-applied').textContent = counts.applied;
+    document.getElementById('cnt-ignored').textContent = counts.ignored;
+  }
+
+  // ── Main render ───────────────────────────────────────────────────────────
+  function renderTable() {
+    const query        = document.getElementById('search').value.toLowerCase().trim();
+    const platFilter   = document.getElementById('platform-filter').value;
+    const hideActioned = document.getElementById('hide-actioned').checked;
+    const statuses     = loadStatuses();
+
+    let jobs = allJobs.filter(job => {
+      if (platFilter && job.platform_source !== platFilter) return false;
+
+      if (query) {
+        const hay = (job.title + ' ' + job.company + ' ' + (job.location || '')).toLowerCase();
+        if (!hay.includes(query)) return false;
+      }
+
+      const status = statuses[job.job_id]?.status || null;
+
+      // Status tab filter
+      if (activeTab === 'saved'   && status !== 'saved')   return false;
+      if (activeTab === 'applied' && status !== 'applied') return false;
+      if (activeTab === 'ignored' && status !== 'ignored') return false;
+
+      // Hide actioned toggle (only on the "All" tab)
+      if (activeTab === '' && hideActioned && (status === 'applied' || status === 'ignored')) return false;
+
+      return true;
     });
 
+    // Sort
     jobs.sort((a, b) => {
-      let av = (a[sortCol] || '').toLowerCase();
-      let bv = (b[sortCol] || '').toLowerCase();
+      let av = String(a[sortCol] || '').toLowerCase();
+      let bv = String(b[sortCol] || '').toLowerCase();
       if (av < bv) return sortAsc ? -1 : 1;
-      if (av > bv) return sortAsc ? 1 : -1;
+      if (av > bv) return sortAsc ? 1  : -1;
       return 0;
     });
 
@@ -263,6 +454,7 @@
     if (!jobs.length) {
       document.getElementById('jobs-table').style.display = 'none';
       document.getElementById('no-results').style.display = 'block';
+      document.getElementById('stats').innerHTML = 'No jobs match the current filter.';
       return;
     }
 
@@ -270,58 +462,99 @@
     document.getElementById('no-results').style.display = 'none';
 
     for (const job of jobs) {
-      const isNew = daysSince(job.first_seen) <= 7;
-      const remote = isRemote(job.location);
-      const newBadge = isNew ? '<span class="badge badge-new" title="Added in the last 7 days">NEW</span> ' : '';
-      const remoteBadge = remote ? '<span class="badge badge-remote">Remote</span>' : '';
-      const loc = job.location || '—';
-      const added = job.first_seen || '—';
-      const url = job.application_url || '#';
+      const status  = statuses[job.job_id]?.status || null;
+      const isNew   = daysSince(job.first_seen) <= 7;
+      const remote  = isRemote(job.location);
+      const url     = escHtml(job.application_url || '#');
+      const loc     = escHtml(job.location || '—');
+      const postedDate = job.date_posted || job.first_seen;
+
+      const newBadge    = isNew ? '<span class="badge badge-new">NEW</span> ' : '';
+      const remoteBadge = remote ? '<span class="badge badge-remote">Remote</span> ' : '';
+
+      // Salary cell
+      const salaryHtml = job.salary_posted
+        ? `<span class="col-salary">${escHtml(job.salary_posted)}</span>`
+        : `<span class="col-salary no-salary">—</span>`;
+
+      // Verified cell
+      let verifiedHtml = '—';
+      if (job.liveness_checked_at) {
+        const label = fmtVerified(job.liveness_checked_at);
+        const daysOld = daysSince(job.liveness_checked_at.slice(0, 10));
+        const cls = daysOld > 2 ? 'verified-badge old' : 'verified-badge';
+        verifiedHtml = `<span class="${cls}" title="Verified ${job.liveness_checked_at.slice(0,10)}">✓ ${escHtml(label)}</span>`;
+      }
+
+      // Action buttons
+      const btnSave  = `<button class="action-btn${status==='saved'   ? ' st-saved'   : ''}" onclick="setStatus('${escHtml(job.job_id)}','saved')"   title="Save for later">★</button>`;
+      const btnApply = `<button class="action-btn${status==='applied' ? ' st-applied' : ''}" onclick="setStatus('${escHtml(job.job_id)}','applied')" title="Mark applied">✓</button>`;
+      const btnIgnore= `<button class="action-btn${status==='ignored' ? ' st-ignored' : ''}" onclick="setStatus('${escHtml(job.job_id)}','ignored')" title="Not interested">✗</button>`;
 
       const row = document.createElement('tr');
+      if (status === 'applied') row.classList.add('row-applied');
+      if (status === 'ignored') row.classList.add('row-ignored');
+
       row.innerHTML = `
-        <td class="job-title">${newBadge}<a href="${escHtml(url)}" target="_blank" rel="noopener">${escHtml(job.title)}</a></td>
+        <td class="job-title">${newBadge}<a href="${url}" target="_blank" rel="noopener">${escHtml(job.title)}</a></td>
         <td>${escHtml(job.company)}</td>
-        <td class="col-loc">${remoteBadge} ${escHtml(loc)}</td>
+        <td class="col-loc">${remoteBadge}${loc}</td>
+        <td>${salaryHtml}</td>
+        <td class="col-date" title="${escHtml(postedDate || '')}">${fmtDate(postedDate)}</td>
+        <td>${verifiedHtml}</td>
         <td><span class="platform-pill">${escHtml(job.platform_source)}</span></td>
-        <td class="col-date">${escHtml(added)}</td>
-        <td><a href="${escHtml(url)}" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-size:12px;">Apply →</a></td>
+        <td><div class="action-btns">${btnSave}${btnApply}${btnIgnore}</div></td>
+        <td><a class="apply-link" href="${url}" target="_blank" rel="noopener">Apply →</a></td>
       `;
       tbody.appendChild(row);
     }
 
-    // Update stats
-    const total = allJobs.length;
+    // Stats bar
+    const total    = allJobs.length;
     const newCount = allJobs.filter(j => daysSince(j.first_seen) <= 7).length;
+    const salCount = allJobs.filter(j => j.salary_posted).length;
     document.getElementById('stats').innerHTML =
-      `Showing <b>${jobs.length}</b> of <b>${total}</b> open matches — <b>${newCount}</b> added in the last 7 days`;
+      `Showing <b>${jobs.length}</b> of <b>${total}</b> live matches — `
+    + `<b>${newCount}</b> added this week`
+    + (salCount ? ` · <b>${salCount}</b> with salary posted` : '');
   }
 
-  function escHtml(s) {
-    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
+  // ── Event wiring ──────────────────────────────────────────────────────────
+  document.getElementById('search').addEventListener('input', renderTable);
+  document.getElementById('platform-filter').addEventListener('change', renderTable);
+  document.getElementById('hide-actioned').addEventListener('change', renderTable);
 
-  // Sort on header click
+  // Sortable column headers
   document.querySelectorAll('thead th[data-col]').forEach(th => {
     th.addEventListener('click', () => {
       const col = th.dataset.col;
-      if (sortCol === col) { sortAsc = !sortAsc; }
-      else { sortCol = col; sortAsc = col !== 'first_seen'; }
-      document.querySelectorAll('thead th').forEach(t => t.classList.remove('sorted'));
+      if (sortCol === col) {
+        sortAsc = !sortAsc;
+      } else {
+        sortCol = col;
+        sortAsc = col !== 'first_seen' && col !== 'liveness_checked_at';
+      }
+      document.querySelectorAll('thead th').forEach(t => {
+        t.classList.remove('sorted');
+        if (t.dataset.arrow) t.dataset.arrow = t.dataset.arrow.replace(/[↑↓]/, '↑');
+      });
       th.classList.add('sorted');
+      th.dataset.arrow = sortAsc ? '↑' : '↓';
       renderTable();
     });
   });
 
-  document.getElementById('search').addEventListener('input', renderTable);
-  document.getElementById('platform-filter').addEventListener('change', renderTable);
-  document.getElementById('sort-by').addEventListener('change', e => {
-    sortCol = e.target.value;
-    sortAsc = sortCol !== 'first_seen';
-    renderTable();
+  // Status tab buttons
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeTab = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderTable();
+    });
   });
 
-  // Load jobs_db.json
+  // ── Load jobs_db.json ─────────────────────────────────────────────────────
   fetch('jobs_db.json?_=' + Date.now())
     .then(r => {
       if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -330,16 +563,14 @@
     .then(data => {
       allJobs = data.jobs || [];
       document.getElementById('loading').style.display = 'none';
+
       const updated = data.last_updated
-        ? new Date(data.last_updated).toLocaleString('en-US', {dateStyle:'medium', timeStyle:'short'})
+        ? new Date(data.last_updated).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })
         : '—';
-      document.querySelector('header p').textContent =
+      document.getElementById('header-sub').textContent =
         `Director / VP / Head of IT roles — Remote or Jacksonville, FL · Last updated: ${updated}`;
 
-      // Update RSS link to absolute path once we know the base
-      const rssLink = document.getElementById('rss-link');
-      rssLink.href = 'job_feed.xml';
-
+      updateTabCounts();
       renderTable();
     })
     .catch(err => {

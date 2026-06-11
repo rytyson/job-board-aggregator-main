@@ -613,3 +613,140 @@ def fetch_all_jobs(companies: dict) -> list[dict]:
             unique.append(job)
 
     return unique
+
+
+# ──────────────────────────── Liveness check + salary ───────────────────────
+
+_CLOSED_PHRASES = [
+    "this job is no longer available",
+    "job has been closed",
+    "position has been filled",
+    "no longer accepting applications",
+    "requisition is closed",
+    "job has been removed",
+    "position is no longer available",
+    "this opening has been filled",
+    "this position has been filled",
+    "job has expired",
+    "posting has expired",
+    "this job has expired",
+    "job is no longer active",
+    "no longer active",
+    "position is closed",
+    "not accepting applications",
+    "job posting has been removed",
+    "this position has been filled",
+    "page not found",
+    "job not found",
+    "posting not found",
+    "position not found",
+    "sorry, this job is no longer",
+    "this opportunity is no longer",
+    "job listing has been removed",
+    "opening is no longer available",
+]
+
+_SALARY_LABELS = [
+    "salary", "compensation", "pay range", "base pay",
+    "annual salary", "total compensation", "wage", "hourly rate",
+    "base salary", "salary range",
+]
+
+_SALARY_RE = re.compile(
+    r'\$\s*(\d{1,3}(?:,\d{3})*|\d+)\s*[kK]?\s*(?:[-–—]\s*\$?\s*(\d{1,3}(?:,\d{3})*|\d+)\s*[kK]?)?',
+    re.IGNORECASE,
+)
+
+
+def _parse_salary_val(s: str) -> int:
+    s = s.replace(",", "").strip()
+    val = float(s)
+    if val < 1000:
+        val *= 1000
+    return int(val)
+
+
+def _extract_salary(html: str) -> str | None:
+    text_lower = html.lower()
+    for label in _SALARY_LABELS:
+        pos = text_lower.find(label)
+        if pos == -1:
+            continue
+        chunk = html[max(0, pos - 20) : pos + 400]
+        for m in _SALARY_RE.finditer(chunk):
+            low_str = m.group(1)
+            high_str = m.group(2)
+            try:
+                low = _parse_salary_val(low_str)
+                if low < 25_000 or low > 2_000_000:
+                    continue
+                if high_str:
+                    high = _parse_salary_val(high_str)
+                    if high < low:
+                        high, low = low, high
+                    if high > 2_000_000:
+                        continue
+                    return f"${low:,} – ${high:,}"
+                return f"${low:,}"
+            except (ValueError, TypeError):
+                continue
+    return None
+
+
+def _check_one(job: dict) -> dict:
+    url = (job.get("application_url") or "").strip()
+    checked_at = _now_iso()
+
+    if not url:
+        return {**job, "is_live": False, "salary_posted": None, "liveness_checked_at": checked_at}
+
+    try:
+        resp = requests.get(
+            url,
+            headers={"User-Agent": _ua(), "Accept": "text/html,application/xhtml+xml,*/*"},
+            timeout=12,
+            allow_redirects=True,
+        )
+
+        if resp.status_code in (404, 410):
+            return {**job, "is_live": False, "salary_posted": None, "liveness_checked_at": checked_at}
+
+        if resp.status_code >= 400:
+            return {**job, "is_live": False, "salary_posted": None, "liveness_checked_at": checked_at}
+
+        # Detect redirect to a top-level careers/home page (job was removed)
+        orig_path_depth = len([p for p in url.split("/") if p and "http" not in p])
+        final_path_depth = len([p for p in resp.url.split("/") if p and "http" not in p])
+        if final_path_depth <= 1 and orig_path_depth >= 3:
+            return {**job, "is_live": False, "salary_posted": None, "liveness_checked_at": checked_at}
+
+        content_lower = resp.text.lower()
+        for phrase in _CLOSED_PHRASES:
+            if phrase in content_lower:
+                return {**job, "is_live": False, "salary_posted": None, "liveness_checked_at": checked_at}
+
+        salary = _extract_salary(resp.text)
+        return {**job, "is_live": True, "salary_posted": salary, "liveness_checked_at": checked_at}
+
+    except requests.exceptions.Timeout:
+        # On timeout assume still live — don't falsely close jobs
+        return {**job, "is_live": True, "salary_posted": None, "liveness_checked_at": checked_at}
+    except Exception:
+        return {**job, "is_live": True, "salary_posted": None, "liveness_checked_at": checked_at}
+
+
+def check_jobs_liveness(jobs: list[dict], max_workers: int = 15) -> list[dict]:
+    """Check liveness + salary for all jobs in parallel. Returns enriched list."""
+    results: list[dict] = []
+    total = len(jobs)
+
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        futures = {pool.submit(_check_one, job): job for job in jobs}
+        for future in as_completed(futures):
+            results.append(future.result())
+            done = len(results)
+            if done % 20 == 0 or done == total:
+                live = sum(1 for r in results if r.get("is_live", True))
+                print(f"  Liveness: {done}/{total} checked — {live} live so far …")
+
+    return results
