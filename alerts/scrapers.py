@@ -491,6 +491,24 @@ def fetch_all_jobs_from_chunks() -> list[dict]:
         if not url or not title or not company:
             continue
 
+        # iCIMS scraper does not populate location — infer from the remote flag.
+        # iCIMS is used almost exclusively by US enterprises, so "United States"
+        # is a safe default when remote=False and location is absent.
+        # Exception: skip iCIMS boards whose company slug starts with a
+        # 2-letter country code prefix (e.g. "de-merlin", "it-merlin", "uk-company")
+        # — those are country-specific non-US boards.
+        _ICIMS_COUNTRY_PREFIXES = (
+            "de-", "it-", "uk-", "fr-", "es-", "nl-", "au-", "ca-",
+            "sg-", "jp-", "kr-", "in-", "br-", "mx-", "pl-", "se-",
+        )
+        loc_raw = location.lower().strip()
+        if ats == "iCIMS" and loc_raw in ("", "not specified", "n/a", "unknown"):
+            slug_lower = company.lower().replace(" ", "-")
+            if any(slug_lower.startswith(pfx) for pfx in _ICIMS_COUNTRY_PREFIXES):
+                location = ""   # will fail location filter → excluded
+            else:
+                location = "Remote" if job.get("remote") else "United States"
+
         # Generate a stable job_id from the three most-stable fields
         job_id = _make_job_id(ats, company, url)
 

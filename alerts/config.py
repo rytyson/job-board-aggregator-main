@@ -233,6 +233,9 @@ EXCLUSION_TERMS = [
     "partnerships",     # "Head of Technology Partnerships" = BD, not IT ops
     "contracts and legal",  # "Contracts and Legal Systems Operations Manager" = legal ops, not IT
     "product owner",    # "IT Manager, Product Owner" = product management role, not IT ops
+    "oconus",           # military/government roles outside the continental US
+    "japan s6",         # military IT role in Japan
+
 ]
 
 # ---------- Dedup / pruning ----------
