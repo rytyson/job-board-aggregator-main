@@ -768,22 +768,43 @@ def _extract_post_date(html: str) -> str | None:
 
 def _icims_location_from_page(html: str) -> str | None:
     """
-    For iCIMS jobs where the chunk had no location, try to read the real
-    location from the posting page. Returns a location string or None.
+    For iCIMS jobs where the chunk had no location, read the real location
+    from the posting page HTML.
+
+    Returns:
+      "Remote"       → remote job, keep
+      "Florida"      → onsite FL (incl. Jacksonville), keep
+      "US-ONSITE"    → US onsite but outside FL, exclude
+      "INTL:{CC}"    → international, exclude
+      None           → couldn't determine, pass through unchanged
     """
     for m in _ICIMS_PAGE_LOC_RE.finditer(html):
-        code = (m.group(1) or m.group(3) or "").upper()
-        if not code or len(code) != 2:
-            continue
-        if code == "US":
-            # US job — pass through (further filtering happens below in _check_one)
-            return "United States"
-        if code in _KNOWN_COUNTRY_CODES:
-            return f"INTL:{code}"   # international — caller will exclude
-    # Check for explicit Remote indicator on iCIMS pages
-    if re.search(r'remote[^<\n]{0,30}yes|remote[^<\n]{0,30}true|\bwork from home\b', html.lower()):
+        # Three-part code: CC-ST-City  e.g. US-TN-Memphis, US-FL-Jacksonville
+        if m.group(1) and m.group(2):
+            country = m.group(1).upper()
+            state   = m.group(2).upper()
+            if country == "US":
+                return "Florida" if state == "FL" else "US-ONSITE"
+            if country in _KNOWN_COUNTRY_CODES:
+                return f"INTL:{country}"
+        # Two-part code: CC-City  e.g. LB-Beirut
+        elif m.group(3):
+            country = m.group(3).upper()
+            if country == "US":
+                return None   # ambiguous — don't change anything
+            if country in _KNOWN_COUNTRY_CODES:
+                return f"INTL:{country}"
+    # Explicit Remote indicator on iCIMS pages
+    if re.search(r'remote[^<\n]{0,30}(?:yes|true|only)|\bwork from home\b', html.lower()):
         return "Remote"
     return None
+
+
+# Regex to parse Workday job URLs and extract company/tenant/job-id
+_WD_URL_RE = re.compile(
+    r'https://([^.]+)(\.wd\d+\.myworkdayjobs\.com)/([^/]+)/job/.+/[^_/]+_([A-Za-z0-9\-]+?)(?:/|\?|$)',
+    re.IGNORECASE,
+)
 
 _SALARY_LABELS = [
     "salary", "compensation", "pay range", "base pay",
@@ -833,22 +854,58 @@ def _extract_salary(html: str) -> str | None:
 
 
 def _check_one(job: dict) -> dict:
-    url = (job.get("application_url") or "").strip()
+    url      = (job.get("application_url") or "").strip()
+    platform = job.get("platform_source", "")
     checked_at = _now_iso()
 
-    def _closed(**extra):
+    def _closed():
         return {**job, "is_live": False, "salary_posted": None,
-                "date_posted": None, "liveness_checked_at": checked_at, **extra}
+                "date_posted": None, "liveness_checked_at": checked_at}
 
-    def _live(html: str):
-        salary = _extract_salary(html)
-        date_p = _extract_post_date(html)
-        return {**job, "is_live": True, "salary_posted": salary,
-                "date_posted": date_p, "liveness_checked_at": checked_at}
+    def _live_from_html(html: str):
+        return {**job, "is_live": True,
+                "salary_posted": _extract_salary(html),
+                "date_posted": _extract_post_date(html),
+                "liveness_checked_at": checked_at}
 
     if not url:
         return _closed()
 
+    # ── Workday: use CXS JSON API — Workday is a JS SPA so HTML gives nothing ──
+    wd_m = _WD_URL_RE.match(url)
+    if wd_m:
+        company = wd_m.group(1)
+        wd_host = company + wd_m.group(2)
+        tenant  = wd_m.group(3)
+        job_id  = wd_m.group(4)
+        try:
+            api_url = f"https://{wd_host}/wday/cxs/{company}/{tenant}/jobs"
+            r = requests.post(
+                api_url,
+                json={"limit": 1, "offset": 0, "searchText": job_id},
+                headers={
+                    "Content-Type": "application/json",
+                    "User-Agent": _ua(),
+                    "Accept": "application/json",
+                },
+                timeout=12,
+            )
+            if r.status_code == 200:
+                data = r.json()
+                if data.get("total", 0) == 0:
+                    return _closed()   # job not found in Workday → closed/removed
+                # Extract posted date from postedOn field ("Posted 7 Days Ago" etc.)
+                postings = data.get("jobPostings", [])
+                date_p = None
+                if postings:
+                    posted_on = postings[0].get("postedOn") or ""
+                    date_p = _extract_post_date(posted_on)
+                return {**job, "is_live": True, "salary_posted": None,
+                        "date_posted": date_p, "liveness_checked_at": checked_at}
+        except Exception:
+            pass   # fall through to HTML approach if API fails
+
+    # ── All other platforms: fetch HTML and inspect ────────────────────────
     try:
         resp = requests.get(
             url,
@@ -859,14 +916,20 @@ def _check_one(job: dict) -> dict:
 
         if resp.status_code in (404, 410):
             return _closed()
-
         if resp.status_code >= 400:
             return _closed()
 
-        # Detect redirect to a top-level careers/home page (job was removed)
-        orig_path_depth = len([p for p in url.split("/") if p and "http" not in p])
-        final_path_depth = len([p for p in resp.url.split("/") if p and "http" not in p])
-        if final_path_depth <= 1 and orig_path_depth >= 3:
+        # Greenhouse (and some others) redirect to ?error=true when job is removed
+        if "error=true" in resp.url.lower():
+            return _closed()
+
+        # Detect redirect to a careers home page (job depth drops significantly)
+        def _path_depth(u: str) -> int:
+            return len([p for p in u.split("/") if p and "http" not in p])
+
+        orig_d  = _path_depth(url)
+        final_d = _path_depth(resp.url)
+        if (orig_d - final_d) >= 2 and final_d <= 2:
             return _closed()
 
         content_lower = resp.text.lower()
@@ -874,21 +937,21 @@ def _check_one(job: dict) -> dict:
             if phrase in content_lower:
                 return _closed()
 
-        # iCIMS jobs with unverified "United States" location: check real location from page.
-        # If the page clearly shows a non-US country code, treat the job as closed/excluded.
-        if job.get("platform_source") == "iCIMS" and job.get("location") == "United States":
+        # iCIMS jobs defaulted to "United States": verify real location from page.
+        # Exclude if the page confirms US onsite non-FL or international.
+        if platform == "iCIMS" and job.get("location") == "United States":
             real_loc = _icims_location_from_page(resp.text)
-            if real_loc and real_loc.startswith("INTL:"):
-                return _closed()   # confirmed international
+            if real_loc in ("US-ONSITE",) or (real_loc and real_loc.startswith("INTL:")):
+                return _closed()
 
-        return _live(resp.text)
+        return _live_from_html(resp.text)
 
     except requests.exceptions.Timeout:
         return {**job, "is_live": True, "salary_posted": None,
-                "date_posted": job.get("date_posted"), "liveness_checked_at": checked_at}
+                "date_posted": None, "liveness_checked_at": checked_at}
     except Exception:
         return {**job, "is_live": True, "salary_posted": None,
-                "date_posted": job.get("date_posted"), "liveness_checked_at": checked_at}
+                "date_posted": None, "liveness_checked_at": checked_at}
 
 
 def check_jobs_liveness(jobs: list[dict], max_workers: int = 15) -> list[dict]:
