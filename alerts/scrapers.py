@@ -485,8 +485,10 @@ def fetch_all_jobs_from_chunks() -> list[dict]:
         company = (job.get("company") or "").strip()
         ats = job.get("ats") or "Unknown"
         location = _normalize_location(job.get("location") or "")
-        scraped_at = job.get("scraped_at") or ""
-        date_posted = scraped_at[:10] if scraped_at else ""
+        # Don't trust date_posted from chunks — it reflects when the chunk scraper
+        # ran, not when the job was actually posted. We extract the real date from
+        # the posting page during the liveness check and populate it there.
+        date_posted = None
 
         if not url or not title or not company:
             continue
@@ -512,10 +514,11 @@ def fetch_all_jobs_from_chunks() -> list[dict]:
                 elif job.get("remote"):
                     location = "Remote"
                 else:
-                    location = ""   # Non-remote with no location data → exclude.
-                    # We cannot confirm this is Jacksonville or even US, so drop it.
-                    # (Previously was "United States" which let every onsite global
-                    # iCIMS job slip through the bare-location filter.)
+                    # Non-remote, no location in chunk. iCIMS is used almost
+                    # exclusively by US enterprises, so "United States" is a
+                    # reasonable default. The liveness check will verify the real
+                    # location from the posting page and exclude international hits.
+                    location = "United States"
 
             elif re.match(r"^[A-Za-z]{2}-", loc_raw):
                 # Structured country-code prefix: "US-CA-Valencia", "LB-Beirut", etc.
@@ -643,6 +646,7 @@ def fetch_all_jobs(companies: dict) -> list[dict]:
 # ──────────────────────────── Liveness check + salary ───────────────────────
 
 _CLOSED_PHRASES = [
+    # Generic ATS closure messages
     "this job is no longer available",
     "job has been closed",
     "position has been filled",
@@ -660,16 +664,126 @@ _CLOSED_PHRASES = [
     "position is closed",
     "not accepting applications",
     "job posting has been removed",
-    "this position has been filled",
-    "page not found",
-    "job not found",
-    "posting not found",
-    "position not found",
     "sorry, this job is no longer",
     "this opportunity is no longer",
     "job listing has been removed",
     "opening is no longer available",
+    # Workday-specific (Workday returns HTTP 200 with these error pages)
+    "page you are looking for doesn't exist",
+    "page you are looking for does not exist",
+    "the page you requested was not found",
+    "this page no longer exists",
+    "oops! the page",
+    "we couldn't find this page",
+    "this job requisition is no longer open",
+    "this requisition is no longer open",
+    # Generic 404-style messages returned as HTTP 200
+    "404 - page not found",
+    "error 404",
+    "page cannot be found",
 ]
+
+# Regexes used for real posted-date extraction from page HTML
+_WD_POSTED_DATE_RE  = re.compile(r'"postedOn"\s*:\s*"([^"]+)"', re.IGNORECASE)
+_TIME_DATETIME_RE   = re.compile(r'<time[^>]+datetime="(\d{4}-\d{2}-\d{2})', re.IGNORECASE)
+_DAYS_AGO_RE        = re.compile(r'(\d+)\s+days?\s+ago', re.IGNORECASE)
+_POSTED_LABEL_RE    = re.compile(
+    r'posted(?:\s+on)?\s*[:\-]?\s*'
+    r'(\d{4}-\d{2}-\d{2}|\d{1,2}/\d{1,2}/\d{4}'
+    r'|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w{0,6}\.?\s+\d{1,2},?\s+\d{4})',
+    re.IGNORECASE,
+)
+
+# Regex to detect iCIMS structured location codes in page HTML
+_ICIMS_PAGE_LOC_RE  = re.compile(r'\b([A-Z]{2})-([A-Z]{2})-\w+\b|\b([A-Z]{2})-[A-Za-z]+\b', re.IGNORECASE)
+# Country codes that are never US states (used to distinguish "LB-Beirut" from "US-CA-*")
+_KNOWN_COUNTRY_CODES = {
+    "AF","AL","DZ","AD","AO","AG","AR","AM","AU","AT","AZ","BS","BH","BD","BB",
+    "BY","BE","BZ","BJ","BT","BO","BA","BW","BR","BN","BG","BF","BI","CV","KH",
+    "CM","CF","TD","CL","CN","CO","KM","CD","CG","CR","HR","CU","CY","CZ","DK",
+    "DJ","DM","DO","EC","EG","SV","GQ","ER","EE","SZ","ET","FJ","FI","FR","GA",
+    "GM","GE","DE","GH","GR","GD","GT","GN","GW","GY","HT","HN","HU","IS","IN",
+    "ID","IR","IQ","IE","IL","IT","JM","JP","JO","KZ","KE","KI","KP","KR","KW",
+    "KG","LA","LV","LB","LS","LR","LY","LI","LT","LU","MG","MW","MY","MV","ML",
+    "MT","MH","MR","MU","MX","FM","MD","MC","MN","ME","MA","MZ","MM","NA","NR",
+    "NP","NL","NZ","NI","NE","NG","MK","NO","OM","PK","PW","PA","PG","PY","PE",
+    "PH","PL","PT","QA","RO","RU","RW","KN","LC","VC","WS","SM","ST","SA","SN",
+    "RS","SC","SL","SG","SK","SI","SB","SO","ZA","SS","ES","LK","SD","SR","SE",
+    "CH","SY","TW","TJ","TZ","TH","TL","TG","TO","TT","TN","TR","TM","TV","UG",
+    "UA","AE","GB","UK","UY","UZ","VU","VE","VN","YE","ZM","ZW",
+}
+
+
+def _normalise_date(raw: str) -> str | None:
+    """Parse various date formats to YYYY-MM-DD, or return None if unrecognised."""
+    from datetime import datetime
+    raw = raw.strip().rstrip(".")
+    if re.match(r'^\d{4}-\d{2}-\d{2}$', raw):
+        return raw
+    m = re.match(r'^(\d{1,2})/(\d{1,2})/(\d{4})$', raw)
+    if m:
+        return f"{m.group(3)}-{int(m.group(1)):02d}-{int(m.group(2)):02d}"
+    for fmt in ('%B %d, %Y', '%B %d %Y', '%b %d, %Y', '%b %d %Y',
+                '%d %B %Y', '%d %b %Y', '%B %d,%Y'):
+        try:
+            return datetime.strptime(raw, fmt).strftime('%Y-%m-%d')
+        except ValueError:
+            pass
+    return None
+
+
+def _extract_post_date(html: str) -> str | None:
+    """
+    Try to extract the real posting date from job page HTML.
+    Returns YYYY-MM-DD string or None.
+    """
+    from datetime import date, timedelta
+
+    # Workday embeds postedOn in page JSON: "postedOn":"06/04/2026"
+    m = _WD_POSTED_DATE_RE.search(html)
+    if m:
+        d = _normalise_date(m.group(1))
+        if d:
+            return d
+
+    # Greenhouse / Lever / Ashby use <time datetime="2026-06-04">
+    m = _TIME_DATETIME_RE.search(html)
+    if m:
+        return m.group(1)
+
+    # "Posted 7 days ago" → calculate from today
+    m = _DAYS_AGO_RE.search(html)
+    if m:
+        days = int(m.group(1))
+        if days <= 365:  # sanity cap
+            return (date.today() - timedelta(days=days)).isoformat()
+
+    # "Posted on June 4, 2026" / "Date Posted: 06/04/2026"
+    m = _POSTED_LABEL_RE.search(html)
+    if m:
+        return _normalise_date(m.group(1))
+
+    return None
+
+
+def _icims_location_from_page(html: str) -> str | None:
+    """
+    For iCIMS jobs where the chunk had no location, try to read the real
+    location from the posting page. Returns a location string or None.
+    """
+    for m in _ICIMS_PAGE_LOC_RE.finditer(html):
+        code = (m.group(1) or m.group(3) or "").upper()
+        if not code or len(code) != 2:
+            continue
+        if code == "US":
+            # US job — pass through (further filtering happens below in _check_one)
+            return "United States"
+        if code in _KNOWN_COUNTRY_CODES:
+            return f"INTL:{code}"   # international — caller will exclude
+    # Check for explicit Remote indicator on iCIMS pages
+    if re.search(r'remote[^<\n]{0,30}yes|remote[^<\n]{0,30}true|\bwork from home\b', html.lower()):
+        return "Remote"
+    return None
 
 _SALARY_LABELS = [
     "salary", "compensation", "pay range", "base pay",
@@ -722,8 +836,18 @@ def _check_one(job: dict) -> dict:
     url = (job.get("application_url") or "").strip()
     checked_at = _now_iso()
 
+    def _closed(**extra):
+        return {**job, "is_live": False, "salary_posted": None,
+                "date_posted": None, "liveness_checked_at": checked_at, **extra}
+
+    def _live(html: str):
+        salary = _extract_salary(html)
+        date_p = _extract_post_date(html)
+        return {**job, "is_live": True, "salary_posted": salary,
+                "date_posted": date_p, "liveness_checked_at": checked_at}
+
     if not url:
-        return {**job, "is_live": False, "salary_posted": None, "liveness_checked_at": checked_at}
+        return _closed()
 
     try:
         resp = requests.get(
@@ -734,30 +858,37 @@ def _check_one(job: dict) -> dict:
         )
 
         if resp.status_code in (404, 410):
-            return {**job, "is_live": False, "salary_posted": None, "liveness_checked_at": checked_at}
+            return _closed()
 
         if resp.status_code >= 400:
-            return {**job, "is_live": False, "salary_posted": None, "liveness_checked_at": checked_at}
+            return _closed()
 
         # Detect redirect to a top-level careers/home page (job was removed)
         orig_path_depth = len([p for p in url.split("/") if p and "http" not in p])
         final_path_depth = len([p for p in resp.url.split("/") if p and "http" not in p])
         if final_path_depth <= 1 and orig_path_depth >= 3:
-            return {**job, "is_live": False, "salary_posted": None, "liveness_checked_at": checked_at}
+            return _closed()
 
         content_lower = resp.text.lower()
         for phrase in _CLOSED_PHRASES:
             if phrase in content_lower:
-                return {**job, "is_live": False, "salary_posted": None, "liveness_checked_at": checked_at}
+                return _closed()
 
-        salary = _extract_salary(resp.text)
-        return {**job, "is_live": True, "salary_posted": salary, "liveness_checked_at": checked_at}
+        # iCIMS jobs with unverified "United States" location: check real location from page.
+        # If the page clearly shows a non-US country code, treat the job as closed/excluded.
+        if job.get("platform_source") == "iCIMS" and job.get("location") == "United States":
+            real_loc = _icims_location_from_page(resp.text)
+            if real_loc and real_loc.startswith("INTL:"):
+                return _closed()   # confirmed international
+
+        return _live(resp.text)
 
     except requests.exceptions.Timeout:
-        # On timeout assume still live — don't falsely close jobs
-        return {**job, "is_live": True, "salary_posted": None, "liveness_checked_at": checked_at}
+        return {**job, "is_live": True, "salary_posted": None,
+                "date_posted": job.get("date_posted"), "liveness_checked_at": checked_at}
     except Exception:
-        return {**job, "is_live": True, "salary_posted": None, "liveness_checked_at": checked_at}
+        return {**job, "is_live": True, "salary_posted": None,
+                "date_posted": job.get("date_posted"), "liveness_checked_at": checked_at}
 
 
 def check_jobs_liveness(jobs: list[dict], max_workers: int = 15) -> list[dict]:

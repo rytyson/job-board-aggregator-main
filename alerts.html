@@ -312,7 +312,7 @@
         <th data-col="company" data-arrow="↑">Company</th>
         <th data-col="location" data-arrow="↑">Location</th>
         <th data-col="salary_posted" data-arrow="↑">Salary</th>
-        <th data-col="first_seen" class="sorted" data-arrow="↓">Posted</th>
+        <th data-col="first_seen" class="sorted" data-arrow="↓">Date</th>
         <th data-col="liveness_checked_at" data-arrow="↑">Verified</th>
         <th data-col="platform_source" data-arrow="↑">Platform</th>
         <th class="no-sort">Actions</th>
@@ -483,7 +483,12 @@
       const remote  = isRemote(job.location);
       const url     = escHtml(job.application_url || '#');
       const loc     = escHtml(job.location || '—');
-      const postedDate = job.date_posted || job.first_seen;
+      // date_posted is only set when the liveness check extracted it from the
+      // actual page — it's the real post date. first_seen is when our system
+      // first spotted the job in the chunks. Show which one we're using.
+      const hasVerifiedDate = !!(job.liveness_checked_at && job.date_posted);
+      const postedDate      = hasVerifiedDate ? job.date_posted : job.first_seen;
+      const dateLabel       = hasVerifiedDate ? 'Posted' : 'First seen';
 
       const newBadge    = isNew ? '<span class="badge badge-new">NEW</span> ' : '';
       const remoteBadge = remote ? '<span class="badge badge-remote">Remote</span> ' : '';
@@ -516,7 +521,10 @@
         <td>${escHtml(job.company)}</td>
         <td class="col-loc">${remoteBadge}${loc}</td>
         <td>${salaryHtml}</td>
-        <td class="col-date" title="${escHtml(postedDate || '')}">${fmtDate(postedDate)}</td>
+        <td class="col-date" title="${escHtml(dateLabel)}: ${escHtml(postedDate || '')}">
+          <span style="font-size:10px;color:var(--muted);display:block;line-height:1.2">${escHtml(dateLabel)}</span>
+          ${fmtDate(postedDate)}
+        </td>
         <td>${verifiedHtml}</td>
         <td><span class="platform-pill">${escHtml(job.platform_source)}</span></td>
         <td><div class="action-btns">${btnSave}${btnApply}${btnIgnore}</div></td>
