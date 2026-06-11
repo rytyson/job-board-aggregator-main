@@ -491,23 +491,48 @@ def fetch_all_jobs_from_chunks() -> list[dict]:
         if not url or not title or not company:
             continue
 
-        # iCIMS scraper does not populate location — infer from the remote flag.
-        # iCIMS is used almost exclusively by US enterprises, so "United States"
-        # is a safe default when remote=False and location is absent.
-        # Exception: skip iCIMS boards whose company slug starts with a
-        # 2-letter country code prefix (e.g. "de-merlin", "it-merlin", "uk-company")
-        # — those are country-specific non-US boards.
-        _ICIMS_COUNTRY_PREFIXES = (
+        # iCIMS location handling — chunks store location in two formats:
+        #   1. Empty / "Not specified"  → infer from remote flag
+        #   2. Structured code like "US-CA-Valencia" or "LB-Beirut" → parse
+        # Only pass Remote jobs and FL (Jacksonville) jobs; exclude everything else.
+        _ICIMS_INTL_PREFIXES = (
             "de-", "it-", "uk-", "fr-", "es-", "nl-", "au-", "ca-",
             "sg-", "jp-", "kr-", "in-", "br-", "mx-", "pl-", "se-",
         )
-        loc_raw = location.lower().strip()
-        if ats == "iCIMS" and loc_raw in ("", "not specified", "n/a", "unknown"):
-            slug_lower = company.lower().replace(" ", "-")
-            if any(slug_lower.startswith(pfx) for pfx in _ICIMS_COUNTRY_PREFIXES):
-                location = ""   # will fail location filter → excluded
-            else:
-                location = "Remote" if job.get("remote") else "United States"
+        if ats == "iCIMS":
+            loc_raw = location.strip()
+            loc_lower = loc_raw.lower()
+
+            if loc_lower in ("", "not specified", "n/a", "unknown"):
+                # No location data in chunk — use company slug as last resort to
+                # catch known international iCIMS boards.
+                slug_lower = company.lower().replace(" ", "-")
+                if any(slug_lower.startswith(pfx) for pfx in _ICIMS_INTL_PREFIXES):
+                    location = ""   # known non-US board → exclude
+                elif job.get("remote"):
+                    location = "Remote"
+                else:
+                    location = ""   # Non-remote with no location data → exclude.
+                    # We cannot confirm this is Jacksonville or even US, so drop it.
+                    # (Previously was "United States" which let every onsite global
+                    # iCIMS job slip through the bare-location filter.)
+
+            elif re.match(r"^[A-Za-z]{2}-", loc_raw):
+                # Structured country-code prefix: "US-CA-Valencia", "LB-Beirut", etc.
+                country_code = loc_raw[:2].upper()
+                if country_code == "US":
+                    if job.get("remote"):
+                        location = "Remote"
+                    else:
+                        parts = loc_raw.split("-")
+                        state = parts[1].upper() if len(parts) > 1 else ""
+                        city  = parts[2] if len(parts) > 2 else ""
+                        if state == "FL":
+                            location = f"{city}, FL" if city else "Florida"
+                        else:
+                            location = ""   # US onsite outside FL → exclude
+                else:
+                    location = ""   # International → exclude
 
         # Generate a stable job_id from the three most-stable fields
         job_id = _make_job_id(ats, company, url)
