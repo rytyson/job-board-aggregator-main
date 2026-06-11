@@ -439,10 +439,26 @@
       return true;
     });
 
-    // Sort
+    // Sort — date columns use numeric timestamps so null values and mixed
+    // formats never produce wrong order. "Posted" sorts by date_posted ?? first_seen
+    // to match what the column actually displays.
+    const DATE_COLS = new Set(['first_seen', 'last_seen', 'date_posted', 'liveness_checked_at']);
+
+    function sortVal(job, col) {
+      if (DATE_COLS.has(col)) {
+        const raw = col === 'first_seen'
+          ? (job.date_posted || job.first_seen || '')   // match displayed value
+          : (job[col] || '');
+        if (!raw) return sortAsc ? Infinity : -Infinity; // nulls always last
+        const ts = new Date(raw).getTime();
+        return isNaN(ts) ? (sortAsc ? Infinity : -Infinity) : ts;
+      }
+      return String(job[col] || '').toLowerCase();
+    }
+
     jobs.sort((a, b) => {
-      let av = String(a[sortCol] || '').toLowerCase();
-      let bv = String(b[sortCol] || '').toLowerCase();
+      const av = sortVal(a, sortCol);
+      const bv = sortVal(b, sortCol);
       if (av < bv) return sortAsc ? -1 : 1;
       if (av > bv) return sortAsc ? 1  : -1;
       return 0;
