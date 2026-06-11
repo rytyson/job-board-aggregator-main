@@ -68,9 +68,13 @@ EXCLUDED_COUNTRIES = [
     "ireland", "poland", "mexico", "argentina", "colombia", "philippines",
     "portugal", "switzerland", "austria", "belgium", "czech", "hungary",
     "romania", "south africa", "nigeria", "kenya", "egypt", "uae",
+    "pakistan", "latin america", "asia pacific", "apac", "- asia",
     # ISO country codes used by some ATS systems (Workday especially)
     "- phl", "- ind", "- chn", "- gbr", "- deu", "- fra", "- aus",
     "- bra", "- mex", "- sgp", "- jpn", "- kor", "- isr", "- irl",
+    # Bare ISO codes used as location prefix (e.g. "PH - Remote", "PHL - Remote")
+    "phl -", "phl,", "ind -", "ind,",
+    "ph - ",                               # 2-letter ISO prefix for Philippines
 ]
 
 # If True, jobs whose location is blank / "Not specified" are also kept.
@@ -81,56 +85,112 @@ ALLOW_UNSPECIFIED_LOCATION = False
 # A job PASSES the keyword filter if its title (lowercased) CONTAINS any of
 # these strings.  Add new phrases here — no other code changes required.
 TARGET_KEYWORDS = [
-    # Director-level IT
-    # Note: "director, it" uses a trailing space to avoid matching "Director, Italy"
+    # ── Director-level IT ──────────────────────────────────────────────────
+    # Note: "director, it" uses a trailing space/comma to avoid matching "Director, Italy"
     "director of it ",
     "director of it,",
     "director, it ",
     "director, it,",
     "it director",
     "director of information technology",
-    # Director-level Infrastructure
+    "director of enterprise it",
+    "director of enterprise technology",
+    # ── Director-level Infrastructure ─────────────────────────────────────
     "director of infrastructure",
     "infrastructure director",
     "director of technology infrastructure",
-    # Director-level Service Delivery
+    "director of enterprise infrastructure",
+    "director of cloud engineering",
+    "director of cloud infrastructure",
+    "director of compute",
+    "director of server",                    # catches Director of Server Operations, Server/Compute, etc.
+    # ── Director-level Workplace / End-User ───────────────────────────────
+    "director of workplace technology",
+    "director of end user services",
+    "director of end user support",
+    "director of service desk",
+    # ── Director-level Service Delivery ───────────────────────────────────
     "director of service delivery",
     "service delivery director",
-    # Director-level Managed Services
+    # ── Director-level Managed Services ───────────────────────────────────
     "director of managed services",
     "managed services director",
-    # Director-level Operations — kept specific to avoid non-IT false positives
+    # ── Director-level Operations ─────────────────────────────────────────
+    # Note: bare "director of operations" removed — too many food/service/nonprofit hits
     "director of enterprise operations",
     "director of it operations",
     "director of technology operations",
-    # Note: bare "director of operations" removed — too many food/service/nonprofit hits
-    # Senior Manager variants
+    "director of platform operations",
+    "director of production operations",
+    # ── Director-level ITSM / Applications / Implementations ──────────────
+    "director of it service management",
+    "director, it service management",
+    "director of application support",
+    "director of enterprise applications",
+    "director of implementations",
+    "director, implementations",
+    "director of technology",                # Director of Technology at growth-stage / operationally complex businesses
+    "healthcare it director",
+    # ── Senior Manager variants ────────────────────────────────────────────
     "senior manager it",
     "senior manager of it",
     "senior manager, it",
     "senior manager infrastructure",
     "senior manager of infrastructure",
+    "senior manager, infrastructure",
+    "senior manager service delivery",
+    "senior manager of service delivery",
+    "senior manager, service delivery",
+    "senior manager managed services",
+    "senior manager of managed services",
+    "senior manager, managed services",
+    "senior manager technical operations",
+    "senior manager of technical operations",
+    "senior manager, technical operations",
+    "senior manager server operations",
+    "senior manager of server operations",
+    "senior manager, server operations",
+    "senior manager technical support",
+    "senior manager of technical support",
+    "senior manager, technical support",
+    "senior manager itsm",
+    "senior manager of itsm",
+    "senior manager, itsm",
+    "senior manager service desk",
+    "senior manager of service desk",
+    "senior manager, service desk",
     "manager of infrastructure operations",
     "infrastructure operations manager",
-    # VP / Vice President
+    "it operations manager",
+    "technology operations manager",
+    "systems operations manager",
+    "it manager",                            # IT Manager, Systems Administration; IT Manager of Infrastructure etc.
+    # ── VP / Vice President ────────────────────────────────────────────────
     "vp it",
     "vp of it",
     "vp infrastructure",
     "vp of infrastructure",
+    "vp managed services",
+    "vp of managed services",
     "vice president it",
     "vice president, it",
     "vice president infrastructure",
     "vice president of it",
     "vice president of infrastructure",
-    # Head of
+    "vice president managed services",
+    "vice president of managed services",
+    # ── Head of ───────────────────────────────────────────────────────────
     "head of it",
     "head of information technology",
     "head of infrastructure",
     "head of technology",
-    # Incident & Implementation
+    # ── Incident, Implementation & Healthcare ─────────────────────────────
     "major incident manager",
     "technical implementation manager",
     "it implementation manager",
+    "healthcare implementation manager",
+    "ehr integration manager",
+    "ehr implementation manager",
 ]
 
 # ---------- Exclusion terms ----------
@@ -171,6 +231,8 @@ EXCLUSION_TERMS = [
     "principal engineer",
     "alliances",        # "Head of Technology Alliances" = BD, not IT ops
     "partnerships",     # "Head of Technology Partnerships" = BD, not IT ops
+    "contracts and legal",  # "Contracts and Legal Systems Operations Manager" = legal ops, not IT
+    "product owner",    # "IT Manager, Product Owner" = product management role, not IT ops
 ]
 
 # ---------- Dedup / pruning ----------

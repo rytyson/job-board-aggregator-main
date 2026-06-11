@@ -2,326 +2,209 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ryan's IT Leadership Job Alerts</title>
-    <link>https://&lt;your-username&gt;.github.io/job-board-aggregator-main/alerts.html</link>
+    <link>https://rytyson.github.io/job-board-aggregator-main/alerts.html</link>
     <description>Director / VP / Head-of-IT roles in Operations, Infrastructure, Service Delivery, and Managed Services — Remote or Jacksonville, FL</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 10 Jun 2026 22:15:16 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2026 08:10:48 +0000</lastBuildDate>
     <ttl>360</ttl>
-    <atom:link href="https://&lt;your-username&gt;.github.io/job-board-aggregator-main/job_feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Senior Manager, IT Infrastructure — adaptivebiotechnologies</title>
-      <link>https://www.adaptivebiotech.com/career-listings/listing?gh_jid=8557528002</link>
-      <description>Senior Manager, IT Infrastructure at adaptivebiotechnologies (Remote (WFH)) via Greenhouse. First seen: 2026-06-10.</description>
+      <title>IT Operations Manager — accreditedlabs</title>
+      <link>https://job-boards.greenhouse.io/accreditedlabs/jobs/4243139009</link>
+      <description>IT Operations Manager at accreditedlabs (Remote) via Greenhouse. First seen: 2026-06-11.</description>
       <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">dabc66217026d2c7</guid>
+      <guid isPermaLink="false">da163a234d9a0472</guid>
       <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
     </item>
     <item>
-      <title>Senior Director, IT – Business Applications — amerilife</title>
-      <link>https://amerilife.wd5.myworkdayjobs.com/external/job/Clearwater-FL/Senior-Director--IT---Agent-Distribution-Platforms_R4815</link>
-      <description>Senior Director, IT – Business Applications at amerilife (Clearwater, FL) via Workday. First seen: 2026-06-10.</description>
+      <title>Technology Operations Manager — businesswire</title>
+      <link>https://jobs.lever.co/businesswire/c85581fa-02a7-4daf-aa4c-f2ec7cf31c66</link>
+      <description>Technology Operations Manager at businesswire (Remote) via Lever. First seen: 2026-06-11.</description>
       <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">32334756cc8f829b</guid>
+      <guid isPermaLink="false">ae9b6e46366e93a2</guid>
+      <category>Lever</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>IT Manager — capitalrx</title>
+      <link>https://job-boards.greenhouse.io/capitalrx/jobs/5227140008</link>
+      <description>IT Manager at capitalrx (Remote) via Greenhouse. First seen: 2026-06-11.</description>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">d443e822d288308c</guid>
+      <category>Greenhouse</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>Systems Operations Manager — commure</title>
+      <link>https://jobs.ashbyhq.com/commure/1ceb9b7d-9a09-4283-8c03-d3577c3f2312</link>
+      <description>Systems Operations Manager at commure (United States) via Ashby. First seen: 2026-06-11.</description>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">233a7eb51e2540fa</guid>
+      <category>Ashby</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>Technology Operations Manager — digitalmediamanagement</title>
+      <link>https://jobs.lever.co/digitalmediamanagement/cfcb9a4e-2f6d-494b-b7d4-9c35b0de429c</link>
+      <description>Technology Operations Manager at digitalmediamanagement (United States) via Lever. First seen: 2026-06-11.</description>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">16fb2fa98f66e2a4</guid>
+      <category>Lever</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>Sr. IT Systems Operations Manager — extrahopnetworks</title>
+      <link>https://job-boards.greenhouse.io/extrahopnetworks/jobs/6016297004</link>
+      <description>Sr. IT Systems Operations Manager at extrahopnetworks (Remote) via Greenhouse. First seen: 2026-06-11.</description>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">a9d90aa0aaa922f1</guid>
+      <category>Greenhouse</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>IT Operations Manager — fairmarkit</title>
+      <link>https://job-boards.greenhouse.io/fairmarkit/jobs/6011585004</link>
+      <description>IT Operations Manager at fairmarkit (Remote, US) via Greenhouse. First seen: 2026-06-11.</description>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">152b554a18b67272</guid>
+      <category>Greenhouse</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>Senior IT Manager — givebutter</title>
+      <link>https://jobs.ashbyhq.com/givebutter/cd634a6b-be32-4da4-b1eb-84f208e5faf9</link>
+      <description>Senior IT Manager at givebutter (Remote) via Ashby. First seen: 2026-06-11.</description>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">43af67dccbc9c6ed</guid>
+      <category>Ashby</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>Principal Systems Operations Manager — outreach</title>
+      <link>https://jobs.lever.co/outreach/38ac7a54-e7d2-4a5d-bd56-ddee7b85bea4</link>
+      <description>Principal Systems Operations Manager at outreach (United States) via Lever. First seen: 2026-06-11.</description>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">73dcda63b8c6ce12</guid>
+      <category>Lever</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>IT Manager — quantfury</title>
+      <link>https://quantfury.bamboohr.com/careers/47</link>
+      <description>IT Manager at quantfury (Miami, Florida) via BambooHR. First seen: 2026-06-11.</description>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">f53deadabd42626d</guid>
+      <category>BambooHR</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>IT Manager — shinvestmentsllc</title>
+      <link>https://senecaholdings.com/jobs/?gh_jid=4681047005</link>
+      <description>IT Manager at shinvestmentsllc (Remote) via Greenhouse. First seen: 2026-06-11.</description>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">d1e85dd18dcec4ad</guid>
+      <category>Greenhouse</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>Senior IT Manager — stewart</title>
+      <link>https://stewart.wd1.myworkdayjobs.com/external/job/USA-TX---Remote/IT-Manager_JR107946</link>
+      <description>Senior IT Manager at stewart (USA TX - Remote) via Workday. First seen: 2026-06-11.</description>
+      <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">585083b0ab0c09b1</guid>
       <category>Workday</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
     </item>
     <item>
-      <title>Technical Implementation Manager — apella</title>
-      <link>https://jobs.ashbyhq.com/apella/2622e71a-e40e-49ed-95a2-30749e039b12</link>
-      <description>Technical Implementation Manager at apella (Remote) via Ashby. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">474212fe62802eb4</guid>
-      <category>Ashby</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director, IT — confluent</title>
-      <link>https://jobs.ashbyhq.com/confluent/6833487b-88cd-447b-8629-174696192510</link>
-      <description>Director, IT at confluent (Remote, United States) via Ashby. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">19aea93cb5cc85d3</guid>
-      <category>Ashby</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director of Infrastructure — datavant2</title>
-      <link>https://www.datavant.com/about/careers/open-roles/job?gh_jid=5150834008</link>
-      <description>Director of Infrastructure at datavant2 (Remote - United States) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">db61655cabb665cb</guid>
+      <title>IT Manager - Distributed Database Services — horacemannservicecorporation</title>
+      <link>https://job-boards.greenhouse.io/horacemannservicecorporation/jobs/5862243004</link>
+      <description>IT Manager - Distributed Database Services at horacemannservicecorporation (Remote) via Greenhouse. First seen: 2026-06-11.</description>
+      <pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">e8a5a05b30a57ef8</guid>
       <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
     </item>
     <item>
-      <title>Director of IT — goodwaygroup</title>
-      <link>https://job-boards.greenhouse.io/goodwaygroup/jobs/5991809004</link>
-      <description>Director of IT at goodwaygroup (Remote) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">df27fab9b72af4c3</guid>
-      <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Senior Technical Implementation Manager — h1</title>
-      <link>https://jobs.lever.co/h1/df32e104-5aba-429d-9315-19065ac2a90c</link>
-      <description>Senior Technical Implementation Manager at h1 (US Remote) via Lever. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">d52f036f35bba886</guid>
+      <title>IT Manager — knownwell</title>
+      <link>https://jobs.lever.co/knownwell/8b15177f-4436-4d88-905b-44bc7091bbec</link>
+      <description>IT Manager at knownwell (Remote) via Lever. First seen: 2026-06-11.</description>
+      <pubDate>Fri, 29 May 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">43c80cffa3b7ec3a</guid>
       <category>Lever</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
     </item>
     <item>
-      <title>Senior Manager, IT &amp; Automation - Chemical API Development and Production (Petersburg, VA) — hophr</title>
-      <link>https://jobs.lever.co/hophr/9cb9b2c6-6f62-460d-b537-35662c8952bf</link>
-      <description>Senior Manager, IT &amp; Automation - Chemical API Development and Production (Petersburg, VA) at hophr (Remote) via Lever. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">c37fee1c2a005c1d</guid>
-      <category>Lever</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Head of IT and Cybersecurity — hut8</title>
-      <link>https://job-boards.greenhouse.io/hut8/jobs/4884950008</link>
-      <description>Head of IT and Cybersecurity at hut8 (Miami, FL) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">653e2d6afd931cf5</guid>
-      <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Senior Manager, IT PMO &amp; Corporate Engineering — instacart</title>
-      <link>https://instacart.careers/job/?gh_jid=7989243</link>
-      <description>Senior Manager, IT PMO &amp; Corporate Engineering at instacart (United States - Remote) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">88472f003251f0d1</guid>
-      <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Global Head of IT — koboldmetals</title>
-      <link>https://job-boards.greenhouse.io/koboldmetals/jobs/4683079005</link>
-      <description>Global Head of IT at koboldmetals (Remote - US) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">cc6922703e4fe52f</guid>
-      <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director of IT — link</title>
-      <link>https://job-boards.greenhouse.io/link/jobs/5175744008</link>
-      <description>Director of IT at link (United States - Remote) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">cf55e1b81a1263be</guid>
-      <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Service Delivery Director — lwolf</title>
-      <link>https://jobs.lever.co/lwolf/5780b632-deda-46ca-8470-488608b6a6e7</link>
-      <description>Service Delivery Director at lwolf (United States (Remote)) via Lever. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">1a0b0a7f860977af</guid>
-      <category>Lever</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director of IT — microvision</title>
-      <link>https://jobs.lever.co/microvision/48b3eb29-0b13-4619-8052-c7b4d0e6df49</link>
-      <description>Director of IT at microvision (Orlando, Florida) via Lever. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">b4c02b1f41ae061f</guid>
-      <category>Lever</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director, IT &amp; Security — octave</title>
-      <link>https://boards.greenhouse.io/octave/jobs/8504682002?gh_jid=8504682002</link>
-      <description>Director, IT &amp; Security at octave (Virtual (Remote)) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">a931072167e60814</guid>
-      <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Head of Technology &amp; Security Operations — one-pass-solutions</title>
-      <link>https://jobs.ashbyhq.com/one-pass-solutions/01b73fc3-6d1d-423a-b6ff-751ea7a41e96</link>
-      <description>Head of Technology &amp; Security Operations at one-pass-solutions (United States) via Ashby. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">ad4409bbce0426fa</guid>
-      <category>Ashby</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director of IT — people-ai</title>
-      <link>https://jobs.lever.co/people-ai/d6d4ddcc-1d05-433f-8777-e803665e219a</link>
-      <description>Director of IT at people-ai (United States) via Lever. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">e53f92035c193c9b</guid>
-      <category>Lever</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director, IT Technology Instructor Development — perscholashires</title>
-      <link>https://job-boards.greenhouse.io/perscholashires/jobs/4656609006</link>
-      <description>Director, IT Technology Instructor Development at perscholashires (United States) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">d91b7b994c9969ff</guid>
-      <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director of IT &amp; Security, CISO — redoxengine</title>
-      <link>https://jobs.lever.co/redoxengine/2f80bfb6-f023-459b-b1a9-71a587cd6477</link>
-      <description>Director of IT &amp; Security, CISO at redoxengine (Remote) via Lever. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">b63c3c0732fd6fd6</guid>
-      <category>Lever</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Technical Implementation Manager — second-nature</title>
-      <link>https://jobs.ashbyhq.com/second-nature/2d202d9f-aeca-4089-8a9b-c666821d9e4a</link>
-      <description>Technical Implementation Manager at second-nature (Remote, USA) via Ashby. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">15553e7fa638607b</guid>
-      <category>Ashby</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director, IT Applications — sumitomopharma</title>
-      <link>https://sumitomopharma.wd5.myworkdayjobs.com/smpa/job/US-Remote/Director--IT-Applications_R01087</link>
-      <description>Director, IT Applications at sumitomopharma (US-Remote) via Workday. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">ead2d73ddc60b6c3</guid>
+      <title>IT Manager, Emerging Technology — strayer</title>
+      <link>https://strayer.wd1.myworkdayjobs.com/sei/job/Remote/IT-Manager_R30068</link>
+      <description>IT Manager, Emerging Technology at strayer (Remote) via Workday. First seen: 2026-06-11.</description>
+      <pubDate>Thu, 28 May 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">04bd60d7d3dedcbb</guid>
       <category>Workday</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
     </item>
     <item>
-      <title>Director of Service Delivery — vultr</title>
-      <link>https://jobs.ashbyhq.com/vultr/697acbb4-0806-4d26-8c5c-e5ca20a8a59d</link>
-      <description>Director of Service Delivery at vultr (Remote - United States) via Ashby. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">f3ab48b3e3a68674</guid>
-      <category>Ashby</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director, IT Quality &amp; Compliance — apogeetherapeutics</title>
-      <link>https://job-boards.greenhouse.io/apogeetherapeutics/jobs/5141502007</link>
-      <description>Director, IT Quality &amp; Compliance at apogeetherapeutics (Remote) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">09238c62e09079ff</guid>
-      <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Technical Implementation Manager — sully-ai</title>
-      <link>https://jobs.ashbyhq.com/sully-ai/bc6aa867-6101-421f-b273-19f3cf39348d</link>
-      <description>Technical Implementation Manager at sully-ai (US - Remote) via Ashby. First seen: 2026-06-10.</description>
-      <pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">1b26f4361832b3de</guid>
-      <category>Ashby</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Sr. Director, IT - AI Innovation and Services — elastic</title>
-      <link>https://jobs.elastic.co/jobs?gh_jid=7674976&amp;gh_jid=7674976</link>
-      <description>Sr. Director, IT - AI Innovation and Services at elastic (United States) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Thu, 04 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">45dd659e78ed6338</guid>
-      <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director, IT — guild</title>
-      <link>https://www.guild.com/open-positions-at-guild?gh_jid=7778954</link>
-      <description>Director, IT at guild (United States) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Tue, 02 Jun 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">2387c4a31c8106eb</guid>
-      <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Infrastructure Director — jabil</title>
-      <link>https://jabil.wd5.myworkdayjobs.com/jabil_careers/job/Remote---USA/Infrastructure-Director_J2451181</link>
-      <description>Infrastructure Director at jabil (Remote - USA) via Workday. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">7b2d49d27bff3767</guid>
-      <category>Workday</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director of IT and Technology Solutions — broadwayventures</title>
-      <link>https://job-boards.greenhouse.io/broadwayventures/jobs/5157550008</link>
-      <description>Director of IT and Technology Solutions at broadwayventures (United States - Remote) via Greenhouse. First seen: 2026-06-10.</description>
+      <title>IT Manager (West Coast) — recharge</title>
+      <link>https://job-boards.greenhouse.io/recharge/jobs/8521476002</link>
+      <description>IT Manager (West Coast) at recharge (Remote) via Greenhouse. First seen: 2026-06-11.</description>
       <pubDate>Tue, 26 May 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">e83af97cf833be45</guid>
+      <guid isPermaLink="false">a10c2be06ad28045</guid>
       <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
     </item>
     <item>
-      <title>IT Director, AI &amp; Digtial Automation — formfactor</title>
-      <link>https://formfactor.wd1.myworkdayjobs.com/ffi-careers/job/Remote-IN/IT-Director--AI---Digtial-Automation_JR100524</link>
-      <description>IT Director, AI &amp; Digtial Automation at formfactor (Remote, IN) via Workday. First seen: 2026-06-10.</description>
-      <pubDate>Fri, 22 May 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">43c5bca924163b69</guid>
+      <title>IT Manager II - Network Infrastructure &amp; Operations — trustage</title>
+      <link>https://trustage.wd1.myworkdayjobs.com/trustage/job/Remote---USA/IT-Manager-II---Network-Infrastructure---Operations_R-011921</link>
+      <description>IT Manager II - Network Infrastructure &amp; Operations at trustage (Remote - USA) via Workday. First seen: 2026-06-11.</description>
+      <pubDate>Tue, 26 May 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">969b1fd8a2b4b527</guid>
       <category>Workday</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
     </item>
     <item>
-      <title>Director, IT and Security — oasishealthpartners</title>
-      <link>https://oasishealth.com/jobs/?gh_jid=5209360008</link>
-      <description>Director, IT and Security at oasishealthpartners (Remote) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Fri, 22 May 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">c56a831aeb9ed050</guid>
-      <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director of Information Technology — max-retail</title>
-      <link>https://jobs.lever.co/max-retail/76a7f6ca-a9b3-4d0e-b731-255bbb79b155</link>
-      <description>Director of Information Technology at max-retail (Remote) via Lever. First seen: 2026-06-10.</description>
+      <title>Director, Implementations — galileo</title>
+      <link>https://job-boards.greenhouse.io/galileo/jobs/8547795002</link>
+      <description>Director, Implementations at galileo (Remote, United States) via Greenhouse. First seen: 2026-06-11.</description>
       <pubDate>Thu, 21 May 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">2d741770f3544c1a</guid>
-      <category>Lever</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Head of Technology — banyansoftware</title>
-      <link>https://job-boards.greenhouse.io/banyansoftware/jobs/5056261007</link>
-      <description>Head of Technology at banyansoftware (United States) via Greenhouse. First seen: 2026-06-10.</description>
-      <pubDate>Wed, 20 May 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">557728b23e0a4cfc</guid>
+      <guid isPermaLink="false">2c9145faac0a0dac</guid>
       <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
     </item>
     <item>
-      <title>Director, IT Business Partner - Biopharma GXP — nuvalent</title>
-      <link>https://boards.greenhouse.io/nuvalent/jobs/5797845004?gh_jid=5797845004</link>
-      <description>Director, IT Business Partner - Biopharma GXP at nuvalent (Cambridge, MA / Remote) via Greenhouse. First seen: 2026-06-10.</description>
+      <title>Director of Technology &amp; Information Systems — zrsmanagement</title>
+      <link>https://zrsmanagement.wd5.myworkdayjobs.com/zrs_careers/job/Orlando-FL/Director-of-Technology---Information-Systems_R-105790</link>
+      <description>Director of Technology &amp; Information Systems at zrsmanagement (Orlando, FL) via Workday. First seen: 2026-06-11.</description>
+      <pubDate>Thu, 21 May 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">31c85539e5d7baef</guid>
+      <category>Workday</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>Systems Operations Manager — govworx</title>
+      <link>https://jobs.ashbyhq.com/govworx/7f7e1b6e-18f6-48d1-9afb-2c30906c1050</link>
+      <description>Systems Operations Manager at govworx (Remote - United States) via Ashby. First seen: 2026-06-11.</description>
       <pubDate>Tue, 19 May 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">9d5ea4d7f220071b</guid>
+      <guid isPermaLink="false">00188c497b2ca778</guid>
+      <category>Ashby</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>Senior Manager, Infrastructure — atlasxhm</title>
+      <link>https://job-boards.greenhouse.io/atlasxhm/jobs/8384313002</link>
+      <description>Senior Manager, Infrastructure at atlasxhm (United States of America) via Greenhouse. First seen: 2026-06-11.</description>
+      <pubDate>Thu, 14 May 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">ed5182ab7a083b21</guid>
       <category>Greenhouse</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
     </item>
     <item>
-      <title>Director, IT – Workflow Platform — amerilife</title>
-      <link>https://amerilife.wd5.myworkdayjobs.com/external/job/Clearwater-FL/Director--IT---Workflow-Platform_R4818</link>
-      <description>Director, IT – Workflow Platform at amerilife (Clearwater, FL) via Workday. First seen: 2026-06-10.</description>
-      <pubDate>Mon, 18 May 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">46da93127768f38e</guid>
-      <category>Workday</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
-    </item>
-    <item>
-      <title>Director, IT Portfolio Strategy &amp; Execution - Global Technology &amp; Business Services — cardinalhealth</title>
-      <link>https://cardinalhealth.wd1.myworkdayjobs.com/ext/job/OH-Ohio-Work-from-Home/Director--IT-Portfolio-Strategy---Execution---Global-Technology---Business-Services_20178862</link>
-      <description>Director, IT Portfolio Strategy &amp; Execution - Global Technology &amp; Business Services at cardinalhealth (OH-Ohio-Work from Home) via Workday. First seen: 2026-06-10.</description>
-      <pubDate>Tue, 12 May 2026 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">f0f0042579d43292</guid>
-      <category>Workday</category>
-      <source url="https://<your-username>.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+      <title>IT Manager - East Coast — industrialelectricmanufacturing</title>
+      <link>https://job-boards.greenhouse.io/industrialelectricmanufacturing/jobs/4187490009</link>
+      <description>IT Manager - East Coast at industrialelectricmanufacturing (Jacksonville, Florida, United States) via Greenhouse. First seen: 2026-06-11.</description>
+      <pubDate>Mon, 11 May 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">3a551fc9d0ba5891</guid>
+      <category>Greenhouse</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
     </item>
   </channel>
 </rss>

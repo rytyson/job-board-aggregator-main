@@ -1,7 +1,315 @@
 {
-  "last_updated": "2026-06-10T22:15:16.178016Z",
-  "total": 35,
+  "last_updated": "2026-06-11T08:10:48.469322Z",
+  "total": 57,
   "jobs": [
+    {
+      "job_id": "31c85539e5d7baef",
+      "title": "Director of Technology & Information Systems",
+      "company": "zrsmanagement",
+      "company_slug": "zrsmanagement",
+      "location": "Orlando, FL",
+      "application_url": "https://zrsmanagement.wd5.myworkdayjobs.com/zrs_careers/job/Orlando-FL/Director-of-Technology---Information-Systems_R-105790",
+      "date_posted": "2026-05-21",
+      "platform_source": "Workday",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "969b1fd8a2b4b527",
+      "title": "IT Manager II - Network Infrastructure & Operations",
+      "company": "trustage",
+      "company_slug": "trustage",
+      "location": "Remote - USA",
+      "application_url": "https://trustage.wd1.myworkdayjobs.com/trustage/job/Remote---USA/IT-Manager-II---Network-Infrastructure---Operations_R-011921",
+      "date_posted": "2026-05-26",
+      "platform_source": "Workday",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "04bd60d7d3dedcbb",
+      "title": "IT Manager, Emerging Technology",
+      "company": "strayer",
+      "company_slug": "strayer",
+      "location": "Remote",
+      "application_url": "https://strayer.wd1.myworkdayjobs.com/sei/job/Remote/IT-Manager_R30068",
+      "date_posted": "2026-05-28",
+      "platform_source": "Workday",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "585083b0ab0c09b1",
+      "title": "Senior IT Manager",
+      "company": "stewart",
+      "company_slug": "stewart",
+      "location": "USA TX - Remote",
+      "application_url": "https://stewart.wd1.myworkdayjobs.com/external/job/USA-TX---Remote/IT-Manager_JR107946",
+      "date_posted": "2026-06-07",
+      "platform_source": "Workday",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "d1e85dd18dcec4ad",
+      "title": "IT Manager",
+      "company": "shinvestmentsllc",
+      "company_slug": "shinvestmentsllc",
+      "location": "Remote",
+      "application_url": "https://senecaholdings.com/jobs/?gh_jid=4681047005",
+      "date_posted": "2026-06-10",
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "a10c2be06ad28045",
+      "title": "IT Manager (West Coast)",
+      "company": "recharge",
+      "company_slug": "recharge",
+      "location": "Remote",
+      "application_url": "https://job-boards.greenhouse.io/recharge/jobs/8521476002",
+      "date_posted": "2026-05-26",
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "f53deadabd42626d",
+      "title": "IT Manager",
+      "company": "quantfury",
+      "company_slug": "quantfury",
+      "location": "Miami, Florida",
+      "application_url": "https://quantfury.bamboohr.com/careers/47",
+      "date_posted": "2026-06-10",
+      "platform_source": "BambooHR",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "73dcda63b8c6ce12",
+      "title": "Principal Systems Operations Manager",
+      "company": "outreach",
+      "company_slug": "outreach",
+      "location": "United States",
+      "application_url": "https://jobs.lever.co/outreach/38ac7a54-e7d2-4a5d-bd56-ddee7b85bea4",
+      "date_posted": "2026-06-10",
+      "platform_source": "Lever",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "43c80cffa3b7ec3a",
+      "title": "IT Manager",
+      "company": "knownwell",
+      "company_slug": "knownwell",
+      "location": "Remote",
+      "application_url": "https://jobs.lever.co/knownwell/8b15177f-4436-4d88-905b-44bc7091bbec",
+      "date_posted": "2026-05-29",
+      "platform_source": "Lever",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "3a551fc9d0ba5891",
+      "title": "IT Manager - East Coast",
+      "company": "industrialelectricmanufacturing",
+      "company_slug": "industrialelectricmanufacturing",
+      "location": "Jacksonville, Florida, United States",
+      "application_url": "https://job-boards.greenhouse.io/industrialelectricmanufacturing/jobs/4187490009",
+      "date_posted": "2026-05-11",
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "e8a5a05b30a57ef8",
+      "title": "IT Manager - Distributed Database Services",
+      "company": "horacemannservicecorporation",
+      "company_slug": "horacemannservicecorporation",
+      "location": "Remote",
+      "application_url": "https://job-boards.greenhouse.io/horacemannservicecorporation/jobs/5862243004",
+      "date_posted": "2026-06-03",
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "00188c497b2ca778",
+      "title": "Systems Operations Manager",
+      "company": "govworx",
+      "company_slug": "govworx",
+      "location": "Remote - United States",
+      "application_url": "https://jobs.ashbyhq.com/govworx/7f7e1b6e-18f6-48d1-9afb-2c30906c1050",
+      "date_posted": "2026-05-19",
+      "platform_source": "Ashby",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "43af67dccbc9c6ed",
+      "title": "Senior IT Manager",
+      "company": "givebutter",
+      "company_slug": "givebutter",
+      "location": "Remote",
+      "application_url": "https://jobs.ashbyhq.com/givebutter/cd634a6b-be32-4da4-b1eb-84f208e5faf9",
+      "date_posted": "2026-06-10",
+      "platform_source": "Ashby",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "2c9145faac0a0dac",
+      "title": "Director, Implementations",
+      "company": "galileo",
+      "company_slug": "galileo",
+      "location": "Remote, United States",
+      "application_url": "https://job-boards.greenhouse.io/galileo/jobs/8547795002",
+      "date_posted": "2026-05-21",
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "152b554a18b67272",
+      "title": "IT Operations Manager",
+      "company": "fairmarkit",
+      "company_slug": "fairmarkit",
+      "location": "Remote, US",
+      "application_url": "https://job-boards.greenhouse.io/fairmarkit/jobs/6011585004",
+      "date_posted": "2026-06-10",
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "a9d90aa0aaa922f1",
+      "title": "Sr. IT Systems Operations Manager",
+      "company": "extrahopnetworks",
+      "company_slug": "extrahopnetworks",
+      "location": "Remote",
+      "application_url": "https://job-boards.greenhouse.io/extrahopnetworks/jobs/6016297004",
+      "date_posted": "2026-06-10",
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "16fb2fa98f66e2a4",
+      "title": "Technology Operations Manager",
+      "company": "digitalmediamanagement",
+      "company_slug": "digitalmediamanagement",
+      "location": "United States",
+      "application_url": "https://jobs.lever.co/digitalmediamanagement/cfcb9a4e-2f6d-494b-b7d4-9c35b0de429c",
+      "date_posted": "2026-06-10",
+      "platform_source": "Lever",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "233a7eb51e2540fa",
+      "title": "Systems Operations Manager",
+      "company": "commure",
+      "company_slug": "commure",
+      "location": "United States",
+      "application_url": "https://jobs.ashbyhq.com/commure/1ceb9b7d-9a09-4283-8c03-d3577c3f2312",
+      "date_posted": "2026-06-10",
+      "platform_source": "Ashby",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "d443e822d288308c",
+      "title": "IT Manager",
+      "company": "capitalrx",
+      "company_slug": "capitalrx",
+      "location": "Remote",
+      "application_url": "https://job-boards.greenhouse.io/capitalrx/jobs/5227140008",
+      "date_posted": "2026-06-10",
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "ae9b6e46366e93a2",
+      "title": "Technology Operations Manager",
+      "company": "businesswire",
+      "company_slug": "businesswire",
+      "location": "Remote",
+      "application_url": "https://jobs.lever.co/businesswire/c85581fa-02a7-4daf-aa4c-f2ec7cf31c66",
+      "date_posted": "2026-06-10",
+      "platform_source": "Lever",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "ed5182ab7a083b21",
+      "title": "Senior Manager, Infrastructure",
+      "company": "atlasxhm",
+      "company_slug": "atlasxhm",
+      "location": "United States of America",
+      "application_url": "https://job-boards.greenhouse.io/atlasxhm/jobs/8384313002",
+      "date_posted": "2026-05-14",
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
+    {
+      "job_id": "da163a234d9a0472",
+      "title": "IT Operations Manager",
+      "company": "accreditedlabs",
+      "company_slug": "accreditedlabs",
+      "location": "Remote",
+      "application_url": "https://job-boards.greenhouse.io/accreditedlabs/jobs/4243139009",
+      "date_posted": "2026-06-10",
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "first_seen": "2026-06-11",
+      "last_seen": "2026-06-11"
+    },
     {
       "job_id": "f3ab48b3e3a68674",
       "title": "Director of Service Delivery",
@@ -14,7 +322,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "ead2d73ddc60b6c3",
@@ -28,7 +336,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "1b26f4361832b3de",
@@ -42,7 +350,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "15553e7fa638607b",
@@ -56,7 +364,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "b63c3c0732fd6fd6",
@@ -70,7 +378,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "d91b7b994c9969ff",
@@ -84,7 +392,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "e53f92035c193c9b",
@@ -98,7 +406,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "ad4409bbce0426fa",
@@ -112,7 +420,7 @@
       "skill_level": "senior",
       "is_recruiter": true,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "a931072167e60814",
@@ -126,7 +434,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "c56a831aeb9ed050",
@@ -140,7 +448,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "9d5ea4d7f220071b",
@@ -154,7 +462,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "b4c02b1f41ae061f",
@@ -168,7 +476,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "2d741770f3544c1a",
@@ -182,7 +490,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "1a0b0a7f860977af",
@@ -196,7 +504,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "cf55e1b81a1263be",
@@ -210,7 +518,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "cc6922703e4fe52f",
@@ -224,7 +532,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "7b2d49d27bff3767",
@@ -238,7 +546,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "88472f003251f0d1",
@@ -252,7 +560,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "653e2d6afd931cf5",
@@ -266,7 +574,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "c37fee1c2a005c1d",
@@ -280,7 +588,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "d52f036f35bba886",
@@ -294,7 +602,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "2387c4a31c8106eb",
@@ -308,7 +616,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "df27fab9b72af4c3",
@@ -322,7 +630,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "43c5bca924163b69",
@@ -336,7 +644,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "45dd659e78ed6338",
@@ -350,7 +658,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "db61655cabb665cb",
@@ -364,7 +672,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "19aea93cb5cc85d3",
@@ -378,7 +686,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "f0f0042579d43292",
@@ -392,7 +700,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "e83af97cf833be45",
@@ -406,7 +714,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "557728b23e0a4cfc",
@@ -420,7 +728,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "09238c62e09079ff",
@@ -434,7 +742,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "474212fe62802eb4",
@@ -448,7 +756,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "46da93127768f38e",
@@ -462,7 +770,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "32334756cc8f829b",
@@ -476,7 +784,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     },
     {
       "job_id": "dabc66217026d2c7",
@@ -490,7 +798,7 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "first_seen": "2026-06-10",
-      "last_seen": "2026-06-10"
+      "last_seen": "2026-06-11"
     }
   ]
 }
