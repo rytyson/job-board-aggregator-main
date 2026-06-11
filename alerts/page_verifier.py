@@ -11,6 +11,13 @@ Renders each posting in headless Chromium to extract verified data:
 Workday jobs use the CXS JSON API for liveness + date (fast, 100% reliable).
 All other platforms use Playwright to fully render the JS SPA before inspection.
 
+iCIMS rules (strict):
+  - notFound=1 in URL → closed immediately, no page load needed
+  - /jobs/search in final URL → closed (iCIMS search-page redirect = removed)
+  - Location ALWAYS verified from the rendered page (chunk remote/location unreliable)
+  - Page loaded but location unverifiable → excluded (safe over sorry)
+  - Timeout/network error → kept with ⚠ flag (technical issue, not job removal)
+
 Public API:
     verify_all_jobs(jobs: list[dict], max_concurrent: int = 5) -> list[dict]
 """
@@ -50,7 +57,10 @@ _CLOSED_PHRASES = [
     "this opportunity is no longer",
     "job listing has been removed",
     "opening is no longer available",
-    # Workday (fallback — CXS API handles Workday first)
+    # iCIMS explicit "not found" message
+    "the requested job could not be found",
+    "job that you were looking for either does not exist or is no longer open",
+    # Workday (fallback if CXS API fails)
     "page you are looking for doesn't exist",
     "page you are looking for does not exist",
     "this page no longer exists",
@@ -66,21 +76,22 @@ _CLOSED_PHRASES = [
     "oops, page not found",
 ]
 
-# Page titles that indicate an error/generic page (job content absent)
+# Page titles that indicate an error/empty page (no job content)
 _GENERIC_TITLES = {
     '', 'greenhouse', 'lever', 'ashby', 'bamboohr', 'icims',
     'jobs', 'careers', 'job search', 'job board',
     'error', '404', 'page not found', 'not found',
+    'icims careers portal',   # iCIMS SPA shell title (before JS loads)
 }
 
 # ── Location filtering ────────────────────────────────────────────────────────
 
-# Remote → always accept regardless of any state suffix
+# Remote always accepted regardless of any state suffix
 _REMOTE_RE = re.compile(
-    r'\bremote\b|\bwork from home\b|\bwfh\b|\banywhere\b',
+    r'\bremote\b|\bwork from home\b|\bwfh\b|\banywhere\b|\bvirtual\b',
     re.IGNORECASE,
 )
-# US state abbreviations that are NOT FL — "City, XX" pattern
+# "City, XX" where XX is a US state NOT FL — onsite outside target area
 _US_NON_FL_STATE_RE = re.compile(
     r',\s*(?:AL|AK|AZ|AR|CA|CO|CT|DE|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|'
     r'MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|'
@@ -94,7 +105,8 @@ _INTL_COUNTRY_RE = re.compile(
     r'japan|south korea|israel|poland|sweden|denmark|norway|portugal|'
     r'switzerland|austria|belgium|czech|hungary|romania|south africa|'
     r'nigeria|egypt|uae|pakistan|lebanon|colombia|argentina|'
-    r'new zealand|taiwan|vietnam|thailand|malaysia)\b',
+    r'new zealand|taiwan|vietnam|thailand|malaysia|peru|chile|'
+    r'kenya|ghana|senegal|uganda|ethiopia)\b',
     re.IGNORECASE,
 )
 
@@ -142,7 +154,6 @@ def _normalise_date(raw: str) -> str | None:
 
 
 def _extract_date(text: str) -> str | None:
-    """Extract posting date from rendered page text."""
     m = re.search(r'(\d+)\s+days?\s+ago', text, re.IGNORECASE)
     if m and int(m.group(1)) <= 365:
         return (date.today() - timedelta(days=int(m.group(1)))).isoformat()
@@ -158,7 +169,6 @@ def _extract_date(text: str) -> str | None:
 
 
 def _extract_salary(text: str) -> str | None:
-    """Extract salary from rendered page text."""
     text_lower = text.lower()
     for label in _SALARY_LABELS:
         pos = text_lower.find(label)
@@ -190,17 +200,14 @@ def _extract_salary(text: str) -> str | None:
 
 
 def _parse_jsonld(data: dict) -> dict:
-    """Extract job fields from a schema.org JobPosting dict."""
     out: dict = {}
 
-    # Posted date
     dp = data.get('datePosted') or data.get('dateCreated')
     if dp:
         d = _normalise_date(str(dp)[:10])
         if d:
             out['date_posted'] = d
 
-    # Validity — if expired, flag it
     vt = data.get('validThrough')
     if vt:
         try:
@@ -209,7 +216,6 @@ def _parse_jsonld(data: dict) -> dict:
         except (ValueError, TypeError):
             pass
 
-    # Location
     loc_obj = data.get('jobLocation') or data.get('applicantLocationRequirements')
     if isinstance(loc_obj, list):
         loc_obj = loc_obj[0] if loc_obj else None
@@ -231,7 +237,6 @@ def _parse_jsonld(data: dict) -> dict:
     if 'remote' in str(data.get('jobLocationType') or '').lower():
         out['location_verified'] = 'Remote'
 
-    # Salary
     base = data.get('baseSalary') or data.get('estimatedSalary')
     if isinstance(base, dict):
         val = base.get('value', {})
@@ -250,9 +255,9 @@ def _parse_jsonld(data: dict) -> dict:
 
 def _location_is_excluded(loc: str | None) -> bool:
     """
-    Return True if the verified location is clearly outside Ryan's target area.
-    Target: Remote (US), Jacksonville FL, Florida, or general United States.
-    Remote takes precedence — "Remote, CA" is still acceptable.
+    Return True if the verified location is definitively outside Ryan's target area.
+    Target: Remote (US), Jacksonville FL, Florida, or broad United States.
+    Remote takes precedence — "Remote, CA" is still accepted.
     """
     if not loc:
         return False
@@ -260,18 +265,18 @@ def _location_is_excluded(loc: str | None) -> bool:
         return False
     if _INTL_COUNTRY_RE.search(loc):
         return True
+    # US onsite outside FL — pattern: ", XX" where XX != FL
     m = _US_NON_FL_STATE_RE.search(loc)
     if m:
-        # Double-check there's no FL/Remote override elsewhere in the string
         if not re.search(r'\bFL\b|\bflorida\b|\bjacksonville\b|\bremote\b', loc, re.IGNORECASE):
             return True
     return False
 
 
-async def _get_jsonld(page) -> dict | None:
-    """Return the first JobPosting JSON-LD block found on the rendered page."""
+async def _get_jsonld(frame_or_page) -> dict | None:
+    """Return the first JobPosting JSON-LD block on the page (or any frame)."""
     try:
-        for script in await page.query_selector_all('script[type="application/ld+json"]'):
+        for script in await frame_or_page.query_selector_all('script[type="application/ld+json"]'):
             try:
                 data = json.loads(await script.inner_text())
                 for item in (data if isinstance(data, list) else [data]):
@@ -284,15 +289,97 @@ async def _get_jsonld(page) -> dict | None:
     return None
 
 
+async def _all_text(page) -> str:
+    """
+    Collect rendered body text from the main frame AND all child frames.
+    iCIMS bridge-mode pages sometimes load job content into a child iframe.
+    """
+    parts: list[str] = []
+    try:
+        parts.append(await page.inner_text('body'))
+    except Exception:
+        pass
+    for frame in page.frames:
+        if frame == page.main_frame:
+            continue
+        try:
+            ft = await frame.inner_text('body')
+            if ft:
+                parts.append(ft)
+        except Exception:
+            pass
+    return '\n'.join(parts)
+
+
+async def _extract_icims_location(page, body_text: str, page_title: str) -> str | None:
+    """
+    Extract the real job location from a rendered iCIMS page.
+    Tries four methods in priority order.
+    """
+    # Method 1: Page title — iCIMS often formats as "Title - City, ST - Company"
+    for pattern in (
+        r'[-–]\s*(Remote|Work from Home|Virtual|Anywhere|WFH)\s*(?:[-–|,]|$)',
+        r'[-–]\s*((?:[A-Z][a-z]+(?:[\s\-][A-Z][a-z]+)*),\s*[A-Z]{2})\s*(?:[-–|,]|$)',
+        r'[-–]\s*(United States|Nationwide|USA|U\.S\.A?\.?)\s*(?:[-–|,]|$)',
+    ):
+        m = re.search(pattern, page_title, re.IGNORECASE)
+        if m:
+            return m.group(1).strip()
+
+    # Method 2: "Location" label immediately followed by the value in body text
+    # Rendered iCIMS typically looks like: "Location\nChantilly, VA, US"
+    m = re.search(
+        r'\bLocation\b\s*[\n:]\s*([^\n]{3,100})',
+        body_text, re.IGNORECASE,
+    )
+    if m:
+        candidate = m.group(1).strip()
+        # Reject obvious UI noise
+        bad_words = ('filter', 'search', 'loading', 'apply', 'click', 'submit',
+                     'all locations', 'select', 'type to')
+        if not any(w in candidate.lower() for w in bad_words):
+            return candidate
+
+    # Method 3: iCIMS DOM selectors (standard and custom layouts)
+    for sel in (
+        '[data-field="formfield-C_Location"] span',
+        '.iCIMS_TableBody tr td + td',
+        '[class*="locationTitle"]',
+        '[class*="jobLocation"]',
+        '[class*="location-text"]',
+        '.iCIMS_TableCell',
+    ):
+        try:
+            el = await page.query_selector(sel)
+            if el:
+                txt = (await el.inner_text()).strip()
+                if txt and 3 < len(txt) < 120:
+                    return txt
+        except Exception:
+            pass
+
+    # Method 4: City, STATE or Remote pattern anywhere in body text
+    m = re.search(
+        r'\b(?:Remote|Work from Home|WFH|Virtual|Nationwide'
+        r'|United States|Anywhere in (?:the )?U\.?S\.?A?\.?)\b'
+        r'|(?:[A-Z][a-z]{2,}(?:[ \-][A-Z][a-z]+)*),\s*'
+        r'(?:AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|'
+        r'LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|'
+        r'OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)\b',
+        body_text,
+    )
+    if m:
+        return m.group(0).strip()
+
+    return None
+
+
 # ── Workday CXS API path ──────────────────────────────────────────────────────
 
 def _check_workday_api(job: dict, checked_at: str) -> dict | None:
     """
     Check a Workday job via the CXS JSON API.
     Returns an enriched job dict, or None if the URL isn't Workday / API failed.
-    The CXS API is faster and more reliable than page rendering for Workday:
-      total=0  → job removed/closed
-      total=1  → job live, with postedOn date and locationsText
     """
     import requests
 
@@ -308,7 +395,8 @@ def _check_workday_api(job: dict, checked_at: str) -> dict | None:
     api_url = f"https://{wd_host}/wday/cxs/{company}/{tenant}/jobs"
 
     try:
-        r = requests.post(
+        import requests as req
+        r = req.post(
             api_url,
             json={"limit": 1, "offset": 0, "searchText": job_id},
             headers={
@@ -334,8 +422,7 @@ def _check_workday_api(job: dict, checked_at: str) -> dict | None:
                 'liveness_checked_at': checked_at}
 
     postings = data.get('jobPostings', [])
-    date_p = None
-    loc_v  = None
+    date_p = loc_v = None
 
     if postings:
         p = postings[0]
@@ -352,7 +439,7 @@ def _check_workday_api(job: dict, checked_at: str) -> dict | None:
     return {
         **job,
         'is_live': True,
-        'salary_posted': None,   # Workday rarely publishes salary via CXS
+        'salary_posted': None,
         'date_posted': date_p,
         'location_verified': loc_v,
         'liveness_checked_at': checked_at,
@@ -362,11 +449,7 @@ def _check_workday_api(job: dict, checked_at: str) -> dict | None:
 # ── Playwright page verifier ──────────────────────────────────────────────────
 
 async def _verify_one(page, job: dict, checked_at: str) -> dict:
-    """
-    Verify a single job posting by rendering its page in Playwright.
-    Returns an enriched job dict with is_live, salary_posted, date_posted,
-    location_verified, and liveness_checked_at.
-    """
+    """Verify a single job posting by fully rendering its page in Playwright."""
     url      = (job.get('application_url') or '').strip()
     platform = job.get('platform_source', '')
 
@@ -383,46 +466,81 @@ async def _verify_one(page, job: dict, checked_at: str) -> dict:
     if not url:
         return _closed()
 
+    # ── iCIMS pre-flight: reject bad URLs before spending time loading them ──
+    if 'icims.com' in url.lower():
+        url_lower = url.lower()
+        # notFound=1 in stored URL = job was already removed when chunk scraped
+        if 'notfound=1' in url_lower:
+            return _closed()
+        # /jobs/search in URL = landed on search page, not a job detail page
+        if '/jobs/search' in url_lower:
+            return _closed()
+
     try:
         await page.goto(url, wait_until='domcontentloaded', timeout=30_000)
 
-        # Wait for JS SPAs (iCIMS, Ashby, BambooHR) to finish rendering
+        # Allow JS-heavy SPAs (iCIMS, BambooHR, Ashby) to finish rendering
         try:
             await page.wait_for_load_state('networkidle', timeout=20_000)
         except PWTimeout:
-            pass  # use whatever rendered so far
+            pass  # use whatever rendered
 
         final_url  = page.url
         page_title = (await page.title()).strip()
 
-        # ── URL-based closed detection ─────────────────────────────────────
+        # ── URL-based closed detection ──────────────────────────────────────
         if 'error=true' in final_url.lower():
             return _closed()
-
-        # ── Generic/error page → no job content ───────────────────────────
-        if page_title.lower() in _GENERIC_TITLES:
+        if 'notfound=1' in final_url.lower():
+            return _closed()
+        # iCIMS redirects removed jobs to its search page
+        if 'icims.com' in final_url.lower() and '/jobs/search' in final_url.lower():
             return _closed()
 
-        # ── Rendered body text ─────────────────────────────────────────────
-        try:
-            body_text = await page.inner_text('body')
-        except Exception:
-            body_text = ''
+        # ── Generic/error page title → no job content ───────────────────────
+        if page_title.lower() in _GENERIC_TITLES:
+            # Give iCIMS SPAs more time — their SPA may still be booting
+            if 'icims.com' in final_url.lower():
+                try:
+                    await page.wait_for_load_state('networkidle', timeout=15_000)
+                    page_title = (await page.title()).strip()
+                except PWTimeout:
+                    pass
+            if page_title.lower() in _GENERIC_TITLES:
+                # Still generic after extra wait — treat as closed
+                # (but only for non-iCIMS to avoid false positives;
+                #  iCIMS continues below with body-text checks)
+                if 'icims.com' not in final_url.lower():
+                    return _closed()
+
+        # ── Collect all rendered text (main frame + child frames) ───────────
+        body_text = await _all_text(page)
         body_lower = body_text.lower()
 
+        # ── Closed-phrase detection ─────────────────────────────────────────
         for phrase in _CLOSED_PHRASES:
             if phrase in body_lower:
                 return _closed()
 
-        # ── Redirect depth check (walked back to careers home page) ────────
+        # ── Redirect depth check (walked back to careers home) ──────────────
         def _depth(u: str) -> int:
             return len([p for p in u.split('/') if p and 'http' not in p])
         if url != final_url and (_depth(url) - _depth(final_url)) >= 2 and _depth(final_url) <= 2:
             return _closed()
 
-        # ── JSON-LD extraction (platform-agnostic structured data) ─────────
+        # ── JSON-LD extraction (main frame first, then child frames) ────────
         extras: dict = {}
         jsonld = await _get_jsonld(page)
+        if not jsonld:
+            for frame in page.frames:
+                if frame != page.main_frame:
+                    try:
+                        jsonld = await _get_jsonld(frame)
+                        if jsonld:
+                            break
+                    except Exception:
+                        pass
+
         if jsonld:
             parsed = _parse_jsonld(jsonld)
             if parsed.get('expired'):
@@ -431,71 +549,47 @@ async def _verify_one(page, job: dict, checked_at: str) -> dict:
                 if parsed.get(k):
                     extras[k] = parsed[k]
 
-        # ── Salary fallback: scan rendered text ────────────────────────────
+        # ── Salary fallback: scan rendered text ─────────────────────────────
         if not extras.get('salary_posted'):
             sal = _extract_salary(body_text)
             if sal:
                 extras['salary_posted'] = sal
 
-        # ── Date fallback: scan rendered text ──────────────────────────────
+        # ── Date fallback: scan rendered text ────────────────────────────────
         if not extras.get('date_posted'):
             dt = _extract_date(body_text)
             if dt:
                 extras['date_posted'] = dt
 
-        # ── iCIMS location verification ────────────────────────────────────
-        # iCIMS is a JS SPA. "United States" in the chunk is an unverified
-        # default. After rendering, get the real location and re-apply the
-        # filter. Exclude non-Remote non-FL US locations and international hits.
-        if platform == 'iCIMS' and job.get('location') in ('United States', ''):
-            loc = extras.get('location_verified')
+        # ── iCIMS: always verify location (chunk data is unreliable) ────────
+        # This applies to ALL iCIMS jobs regardless of what the chunk stored.
+        # The chunk's remote flag and location codes are both unreliable.
+        if platform == 'iCIMS':
+            loc = extras.get('location_verified') or \
+                  await _extract_icims_location(page, body_text, page_title)
 
-            if not loc:
-                # iCIMS-specific selectors (rendered DOM)
-                for sel in (
-                    '[data-field="formfield-C_Location"] span',
-                    '.iCIMS_TableBody td',
-                    '[class*="locationTitle"]',
-                    '[class*="jobLocation"]',
-                    '[class*="location-text"]',
-                ):
-                    try:
-                        el = await page.query_selector(sel)
-                        if el:
-                            txt = (await el.inner_text()).strip()
-                            if txt and 5 < len(txt) < 120:
-                                loc = txt
-                                break
-                    except Exception:
-                        continue
-
-                # Last resort: find "City, STATE" pattern in rendered text
-                if not loc:
-                    city_state = re.search(
-                        r'\b(?:Remote|Work from Home|WFH|Anywhere)\b|'
-                        r'(?:[A-Z][a-z]+(?:[ \-][A-Z][a-z]+)*),\s*'
-                        r'(?:AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|'
-                        r'LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|'
-                        r'OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)\b',
-                        body_text,
-                    )
-                    if city_state:
-                        loc = city_state.group(0).strip()
-
-                if loc:
-                    extras['location_verified'] = loc
-
-            if _location_is_excluded(loc):
+            if loc:
+                extras['location_verified'] = loc
+                if _location_is_excluded(loc):
+                    return _closed()
+            else:
+                # Page rendered successfully but location is undetectable.
+                # We exclude rather than show a job with unknown location —
+                # the user explicitly wants no wrong-location results.
+                log.debug("iCIMS location unverifiable for %s — excluding", url)
                 return _closed()
-            # If we couldn't determine location at all, keep the job but flag
-            # it via location_verified=None so the frontend shows a warning
-            extras.setdefault('location_verified', None)
+
+        # ── Non-iCIMS: apply location filter to extracted location ──────────
+        elif extras.get('location_verified'):
+            if _location_is_excluded(extras['location_verified']):
+                return _closed()
 
         return _live(**extras)
 
     except PWTimeout:
-        log.warning("Playwright timeout loading %s", url)
-        # On timeout assume live — don't falsely mark jobs as closed
+        log.warning("Playwright timeout: %s", url)
+        # Timeout = technical failure, not a job removal signal.
+        # Keep the job but leave location_verified=None (frontend shows ⚠).
         return _live()
     except Exception as exc:
         log.warning("Playwright error for %s: %s", url, exc)
@@ -527,7 +621,7 @@ async def _run_all(jobs: list[dict], max_concurrent: int) -> list[dict]:
         async def _dispatch(job: dict) -> dict:
             url = (job.get('application_url') or '').strip()
 
-            # Workday: use fast CXS API (no browser needed)
+            # Workday: use fast CXS API — no browser needed
             if _WD_URL_RE.match(url):
                 loop = asyncio.get_event_loop()
                 result = await loop.run_in_executor(
@@ -535,7 +629,7 @@ async def _run_all(jobs: list[dict], max_concurrent: int) -> list[dict]:
                 )
                 if result is not None:
                     return result
-                # API failed — fall through to Playwright below
+                # API failed — fall through to Playwright
 
             # All other platforms (and Workday API failures): headless browser
             async with sem:
