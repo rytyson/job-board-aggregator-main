@@ -7,6 +7,10 @@ jobs:
   scrape:
     runs-on: ubuntu-latest
     timeout-minutes: 360 # 6 hours max to prevent hanging
+
+    permissions:
+      contents: write  # Required to commit chunk data back to the repo
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

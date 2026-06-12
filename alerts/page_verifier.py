@@ -603,7 +603,7 @@ async def _verify_one(page, job: dict, checked_at: str) -> dict:
             pass  # use whatever rendered
 
         final_url  = page.url
-        page_title = (await page.title()).strip()
+        page_title = (await page.title() or '').strip()
 
         # ── URL-based closed detection ──────────────────────────────────────
         if 'error=true' in final_url.lower():
@@ -620,7 +620,7 @@ async def _verify_one(page, job: dict, checked_at: str) -> dict:
             if 'icims.com' in final_url.lower():
                 try:
                     await page.wait_for_load_state('networkidle', timeout=15_000)
-                    page_title = (await page.title()).strip()
+                    page_title = (await page.title() or '').strip()
                 except PWTimeout:
                     pass
             if page_title.lower() in _GENERIC_TITLES:
@@ -724,6 +724,12 @@ async def _verify_one(page, job: dict, checked_at: str) -> dict:
         return _live()
     except Exception as exc:
         log.warning("Playwright error for %s: %s", url, exc)
+        # For Greenhouse embed URLs that failed to navigate (e.g. redirect loops),
+        # try the Greenhouse API using the domain-derived slug before giving up.
+        if 'gh_jid=' in url.lower():
+            gh_result = _check_greenhouse_embed(url, '', job, checked_at)
+            if gh_result is not None:
+                return gh_result
         return _live()
 
 
