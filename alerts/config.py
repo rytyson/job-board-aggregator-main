@@ -132,6 +132,7 @@ TARGET_KEYWORDS = [
     "director of technology",                # Director of Technology at growth-stage / operationally complex businesses
     "healthcare it director",
     # ── Senior Manager variants ────────────────────────────────────────────
+    # "senior manager [function]" — function comes AFTER "manager"
     "senior manager it",
     "senior manager of it",
     "senior manager, it",
@@ -159,6 +160,19 @@ TARGET_KEYWORDS = [
     "senior manager service desk",
     "senior manager of service desk",
     "senior manager, service desk",
+    # "senior [function] manager" — function comes BEFORE "manager" (e.g. "Senior Technical Support Manager")
+    "senior technical support manager",
+    "senior infrastructure manager",
+    "senior service delivery manager",
+    "senior it support manager",
+    "senior it operations manager",
+    "senior technology operations manager",
+    "senior managed services manager",
+    "senior itsm manager",
+    "senior service desk manager",
+    # ── Technical Support Director (reversed form) ────────────────────────
+    "technical support director",
+    # ── Manager-level IT ─────────────────────────────────────────────────
     "manager of infrastructure operations",
     "infrastructure operations manager",
     "it operations manager",
