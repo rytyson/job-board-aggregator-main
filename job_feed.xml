@@ -5,15 +5,44 @@
     <link>https://rytyson.github.io/job-board-aggregator-main/alerts.html</link>
     <description>Director / VP / Head-of-IT roles in Operations, Infrastructure, Service Delivery, and Managed Services — Remote or Jacksonville, FL</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jun 2026 16:43:03 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jun 2026 17:07:06 +0000</lastBuildDate>
     <ttl>360</ttl>
     <atom:link href="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>No new matches this run (2026-06-12 16:43 UTC)</title>
-      <link>https://rytyson.github.io/job-board-aggregator-main/alerts.html</link>
-      <description>The alert system ran but found no new listings matching your filters.</description>
-      <pubDate>Fri, 12 Jun 2026 16:43:03 +0000</pubDate>
-      <guid isPermaLink="false">no-new-202606121643</guid>
+      <title>Senior Technical Support Manager — pgatour</title>
+      <link>https://pgatour.wd5.myworkdayjobs.com/pgatourexternal/job/Ponte-Vedra-Beach-FL/Senior-Technical-Support-Manager_R014849</link>
+      <description>Senior Technical Support Manager at pgatour (Ponte Vedra Beach, FL) via Workday. First seen: 2026-06-12.</description>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">4b4f54709dcf6ca9</guid>
+      <category>Workday</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>Senior Infrastructure Manager — partnerize</title>
+      <link>https://partnerize.com/company/jobs/?gh_jid=7631214003</link>
+      <description>Senior Infrastructure Manager at partnerize (Remote - Edinburgh) via Greenhouse. First seen: 2026-06-12.</description>
+      <pubDate>Tue, 02 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">002de20b3a138c7e</guid>
+      <category>Greenhouse</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>Senior Infrastructure Manager — partnerize</title>
+      <link>https://partnerize.com/company/jobs/?gh_jid=7631215003</link>
+      <description>Senior Infrastructure Manager at partnerize (Remote - Manchester) via Greenhouse. First seen: 2026-06-12.</description>
+      <pubDate>Tue, 02 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">c9ff08087c4967cc</guid>
+      <category>Greenhouse</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
+    </item>
+    <item>
+      <title>Senior Infrastructure Manager — partnerize</title>
+      <link>https://partnerize.com/company/jobs/?gh_jid=7631213003</link>
+      <description>Senior Infrastructure Manager at partnerize (Remote - Leeds) via Greenhouse. First seen: 2026-06-12.</description>
+      <pubDate>Tue, 02 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">b82528f3b6ed5c64</guid>
+      <category>Greenhouse</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
     </item>
   </channel>
 </rss>
