@@ -5,15 +5,15 @@
     <link>https://rytyson.github.io/job-board-aggregator-main/alerts.html</link>
     <description>Director / VP / Head-of-IT roles in Operations, Infrastructure, Service Delivery, and Managed Services — Remote or Jacksonville, FL</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Jun 2026 10:52:37 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jun 2026 15:31:06 +0000</lastBuildDate>
     <ttl>360</ttl>
     <atom:link href="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>No new matches this run (2026-06-13 10:52 UTC)</title>
+      <title>No new matches this run (2026-06-13 15:31 UTC)</title>
       <link>https://rytyson.github.io/job-board-aggregator-main/alerts.html</link>
       <description>The alert system ran but found no new listings matching your filters.</description>
-      <pubDate>Sat, 13 Jun 2026 10:52:37 +0000</pubDate>
-      <guid isPermaLink="false">no-new-202606131052</guid>
+      <pubDate>Sat, 13 Jun 2026 15:31:06 +0000</pubDate>
+      <guid isPermaLink="false">no-new-202606131531</guid>
     </item>
   </channel>
 </rss>
