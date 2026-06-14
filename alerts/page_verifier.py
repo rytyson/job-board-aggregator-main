@@ -140,6 +140,13 @@ _WD_URL_RE = re.compile(
     re.IGNORECASE,
 )
 
+# ── Ashby URL pattern ─────────────────────────────────────────────────────────
+
+_ASHBY_URL_RE = re.compile(
+    r'https://jobs\.ashbyhq\.com/([^/]+)/([0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12})',
+    re.IGNORECASE,
+)
+
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -499,6 +506,62 @@ def _check_greenhouse_embed(url: str, page_html: str, job: dict, checked_at: str
     return None  # couldn't determine via API — caller falls back to page inspection
 
 
+# ── Ashby board API verifier ──────────────────────────────────────────────────
+
+def _check_ashby_api(job: dict, checked_at: str) -> dict | None:
+    """
+    Verify an Ashby job via the public posting-api board endpoint.
+
+    Ashby SPAs return HTTP 200 for ANY job UUID — even removed ones — because
+    the SPA shell always loads before JS fetches the actual job data.  Playwright
+    body-text checks are therefore unreliable; the board API is authoritative.
+
+    Returns an enriched job dict (is_live True/False), or None if the URL
+    isn't an Ashby job or the API call fails (caller falls through to Playwright).
+    """
+    import requests as req
+
+    url = (job.get('application_url') or '').strip()
+    m = _ASHBY_URL_RE.match(url)
+    if not m:
+        return None
+
+    slug     = m.group(1)
+    job_uuid = m.group(2).lower()
+
+    def _dead() -> dict:
+        return {**job, 'is_live': False, 'salary_posted': None,
+                'date_posted': None, 'location_verified': None,
+                'liveness_checked_at': checked_at}
+
+    try:
+        r = req.get(
+            f'https://api.ashbyhq.com/posting-api/job-board/{slug}',
+            headers={'User-Agent': 'Mozilla/5.0'},
+            timeout=10,
+        )
+        if r.status_code == 404:
+            return _dead()   # company board gone — all jobs dead
+        if r.status_code != 200:
+            return None       # transient API failure → fall through to Playwright
+
+        for j in r.json().get('jobs', []):
+            if (j.get('id') or '').lower() == job_uuid:
+                loc = j.get('location') or None
+                dp  = (j.get('publishedAt') or '')[:10] or None
+                if _location_is_excluded(loc):
+                    return _dead()
+                return {**job, 'is_live': True, 'salary_posted': None,
+                        'date_posted': dp, 'location_verified': loc,
+                        'liveness_checked_at': checked_at}
+
+        # UUID absent from board listing → job has been removed
+        return _dead()
+
+    except Exception:
+        return None   # API failure → caller falls through to Playwright
+
+
 # ── Workday CXS API path ──────────────────────────────────────────────────────
 
 def _check_workday_api(job: dict, checked_at: str) -> dict | None:
@@ -631,7 +694,10 @@ async def _verify_one(page, job: dict, checked_at: str) -> dict:
             # SPA platforms boot with a generic shell title before JS hydrates
             # the real job content. Give them extra time, then fall through to
             # body-text checks rather than immediately closing.
-            _SPA_DOMAINS = ('icims.com', 'bamboohr.com', 'ashbyhq.com')
+            # Note: ashbyhq.com is handled via board API before reaching here,
+            # so it is NOT listed — if Playwright is reached for Ashby (API fail),
+            # the conservative generic-title close is safer than a false positive.
+            _SPA_DOMAINS = ('icims.com', 'bamboohr.com')
             is_spa = any(d in final_url.lower() for d in _SPA_DOMAINS)
             if is_spa:
                 try:
@@ -780,7 +846,18 @@ async def _run_all(jobs: list[dict], max_concurrent: int) -> list[dict]:
                     return result
                 # API failed — fall through to Playwright
 
-            # All other platforms (and Workday API failures): headless browser
+            # Ashby: board API is authoritative — SPA always returns 200
+            # (even for removed jobs), so Playwright body-text is unreliable.
+            if _ASHBY_URL_RE.match(url):
+                loop = asyncio.get_event_loop()
+                result = await loop.run_in_executor(
+                    None, _check_ashby_api, job, checked_at
+                )
+                if result is not None:
+                    return result
+                # API failed — fall through to Playwright
+
+            # All other platforms (and API failures): headless browser
             async with sem:
                 ctx = await browser.new_context(
                     user_agent=(

@@ -1,6 +1,6 @@
 {
   "last_updated": "2026-06-14T15:47:53.013492Z",
-  "total": 32,
+  "total": 31,
   "jobs": [
     {
       "job_id": "f3ab48b3e3a68674",
@@ -51,7 +51,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$70,000 – $75,000",
+      "salary_posted": "$70,000 \u2013 $75,000",
       "location_verified": "United States",
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -69,7 +69,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$224,000 – $260,000",
+      "salary_posted": "$224,000 \u2013 $260,000",
       "location_verified": null,
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -123,7 +123,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$200,000 – $270,000",
+      "salary_posted": "$200,000 \u2013 $270,000",
       "location_verified": null,
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -141,7 +141,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$115,000 – $165,000",
+      "salary_posted": "$115,000 \u2013 $165,000",
       "location_verified": null,
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -195,7 +195,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$145,000 – $165,000",
+      "salary_posted": "$145,000 \u2013 $165,000",
       "location_verified": null,
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -213,7 +213,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$105,000 – $130,000",
+      "salary_posted": "$105,000 \u2013 $130,000",
       "location_verified": null,
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -231,7 +231,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$150,000 – $180,000",
+      "salary_posted": "$150,000 \u2013 $180,000",
       "location_verified": null,
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -327,24 +327,6 @@
       "last_seen": "2026-06-14"
     },
     {
-      "job_id": "00188c497b2ca778",
-      "title": "Systems Operations Manager",
-      "company": "govworx",
-      "company_slug": "govworx",
-      "location": "Remote - United States",
-      "application_url": "https://jobs.ashbyhq.com/govworx/7f7e1b6e-18f6-48d1-9afb-2c30906c1050",
-      "date_posted": null,
-      "platform_source": "Ashby",
-      "skill_level": "senior",
-      "is_recruiter": false,
-      "is_live": true,
-      "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": null,
-      "location_verified": null,
-      "first_seen": "2026-06-14",
-      "last_seen": "2026-06-14"
-    },
-    {
       "job_id": "df27fab9b72af4c3",
       "title": "Director of IT",
       "company": "goodwaygroup",
@@ -393,7 +375,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$155,934 – $196,909",
+      "salary_posted": "$155,934 \u2013 $196,909",
       "location_verified": null,
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -411,7 +393,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$170,000 – $195,000",
+      "salary_posted": "$170,000 \u2013 $195,000",
       "location_verified": null,
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -429,7 +411,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$105,000 – $125,000",
+      "salary_posted": "$105,000 \u2013 $125,000",
       "location_verified": null,
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -447,7 +429,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$221,700 – $266,000",
+      "salary_posted": "$221,700 \u2013 $266,000",
       "location_verified": "United States",
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -465,7 +447,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$110,000 – $130,000",
+      "salary_posted": "$110,000 \u2013 $130,000",
       "location_verified": "United States",
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -501,7 +483,7 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$95,200 – $150,000",
+      "salary_posted": "$95,200 \u2013 $150,000",
       "location_verified": null,
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
@@ -537,14 +519,14 @@
       "is_recruiter": false,
       "is_live": true,
       "liveness_checked_at": "2026-06-14T15:47:05.759365+00:00",
-      "salary_posted": "$125,000 – $150,000",
+      "salary_posted": "$125,000 \u2013 $150,000",
       "location_verified": "United States",
       "first_seen": "2026-06-14",
       "last_seen": "2026-06-14"
     },
     {
       "job_id": "32334756cc8f829b",
-      "title": "Senior Director, IT – Business Applications",
+      "title": "Senior Director, IT \u2013 Business Applications",
       "company": "amerilife",
       "company_slug": "amerilife",
       "location": "Clearwater, FL",
