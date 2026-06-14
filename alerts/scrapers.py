@@ -380,6 +380,11 @@ def _location_matches(location: str) -> bool:
         if pattern.lower() in loc:
             return True
 
+    # Florida with word boundary — plain substring ", fl" also matches ", flemish",
+    # ", florence", etc., so we need an explicit regex check here.
+    if re.search(r',\s*fl\b', loc):
+        return True
+
     # Bare country strings — exact match only.
     # "United States" → allow.  "Spring, Texas, United States of America" → deny.
     if loc in ALLOWED_BARE_LOCATIONS:

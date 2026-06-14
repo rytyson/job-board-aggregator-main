@@ -36,9 +36,9 @@ ALLOWED_LOCATIONS = [
     "remote",
     "jacksonville",
     " jax",
-    ", fl",
+    # Note: ", fl" and " fl," are intentionally absent — they false-match ", flemish",
+    # ", florence", etc. Florida is handled by a word-boundary regex in _location_matches.
     ", florida",
-    " fl,",
     " florida",
     "anywhere",
     "work from home",
@@ -63,18 +63,23 @@ ALLOWED_BARE_LOCATIONS = {
 # from matching just because it contains the word "remote".
 EXCLUDED_COUNTRIES = [
     "china", "india", "germany", "france", "spain", "italy", "brazil",
-    "canada", "australia", "uk", "united kingdom", "england", "netherlands",
-    "sweden", "norway", "denmark", "singapore", "japan", "korea", "israel",
-    "ireland", "poland", "mexico", "argentina", "colombia", "philippines",
-    "portugal", "switzerland", "austria", "belgium", "czech", "hungary",
-    "romania", "south africa", "nigeria", "kenya", "egypt", "uae",
-    "pakistan", "latin america", "asia pacific", "apac", "- asia",
+    "canada", "australia", "uk", "united kingdom", "england", "scotland",
+    "wales", "netherlands", "sweden", "norway", "denmark", "singapore",
+    "japan", "korea", "israel", "ireland", "poland", "mexico", "argentina",
+    "colombia", "philippines", "portugal", "switzerland", "austria",
+    "belgium", "flemish", "flanders", "wallonia",  # Belgium + Belgian regions
+    "czech", "hungary", "romania", "south africa", "nigeria", "kenya",
+    "egypt", "uae", "pakistan", "latin america", "asia pacific", "apac",
+    "- asia",
     # ISO country codes used by some ATS systems (Workday especially)
     "- phl", "- ind", "- chn", "- gbr", "- deu", "- fra", "- aus",
     "- bra", "- mex", "- sgp", "- jpn", "- kor", "- isr", "- irl",
     # Bare ISO codes used as location prefix (e.g. "PH - Remote", "PHL - Remote")
     "phl -", "phl,", "ind -", "ind,",
     "ph - ",                               # 2-letter ISO prefix for Philippines
+    # UK cities that appear in "Remote - [City]" Partnerize-style locations
+    "- leeds", "- edinburgh", "- manchester", "- newcastle", "- glasgow",
+    "- birmingham", "- sheffield", "- liverpool", "- bristol", "- london",
 ]
 
 # If True, jobs whose location is blank / "Not specified" are also kept.

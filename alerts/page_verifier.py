@@ -91,22 +91,34 @@ _REMOTE_RE = re.compile(
     r'\bremote\b|\bwork from home\b|\bwfh\b|\banywhere\b|\bvirtual\b',
     re.IGNORECASE,
 )
-# "City, XX" where XX is a US state NOT FL — onsite outside target area
+# "City, XX" where XX is a US state NOT FL — onsite outside target area.
+# Matches both abbreviations (", MN") and full names (", Minnesota").
 _US_NON_FL_STATE_RE = re.compile(
     r',\s*(?:AL|AK|AZ|AR|CA|CO|CT|DE|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|'
     r'MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|'
-    r'UT|VT|VA|WA|WV|WI|WY|DC)\b',
+    r'UT|VT|VA|WA|WV|WI|WY|DC'
+    r'|alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|'
+    r'georgia|hawaii|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|'
+    r'maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|'
+    r'nebraska|nevada|new hampshire|new jersey|new mexico|new york|north carolina|'
+    r'north dakota|ohio|oklahoma|oregon|pennsylvania|rhode island|south carolina|'
+    r'south dakota|tennessee|texas|utah|vermont|virginia|washington|west virginia|'
+    r'wisconsin|wyoming|district of columbia)\b',
     re.IGNORECASE,
 )
-# International country names
+# International country names, regions, and cities commonly seen in job location strings
 _INTL_COUNTRY_RE = re.compile(
     r'\b(?:canada|uk|united kingdom|ireland|australia|india|philippines|'
     r'germany|france|spain|italy|netherlands|brazil|mexico|singapore|'
     r'japan|south korea|israel|poland|sweden|denmark|norway|portugal|'
-    r'switzerland|austria|belgium|czech|hungary|romania|south africa|'
-    r'nigeria|egypt|uae|pakistan|lebanon|colombia|argentina|'
-    r'new zealand|taiwan|vietnam|thailand|malaysia|peru|chile|'
-    r'kenya|ghana|senegal|uganda|ethiopia)\b',
+    r'switzerland|austria|belgium|flemish|flanders|wallonia|'  # Belgium + Belgian regions
+    r'czech|hungary|romania|south africa|nigeria|egypt|uae|pakistan|'
+    r'lebanon|colombia|argentina|new zealand|taiwan|vietnam|thailand|'
+    r'malaysia|peru|chile|kenya|ghana|senegal|uganda|ethiopia|'
+    # UK constituent countries and major cities (catches "Remote - Leeds" etc.)
+    r'england|scotland|wales|northern ireland|'
+    r'london|leeds|manchester|edinburgh|glasgow|birmingham|sheffield|'
+    r'liverpool|newcastle|bristol|yorkshire|lancashire)\b',
     re.IGNORECASE,
 )
 
