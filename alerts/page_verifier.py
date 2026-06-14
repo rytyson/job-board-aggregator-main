@@ -628,19 +628,19 @@ async def _verify_one(page, job: dict, checked_at: str) -> dict:
 
         # ── Generic/error page title → no job content ───────────────────────
         if page_title.lower() in _GENERIC_TITLES:
-            # Give iCIMS SPAs more time — their SPA may still be booting
-            if 'icims.com' in final_url.lower():
+            # SPA platforms boot with a generic shell title before JS hydrates
+            # the real job content. Give them extra time, then fall through to
+            # body-text checks rather than immediately closing.
+            _SPA_DOMAINS = ('icims.com', 'bamboohr.com', 'ashbyhq.com')
+            is_spa = any(d in final_url.lower() for d in _SPA_DOMAINS)
+            if is_spa:
                 try:
                     await page.wait_for_load_state('networkidle', timeout=15_000)
                     page_title = (await page.title() or '').strip()
                 except PWTimeout:
                     pass
-            if page_title.lower() in _GENERIC_TITLES:
-                # Still generic after extra wait — treat as closed
-                # (but only for non-iCIMS to avoid false positives;
-                #  iCIMS continues below with body-text checks)
-                if 'icims.com' not in final_url.lower():
-                    return _closed()
+            if page_title.lower() in _GENERIC_TITLES and not is_spa:
+                return _closed()
 
         # ── Greenhouse embed: verify via API before relying on page text ─────
         # Company-website Greenhouse embeds (e.g. ?gh_jid=12345) return HTTP 200
