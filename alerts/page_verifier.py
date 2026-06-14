@@ -257,9 +257,9 @@ def _parse_jsonld(data: dict) -> dict:
     if isinstance(loc_obj, dict):
         addr = loc_obj.get('address') or loc_obj
         if isinstance(addr, dict):
-            city    = addr.get('addressLocality', '').strip()
-            region  = addr.get('addressRegion', '').strip()
-            country = addr.get('addressCountry', '').strip()
+            city    = (addr.get('addressLocality') or '').strip()
+            region  = (addr.get('addressRegion') or '').strip()
+            country = (addr.get('addressCountry') or '').strip()
             if country and country not in ('US', 'USA', 'United States'):
                 out['location_verified'] = f"{city}, {country}".strip(', ')
             elif city and region:
