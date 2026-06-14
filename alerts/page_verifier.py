@@ -147,6 +147,20 @@ _ASHBY_URL_RE = re.compile(
     re.IGNORECASE,
 )
 
+# ── Lever URL pattern ─────────────────────────────────────────────────────────
+
+_LEVER_URL_RE = re.compile(
+    r'https://jobs\.lever\.co/([^/]+)/([0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12})',
+    re.IGNORECASE,
+)
+
+# ── BambooHR URL pattern ──────────────────────────────────────────────────────
+
+_BAMBOOHR_URL_RE = re.compile(
+    r'https://([^.]+)\.bamboohr\.com/careers/(\d+)',
+    re.IGNORECASE,
+)
+
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -506,6 +520,139 @@ def _check_greenhouse_embed(url: str, page_html: str, job: dict, checked_at: str
     return None  # couldn't determine via API — caller falls back to page inspection
 
 
+# ── BambooHR careers list verifier ───────────────────────────────────────────
+
+def _check_bamboohr_api(job: dict, checked_at: str) -> dict | None:
+    """
+    Verify a BambooHR job via the public careers/list JSON endpoint.
+
+    BambooHR serves a generic SPA shell for ANY URL (including removed jobs),
+    making Playwright body-text checks unreliable.  The careers/list endpoint
+    returns all currently-open positions for the company; if the numeric job
+    ID is absent, the posting has been removed.
+
+    Returns an enriched job dict, or None if URL isn't BambooHR / API failed.
+    """
+    import requests as req
+
+    url = (job.get('application_url') or '').strip()
+    m = _BAMBOOHR_URL_RE.match(url)
+    if not m:
+        return None
+
+    company  = m.group(1)
+    job_id_s = m.group(2)
+
+    def _dead() -> dict:
+        return {**job, 'is_live': False, 'salary_posted': None,
+                'date_posted': None, 'location_verified': None,
+                'liveness_checked_at': checked_at}
+
+    try:
+        r = req.get(
+            f'https://{company}.bamboohr.com/careers/list',
+            headers={'User-Agent': 'Mozilla/5.0'},
+            timeout=8,
+        )
+        if r.status_code == 404:
+            return _dead()
+        if r.status_code != 200:
+            return None  # transient failure → fall through to Playwright
+
+        listings = r.json().get('result', [])
+        for entry in listings:
+            if str(entry.get('id', '')) == job_id_s:
+                # Build a location string from available fields
+                is_remote  = entry.get('isRemote') or entry.get('locationType') == '2'
+                loc_obj    = entry.get('location') or {}
+                city       = (loc_obj.get('city') or '').strip()
+                state      = (loc_obj.get('state') or '').strip()
+
+                if is_remote:
+                    loc = 'Remote'
+                elif city and state:
+                    loc = f'{city}, {state}'
+                elif city or state:
+                    loc = city or state
+                else:
+                    loc = None
+
+                if _location_is_excluded(loc):
+                    return _dead()
+
+                return {**job, 'is_live': True, 'salary_posted': None,
+                        'date_posted': None, 'location_verified': loc,
+                        'liveness_checked_at': checked_at}
+
+        # ID absent from listing → job removed
+        return _dead()
+
+    except Exception:
+        return None   # API failure → caller falls through to Playwright
+
+
+# ── Lever posting API verifier ────────────────────────────────────────────────
+
+def _check_lever_api(job: dict, checked_at: str) -> dict | None:
+    """
+    Verify a Lever job via the public postings API.
+
+    Lever returns HTTP 404 for removed jobs (unlike Ashby/BambooHR which
+    return 200 with an empty SPA shell).  But the API also gives us the
+    correct location and posting date, so we use it for all Lever URLs
+    rather than running Playwright.
+
+    Returns an enriched job dict, or None if URL isn't Lever / API failed.
+    """
+    import requests as req
+    from datetime import datetime as _dt
+
+    url = (job.get('application_url') or '').strip()
+    m = _LEVER_URL_RE.match(url)
+    if not m:
+        return None
+
+    slug    = m.group(1)
+    job_uuid = m.group(2)
+
+    def _dead() -> dict:
+        return {**job, 'is_live': False, 'salary_posted': None,
+                'date_posted': None, 'location_verified': None,
+                'liveness_checked_at': checked_at}
+
+    try:
+        r = req.get(
+            f'https://api.lever.co/v0/postings/{slug}/{job_uuid}?mode=json',
+            headers={'User-Agent': 'Mozilla/5.0'},
+            timeout=8,
+        )
+        if r.status_code == 404:
+            return _dead()
+        if r.status_code != 200:
+            return None  # transient failure → fall through to Playwright
+
+        data = r.json()
+        cats  = data.get('categories') or {}
+        loc   = cats.get('location') or data.get('workplaceType') or None
+        created = data.get('createdAt')
+        dp = None
+        if created:
+            try:
+                dp = _dt.utcfromtimestamp(created / 1000).strftime('%Y-%m-%d')
+            except Exception:
+                pass
+
+        if _location_is_excluded(loc):
+            return _dead()
+
+        return {**job, 'is_live': True, 'salary_posted': None,
+                'date_posted': dp, 'location_verified': loc,
+                'liveness_checked_at': checked_at}
+
+    except Exception:
+        return None   # API failure → caller falls through to Playwright
+
+
 # ── Ashby board API verifier ──────────────────────────────────────────────────
 
 def _check_ashby_api(job: dict, checked_at: str) -> dict | None:
@@ -694,10 +841,11 @@ async def _verify_one(page, job: dict, checked_at: str) -> dict:
             # SPA platforms boot with a generic shell title before JS hydrates
             # the real job content. Give them extra time, then fall through to
             # body-text checks rather than immediately closing.
-            # Note: ashbyhq.com is handled via board API before reaching here,
-            # so it is NOT listed — if Playwright is reached for Ashby (API fail),
-            # the conservative generic-title close is safer than a false positive.
-            _SPA_DOMAINS = ('icims.com', 'bamboohr.com')
+            # Note: ashbyhq.com and bamboohr.com are handled via their board/list
+            # APIs before reaching here, so neither is listed — if Playwright is
+            # reached for those platforms (API failure), the conservative
+            # generic-title close is safer than risking a false positive.
+            _SPA_DOMAINS = ('icims.com',)
             is_spa = any(d in final_url.lower() for d in _SPA_DOMAINS)
             if is_spa:
                 try:
@@ -841,6 +989,26 @@ async def _run_all(jobs: list[dict], max_concurrent: int) -> list[dict]:
                 loop = asyncio.get_event_loop()
                 result = await loop.run_in_executor(
                     None, _check_workday_api, job, checked_at
+                )
+                if result is not None:
+                    return result
+                # API failed — fall through to Playwright
+
+            # BambooHR: careers/list JSON endpoint lists all open positions
+            if _BAMBOOHR_URL_RE.match(url):
+                loop = asyncio.get_event_loop()
+                result = await loop.run_in_executor(
+                    None, _check_bamboohr_api, job, checked_at
+                )
+                if result is not None:
+                    return result
+                # API failed — fall through to Playwright
+
+            # Lever: public postings API returns 404 for removed jobs
+            if _LEVER_URL_RE.match(url):
+                loop = asyncio.get_event_loop()
+                result = await loop.run_in_executor(
+                    None, _check_lever_api, job, checked_at
                 )
                 if result is not None:
                     return result
