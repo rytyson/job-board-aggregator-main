@@ -5,15 +5,17 @@
     <link>https://rytyson.github.io/job-board-aggregator-main/alerts.html</link>
     <description>Director / VP / Head-of-IT roles in Operations, Infrastructure, Service Delivery, and Managed Services — Remote or Jacksonville, FL</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Jun 2026 17:58:28 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2026 14:11:34 +0000</lastBuildDate>
     <ttl>360</ttl>
     <atom:link href="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>No new matches this run (2026-06-14 17:58 UTC)</title>
-      <link>https://rytyson.github.io/job-board-aggregator-main/alerts.html</link>
-      <description>The alert system ran but found no new listings matching your filters.</description>
-      <pubDate>Sun, 14 Jun 2026 17:58:28 +0000</pubDate>
-      <guid isPermaLink="false">no-new-202606141758</guid>
+      <title>IT Operations Manager — accreditedlabs</title>
+      <link>https://job-boards.greenhouse.io/accreditedlabs/jobs/4243139009</link>
+      <description>IT Operations Manager at accreditedlabs (Remote) via Greenhouse. First seen: 2026-06-15.</description>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">da163a234d9a0472</guid>
+      <category>Greenhouse</category>
+      <source url="https://rytyson.github.io/job-board-aggregator-main/job_feed.xml">Ryan's IT Leadership Job Alerts</source>
     </item>
   </channel>
 </rss>
