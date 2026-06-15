@@ -255,6 +255,89 @@
     }
     .empty p { margin-top: 8px; font-size: 13px; }
     #loading  { text-align: center; padding: 60px 20px; color: var(--muted); }
+
+    /* ── External boards section ─────────────────────────────────────────── */
+    .ext-section-header {
+      padding: 20px 24px 8px;
+      border-top: 2px solid var(--border);
+      margin-top: 20px;
+    }
+    .ext-section-header h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .ext-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #2a2010;
+      border: 1px solid #6a5020;
+      color: var(--yellow);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .ext-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .source-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .src-himalayas  { background: #1a2e1a; color: #4ecf8e; border: 1px solid #2a4e2a; }
+    .src-remotive   { background: #1e1e38; color: #7b9eff; border: 1px solid #2e2e58; }
+    .src-wwr        { background: #2a1a2a; color: #cc88ff; border: 1px solid #4a2a4a; }
+    .src-jooble     { background: #1e2e38; color: #60c0e0; border: 1px solid #2e4a58; }
+    .src-other      { border: 1px solid var(--border); color: var(--muted); }
+    .ext-search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 24px;
+      flex-wrap: wrap;
+    }
+    .ext-search-bar input[type="text"] {
+      flex: 1;
+      min-width: 180px;
+      max-width: 400px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+    }
+    .ext-search-bar input[type="text"]:focus { border-color: var(--accent); }
+    .ext-search-bar select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: var(--text);
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .ext-stats { padding: 4px 24px 0; font-size: 12px; color: var(--muted); }
+    .ext-stats b { color: var(--text); }
+    .unverified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      color: var(--yellow);
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -329,9 +412,59 @@
   </div>
 </div>
 
+<!-- ── External Job Boards Section ──────────────────────────────────────── -->
+<div id="ext-section" style="display:none">
+  <div class="ext-section-header">
+    <h2>External Job Boards</h2>
+    <div class="ext-banner">
+      ⚠ Unverified — links open source board; confirm listing is live before applying
+    </div>
+    <p class="ext-desc">Sourced from Himalayas, Remotive, We Work Remotely, and Jooble · Past 7 days · Title-filtered, not ATS-verified</p>
+  </div>
+
+  <div class="ext-search-bar">
+    <input type="text" id="ext-search" placeholder="Search title, company, or location …">
+    <select id="ext-source-filter">
+      <option value="">All sources</option>
+      <option value="Himalayas">Himalayas</option>
+      <option value="Remotive">Remotive</option>
+      <option value="We Work Remotely">We Work Remotely</option>
+      <option value="Jooble">Jooble</option>
+    </select>
+  </div>
+
+  <div class="ext-stats" id="ext-stats"></div>
+
+  <div class="table-wrap">
+    <table id="ext-table" style="display:none">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Company</th>
+          <th>Location</th>
+          <th>Salary</th>
+          <th>Date</th>
+          <th>Source</th>
+          <th class="no-sort">Actions</th>
+          <th class="no-sort">Apply</th>
+        </tr>
+      </thead>
+      <tbody id="ext-body"></tbody>
+    </table>
+    <div id="ext-no-results" class="empty" style="display:none">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8b90a8" stroke-width="1.5">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <p>No external jobs match the current filter.</p>
+    </div>
+    <div id="ext-loading" style="text-align:center;padding:30px 20px;color:var(--muted)">Loading …</div>
+  </div>
+</div>
+
 <script>
   // ── Data ──────────────────────────────────────────────────────────────────
-  let allJobs = [];
+  let allJobs = [];   // ATS-verified jobs
+  let extJobs = [];   // External board jobs (unverified)
   let sortCol = 'first_seen';
   let sortAsc = false;
   let activeTab = '';   // '' | 'saved' | 'applied' | 'ignored'
@@ -413,7 +546,7 @@
   function updateTabCounts() {
     const statuses = loadStatuses();
     const counts = { saved: 0, applied: 0, ignored: 0 };
-    for (const job of allJobs) {
+    for (const job of [...allJobs, ...extJobs]) {
       const s = statuses[job.job_id]?.status;
       if (s && counts[s] !== undefined) counts[s]++;
     }
@@ -421,6 +554,100 @@
     document.getElementById('cnt-saved').textContent = counts.saved;
     document.getElementById('cnt-applied').textContent = counts.applied;
     document.getElementById('cnt-ignored').textContent = counts.ignored;
+  }
+
+  // ── Source pill ───────────────────────────────────────────────────────────
+  function sourcePillClass(src) {
+    const s = (src || '').toLowerCase();
+    if (s === 'himalayas')       return 'source-pill src-himalayas';
+    if (s === 'remotive')        return 'source-pill src-remotive';
+    if (s.includes('remotely'))  return 'source-pill src-wwr';
+    if (s === 'jooble')          return 'source-pill src-jooble';
+    return 'source-pill src-other';
+  }
+
+  // ── External table render ─────────────────────────────────────────────────
+  function renderExternal() {
+    const query      = document.getElementById('ext-search').value.toLowerCase().trim();
+    const srcFilter  = document.getElementById('ext-source-filter').value;
+    const statuses   = loadStatuses();
+
+    let jobs = extJobs.filter(job => {
+      if (srcFilter && job.platform_source !== srcFilter) return false;
+      if (query) {
+        const hay = (job.title + ' ' + job.company + ' ' + (job.location || '')).toLowerCase();
+        if (!hay.includes(query)) return false;
+      }
+      return true;
+    });
+
+    // Sort by date_posted desc, then first_seen desc
+    jobs.sort((a, b) => {
+      const da = a.date_posted || a.first_seen || '';
+      const db = b.date_posted || b.first_seen || '';
+      return db.localeCompare(da);
+    });
+
+    const tbody = document.getElementById('ext-body');
+    tbody.innerHTML = '';
+
+    document.getElementById('ext-loading').style.display = 'none';
+
+    if (!jobs.length) {
+      document.getElementById('ext-table').style.display = 'none';
+      document.getElementById('ext-no-results').style.display = 'block';
+      document.getElementById('ext-stats').innerHTML = 'No external jobs match the current filter.';
+      return;
+    }
+
+    document.getElementById('ext-table').style.display = 'table';
+    document.getElementById('ext-no-results').style.display = 'none';
+
+    for (const job of jobs) {
+      const status  = statuses[job.job_id]?.status || null;
+      const isNew   = daysSince(job.date_posted || job.first_seen) <= 7;
+      const remote  = isRemote(job);
+      const url     = escHtml(job.application_url || '#');
+      const postedDate = job.date_posted || job.first_seen || '';
+
+      const newBadge    = isNew ? '<span class="badge badge-new">NEW</span> ' : '';
+      const remoteBadge = remote ? '<span class="badge badge-remote">Remote</span> ' : '';
+      const locStr      = (job.location || '').trim();
+      const locHtml     = locStr
+        ? `${remoteBadge}${escHtml(locStr)}`
+        : `${remoteBadge}<span style="font-size:11px;color:var(--muted);font-style:italic">—</span>`;
+
+      const salaryHtml = job.salary_posted
+        ? `<span class="col-salary">${escHtml(job.salary_posted)}</span>`
+        : `<span class="col-salary no-salary">—</span>`;
+
+      const srcClass = sourcePillClass(job.platform_source);
+
+      const btnSave   = `<button class="action-btn${status==='saved'   ? ' st-saved'   : ''}" onclick="setStatus('${escHtml(job.job_id)}','saved')"   title="Save for later">★</button>`;
+      const btnApply  = `<button class="action-btn${status==='applied' ? ' st-applied' : ''}" onclick="setStatus('${escHtml(job.job_id)}','applied')" title="Mark applied">✓</button>`;
+      const btnIgnore = `<button class="action-btn${status==='ignored' ? ' st-ignored' : ''}" onclick="setStatus('${escHtml(job.job_id)}','ignored')" title="Not interested">✗</button>`;
+
+      const row = document.createElement('tr');
+      if (status === 'applied') row.classList.add('row-applied');
+      if (status === 'ignored') row.classList.add('row-ignored');
+
+      row.innerHTML = `
+        <td class="job-title">${newBadge}<a href="${url}" target="_blank" rel="noopener">${escHtml(job.title)}</a></td>
+        <td>${escHtml(job.company)}</td>
+        <td class="col-loc">${locHtml}</td>
+        <td>${salaryHtml}</td>
+        <td class="col-date">${fmtDate(postedDate)}</td>
+        <td><span class="${srcClass}">${escHtml(job.platform_source)}</span></td>
+        <td><div class="action-btns">${btnSave}${btnApply}${btnIgnore}</div></td>
+        <td><a class="apply-link" href="${url}" target="_blank" rel="noopener">Apply →</a></td>
+      `;
+      tbody.appendChild(row);
+    }
+
+    const newCount = extJobs.filter(j => daysSince(j.date_posted || j.first_seen) <= 7).length;
+    document.getElementById('ext-stats').innerHTML =
+      `Showing <b>${jobs.length}</b> of <b>${extJobs.length}</b> external listings — `
+      + `<b>${newCount}</b> from the past 7 days`;
   }
 
   // ── Main render ───────────────────────────────────────────────────────────
@@ -564,6 +791,8 @@
   document.getElementById('search').addEventListener('input', renderTable);
   document.getElementById('platform-filter').addEventListener('change', renderTable);
   document.getElementById('hide-actioned').addEventListener('change', renderTable);
+  document.getElementById('ext-search').addEventListener('input', renderExternal);
+  document.getElementById('ext-source-filter').addEventListener('change', renderExternal);
 
   // Sortable column headers
   document.querySelectorAll('thead th[data-col]').forEach(th => {
@@ -602,7 +831,11 @@
       return r.json();
     })
     .then(data => {
-      allJobs = data.jobs || [];
+      const allLoaded = data.jobs || [];
+      // Split into ATS-verified (main table) and external (unverified section)
+      allJobs = allLoaded.filter(j => j.is_verified !== false);
+      extJobs = allLoaded.filter(j => j.is_verified === false);
+
       document.getElementById('loading').style.display = 'none';
 
       const updated = data.last_updated
@@ -610,6 +843,12 @@
         : '—';
       document.getElementById('header-sub').textContent =
         `Director / VP / Head of IT roles — Remote or Jacksonville, FL · Last updated: ${updated}`;
+
+      // Show external section only when there are external results
+      if (extJobs.length > 0) {
+        document.getElementById('ext-section').style.display = 'block';
+        renderExternal();
+      }
 
       updateTabCounts();
       renderTable();

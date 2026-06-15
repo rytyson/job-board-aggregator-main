@@ -38,6 +38,8 @@ jobs:
 
       - name: Run job alert system
         id: alerts
+        env:
+          JOOBLE_API_KEY: ${{ secrets.JOOBLE_API_KEY }}
         run: |
           cd alerts
           python main.py

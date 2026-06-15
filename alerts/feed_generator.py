@@ -27,21 +27,31 @@ log = logging.getLogger(__name__)
 # ─────────────────────────── jobs_db.json ───────────────────────────────────
 
 
-def save_jobs_db(jobs: list[dict]) -> None:
+def save_jobs_db(jobs: list[dict], external_jobs: list[dict] | None = None) -> None:
     """
     Write all currently-open matching jobs to jobs_db.json.
 
-    Jobs are sorted newest-first by first_seen, then by company name.
+    ATS-verified jobs are sorted newest-first by first_seen, then by company name.
+    External (unverified) jobs are appended after ATS jobs, also sorted by first_seen.
     """
-    sorted_jobs = sorted(
+    sorted_ats = sorted(
         jobs,
         key=lambda j: (j.get("first_seen", "") or "", j.get("company", "").lower()),
         reverse=True,
     )
 
+    sorted_ext = sorted(
+        external_jobs or [],
+        key=lambda j: (j.get("date_posted", "") or j.get("first_seen", ""), j.get("company", "").lower()),
+        reverse=True,
+    )
+
+    sorted_jobs = sorted_ats + sorted_ext
+
     payload = {
         "last_updated": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        "total": len(sorted_jobs),
+        "total": len(sorted_ats),
+        "total_external": len(sorted_ext),
         "jobs": sorted_jobs,
     }
 
@@ -105,18 +115,25 @@ def _build_item(job: dict) -> str:
 # ─────────────────────────── RSS feed ───────────────────────────────────────
 
 
-def generate_rss_feed(new_jobs: list[dict]) -> None:
+def generate_rss_feed(
+    new_jobs: list[dict],
+    new_external_jobs: list[dict] | None = None,
+) -> None:
     """
     Write job_feed.xml containing only new jobs from the latest run.
 
-    If there are no new jobs, writes a feed with a single informational item
-    so subscribers know the feed is alive.
+    Includes both ATS-verified new jobs and new external-board jobs.
+    If there are no new jobs at all, writes a sentinel item so subscribers
+    know the feed is alive.
     """
     now = datetime.now(timezone.utc)
     build_date = _rfc822(now)
 
+    all_new = list(new_jobs) + list(new_external_jobs or [])
+
     items_xml = ""
-    if new_jobs:
+    if all_new:
+        new_jobs = all_new  # reuse variable for the block below
         # Sort newest-first by pub_date
         ordered = sorted(new_jobs, key=_pub_date, reverse=True)
         items_xml = "\n".join(_build_item(j) for j in ordered)

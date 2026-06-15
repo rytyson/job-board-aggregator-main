@@ -37,6 +37,7 @@ from dedup import (
     save_seen_jobs,
 )
 from discovery import validate_existing_companies
+from external_feeds import fetch_all_external
 from feed_generator import generate_rss_feed, save_jobs_db
 from scrapers import check_jobs_liveness, fetch_all_jobs, fetch_all_jobs_from_chunks, load_companies
 
@@ -103,32 +104,45 @@ def run(dry_run: bool = False, mode: str = "chunks") -> int:
     current_ids = {j["job_id"] for j in matching_jobs}
     seen = prune_seen_jobs(seen, current_ids)
 
+    # ── 4b. External job boards ───────────────────────────────────────────
+    print("\n[4b] Fetching external job boards (Himalayas, Remotive, WWR, Jooble) …")
+    external_jobs = fetch_all_external()
+    # Partition external jobs into new/existing using the same seen registry
+    new_external, existing_external, seen = partition_jobs(external_jobs, seen)
+    print(f"      External — New: {len(new_external)}  |  Previously seen: {len(existing_external)}")
+
     # ── 5. Write outputs ──────────────────────────────────────────────────
     print("\n[5/6] Writing output files …")
 
     if dry_run:
         print("      DRY-RUN mode — no files written")
-        _print_summary(new_jobs, matching_jobs)
-        return len(new_jobs)
+        _print_summary(new_jobs, matching_jobs, new_external, external_jobs)
+        return len(new_jobs) + len(new_external)
 
     all_jobs_with_meta = enrich_jobs_with_seen_meta(matching_jobs, seen)
-    save_jobs_db(all_jobs_with_meta)
-    generate_rss_feed(new_jobs)
+    all_external_with_meta = enrich_jobs_with_seen_meta(external_jobs, seen)
+    save_jobs_db(all_jobs_with_meta, external_jobs=all_external_with_meta)
+    generate_rss_feed(new_jobs, new_external_jobs=new_external)
     save_seen_jobs(seen)
 
     # ── 6. Summary ────────────────────────────────────────────────────────
     print("\n[6/6] Done.")
-    _print_summary(new_jobs, matching_jobs)
+    _print_summary(new_jobs, matching_jobs, new_external, external_jobs)
 
     print(f"\n  Output files:")
     print(f"    {JOBS_DB_FILE}")
     print(f"    {JOB_FEED_FILE}")
     print(f"    {SEEN_JOBS_FILE}")
 
-    return len(new_jobs)
+    return len(new_jobs) + len(new_external)
 
 
-def _print_summary(new_jobs: list[dict], all_jobs: list[dict]) -> None:
+def _print_summary(
+    new_jobs: list[dict],
+    all_jobs: list[dict],
+    new_external: list[dict] | None = None,
+    all_external: list[dict] | None = None,
+) -> None:
     _banner("Summary")
 
     by_platform: dict[str, int] = {}
@@ -136,18 +150,28 @@ def _print_summary(new_jobs: list[dict], all_jobs: list[dict]) -> None:
         p = j.get("platform_source", "Unknown")
         by_platform[p] = by_platform.get(p, 0) + 1
 
-    print(f"  Total matching open jobs: {len(all_jobs)}")
+    print(f"  Total matching open jobs (ATS): {len(all_jobs)}")
     for platform, count in sorted(by_platform.items()):
         print(f"    {platform:<15} {count}")
 
-    print(f"\n  NEW this run: {len(new_jobs)}")
-    if new_jobs:
-        for job in sorted(new_jobs, key=lambda j: j.get("company", ""))[:20]:
+    if all_external:
+        by_source: dict[str, int] = {}
+        for j in all_external:
+            s = j.get("platform_source", "Unknown")
+            by_source[s] = by_source.get(s, 0) + 1
+        print(f"\n  External boards: {len(all_external)} jobs")
+        for source, count in sorted(by_source.items()):
+            print(f"    {source:<20} {count}")
+
+    all_new = list(new_jobs) + list(new_external or [])
+    print(f"\n  NEW this run: {len(all_new)} ({len(new_jobs)} ATS + {len(new_external or [])} external)")
+    if all_new:
+        for job in sorted(all_new, key=lambda j: j.get("company", ""))[:20]:
             loc = job.get("location") or "—"
-            print(f"    [{job['platform_source']:<11}] {job['company']:<30} {job['title'][:55]}")
-            print(f"                        📍 {loc}")
-        if len(new_jobs) > 20:
-            print(f"    … and {len(new_jobs) - 20} more")
+            print(f"    [{job['platform_source']:<20}] {job['company']:<30} {job['title'][:55]}")
+            print(f"                              📍 {loc}")
+        if len(all_new) > 20:
+            print(f"    … and {len(all_new) - 20} more")
 
 
 def reset_seen() -> None:
