@@ -1,6 +1,6 @@
 """
 External job board fetchers: Himalayas, Remotive, We Work Remotely, Jooble,
-JSearch (Google Jobs via RapidAPI), JobsPipe (100+ boards via RapidAPI).
+JSearch (Google Jobs), JobsPipe, Employ Florida.
 
 Each fetcher normalises results to the same schema used by the ATS pipeline
 and applies the same keyword + location filters so only relevant roles appear.
@@ -14,7 +14,8 @@ Guaranteed keys on every returned job dict:
     date_posted     str  — ISO-8601 date ("YYYY-MM-DD") or ""
     salary          str  — raw salary string or ""
     platform_source str  — "Himalayas" | "Remotive" | "We Work Remotely" |
-                           "Jooble" | "JSearch (Google Jobs)" | "JobsPipe"
+                           "Jooble" | "JSearch (Google Jobs)" | "JobsPipe" |
+                           "Employ Florida"
     is_verified     bool — always False; shown as "Unverified" in the UI
     first_seen      str  — ISO-8601 datetime set at fetch time
 """
@@ -658,6 +659,108 @@ def fetch_jobspipe() -> list[dict]:
     return filtered
 
 
+# ─────────────────────────── Employ Florida (state job board) ────────────────
+
+_EMPLOYFLORIDA_SEARCHES = [
+    ("IT Director",          "Jacksonville FL"),
+    ("IT Manager",           "Jacksonville FL"),
+    ("Director of IT",       "Jacksonville FL"),
+    ("VP of IT",             "Jacksonville FL"),
+    ("IT Director",          "Florida"),
+    ("IT Manager",           "Florida"),
+]
+
+
+def fetch_employflorida() -> list[dict]:
+    """Scrape Florida's state job board using a headless browser (Playwright)."""
+    try:
+        from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
+    except ImportError:
+        log.warning("playwright not installed — skipping Employ Florida")
+        return []
+
+    _BASE = "https://www.employflorida.com"
+    jobs: list[dict] = []
+    seen_urls: set[str] = set()
+
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(headless=True)
+        ctx = browser.new_context(
+            user_agent=(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/125.0.0.0 Safari/537.36"
+            )
+        )
+        page = ctx.new_page()
+        first = True
+
+        for keyword, location in _EMPLOYFLORIDA_SEARCHES:
+            search_url = (
+                f"{_BASE}/vosnet/JobBanks/JobList.aspx"
+                f"?ky={requests.utils.quote(keyword)}"
+                f"&loc={requests.utils.quote(location)}"
+                "&rad=50&rad_units=miles&jtp=0&re=0"
+            )
+            try:
+                page.goto(search_url, wait_until="networkidle", timeout=30_000)
+
+                if first:
+                    preview = page.evaluate("() => document.body.innerText.slice(0, 600)")
+                    log.debug("Employ Florida page preview: %s", preview)
+                    first = False
+
+                # Extract all links to job detail pages
+                result_data = page.evaluate("""() => {
+                    const items = [];
+                    document.querySelectorAll('a[href*="JobDetails"], a[href*="jobdetail"]').forEach(a => {
+                        const row = a.closest('tr') || a.closest('li') || a.closest('div[class*="job"]') || a.parentElement;
+                        items.push({
+                            title: a.innerText.trim(),
+                            url: a.href,
+                            rowText: row ? row.innerText.trim() : ''
+                        });
+                    });
+                    return items;
+                }""")
+
+                log.debug("Employ Florida '%s'/'%s': %d links", keyword, location, len(result_data))
+
+                for item in result_data:
+                    url = item.get("url", "").strip()
+                    if not url or url in seen_urls:
+                        continue
+                    seen_urls.add(url)
+
+                    title = item.get("title", "").strip()
+                    row_text = item.get("rowText", "")
+                    lines = [ln.strip() for ln in row_text.splitlines() if ln.strip()]
+                    # Heuristic: line 0 = title, line 1 = company, line 2 = location, etc.
+                    company = lines[1] if len(lines) > 1 else ""
+                    loc_str = lines[2] if len(lines) > 2 else location
+
+                    jobs.append(_make_job(
+                        source="Employ Florida",
+                        title=title,
+                        company=company,
+                        location=loc_str,
+                        url=url,
+                        date_posted="",
+                        salary="",
+                    ))
+
+            except PWTimeout:
+                log.warning("Employ Florida '%s'/'%s' timed out", keyword, location)
+            except Exception as exc:
+                log.warning("Employ Florida '%s'/'%s' failed: %s", keyword, location, exc)
+
+        browser.close()
+
+    filtered = filter_jobs(jobs)
+    log.info("Employ Florida: %d raw → %d after filter", len(jobs), len(filtered))
+    return filtered
+
+
 # ─────────────────────────── orchestrator ───────────────────────────────────
 
 
@@ -678,6 +781,7 @@ def fetch_all_external() -> list[dict]:
         fetch_jooble,
         fetch_jsearch,
         fetch_jobspipe,
+        fetch_employflorida,
     ):
         try:
             batch = fetcher()
