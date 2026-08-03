@@ -468,9 +468,18 @@ def fetch_jsearch() -> list[dict]:
             log.warning("JSearch query %r — unexpected response type %s: %s", query, type(data).__name__, str(data)[:200])
             return
 
-        raw_items = data.get("data") or data.get("jobs") or data.get("results") or []
+        # v2 response: {"status":..., "data": {"data": [jobs]}} — one extra nesting level
+        inner = data.get("data")
+        if isinstance(inner, list):
+            raw_items = inner
+        elif isinstance(inner, dict):
+            raw_items = inner.get("data") or inner.get("jobs") or inner.get("results") or []
+        else:
+            raw_items = []
+
         if not isinstance(raw_items, list):
-            log.warning("JSearch query %r — unexpected items type %s, keys: %s", query, type(raw_items).__name__, list(data.keys()))
+            log.warning("JSearch query %r — could not find job list; top keys: %s, inner keys: %s",
+                        query, list(data.keys()), list(inner.keys()) if isinstance(inner, dict) else inner)
             return
         if raw_items and not jobs:
             log.debug("JSearch first item keys: %s", list(raw_items[0].keys()) if isinstance(raw_items[0], dict) else type(raw_items[0]).__name__)
