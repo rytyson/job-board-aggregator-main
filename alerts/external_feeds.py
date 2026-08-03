@@ -463,7 +463,12 @@ def fetch_jsearch() -> list[dict]:
                 headers=headers,
                 timeout=_TIMEOUT,
             )
-            resp.raise_for_status()
+            if not resp.ok:
+                log.warning(
+                    "JSearch query %r → HTTP %s — body: %s",
+                    query, resp.status_code, resp.text[:300],
+                )
+                return
             data = resp.json()
         except Exception as exc:
             log.warning("JSearch query %r failed: %s", query, exc)
@@ -574,19 +579,20 @@ def fetch_jobspipe() -> list[dict]:
                 headers=headers,
                 timeout=_TIMEOUT,
             )
+            if not resp.ok:
+                log.warning(
+                    "JobsPipe query %r/%r → HTTP %s — body: %s",
+                    query, location, resp.status_code, resp.text[:300],
+                )
+                return
             # Log raw field names from first item so we can verify mapping
-            if resp.status_code == 200:
-                raw = resp.json()
-                items = raw if isinstance(raw, list) else raw.get("jobs", raw.get("data", raw.get("results", [])))
-                if items and not jobs:
-                    log.debug("JobsPipe first item keys: %s", list(items[0].keys()))
-            resp.raise_for_status()
+            raw = resp.json()
+            items = raw if isinstance(raw, list) else raw.get("jobs", raw.get("data", raw.get("results", [])))
+            if items and not jobs:
+                log.debug("JobsPipe first item keys: %s", list(items[0].keys()))
         except Exception as exc:
             log.warning("JobsPipe query %r / %r failed: %s", query, location, exc)
             return
-
-        raw = resp.json()
-        items = raw if isinstance(raw, list) else raw.get("jobs", raw.get("data", raw.get("results", [])))
 
         for item in items:
             url = _extract_url(item)
