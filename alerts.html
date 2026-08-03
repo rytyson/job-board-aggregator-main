@@ -298,6 +298,8 @@
     .src-remotive   { background: #1e1e38; color: #7b9eff; border: 1px solid #2e2e58; }
     .src-wwr        { background: #2a1a2a; color: #cc88ff; border: 1px solid #4a2a4a; }
     .src-jooble     { background: #1e2e38; color: #60c0e0; border: 1px solid #2e4a58; }
+    .src-jsearch    { background: #1e2838; color: #70b0ff; border: 1px solid #2e3848; }
+    .src-jobspipe   { background: #2e1e38; color: #c080ff; border: 1px solid #4e3e58; }
     .src-other      { border: 1px solid var(--border); color: var(--muted); }
     .ext-search-bar {
       display: flex;
@@ -426,10 +428,12 @@
     <input type="text" id="ext-search" placeholder="Search title, company, or location …">
     <select id="ext-source-filter">
       <option value="">All sources</option>
+      <option value="JSearch (Google Jobs)">JSearch (Google Jobs)</option>
+      <option value="JobsPipe">JobsPipe</option>
+      <option value="Jooble">Jooble</option>
       <option value="Himalayas">Himalayas</option>
       <option value="Remotive">Remotive</option>
       <option value="We Work Remotely">We Work Remotely</option>
-      <option value="Jooble">Jooble</option>
     </select>
   </div>
 
@@ -559,10 +563,12 @@
   // ── Source pill ───────────────────────────────────────────────────────────
   function sourcePillClass(src) {
     const s = (src || '').toLowerCase();
-    if (s === 'himalayas')       return 'source-pill src-himalayas';
-    if (s === 'remotive')        return 'source-pill src-remotive';
-    if (s.includes('remotely'))  return 'source-pill src-wwr';
-    if (s === 'jooble')          return 'source-pill src-jooble';
+    if (s === 'himalayas')            return 'source-pill src-himalayas';
+    if (s === 'remotive')             return 'source-pill src-remotive';
+    if (s.includes('remotely'))       return 'source-pill src-wwr';
+    if (s === 'jooble')               return 'source-pill src-jooble';
+    if (s.includes('jsearch') || s.includes('google jobs')) return 'source-pill src-jsearch';
+    if (s === 'jobspipe')             return 'source-pill src-jobspipe';
     return 'source-pill src-other';
   }
 
