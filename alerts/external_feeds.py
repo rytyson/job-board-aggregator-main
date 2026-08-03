@@ -706,37 +706,18 @@ def fetch_employflorida() -> list[dict]:
         for keyword, location in _EMPLOYFLORIDA_SEARCHES:
             try:
                 # Load the search form fresh each time (VOS requires proper ViewState)
-                page.goto(_SEARCH_PAGE, wait_until="networkidle", timeout=30_000)
+                page.goto(_SEARCH_PAGE, wait_until="domcontentloaded", timeout=30_000)
+                # Wait for the Quick Search form to be ready before filling
+                page.wait_for_selector('#univsearchtxtkeywordquick', timeout=10_000)
 
-                if first:
-                    # Log visible inputs and page title to understand form structure
-                    form_info = page.evaluate("""() => ({
-                        title: document.title,
-                        inputs: Array.from(document.querySelectorAll('input'))
-                                     .filter(el => el.offsetWidth > 0)
-                                     .map(el => ({id: el.id, name: el.name, type: el.type, placeholder: el.placeholder, value: el.value}))
-                                     .slice(0, 8)
-                    })""")
-                    log.info("Employ Florida form: title=%s inputs=%s", form_info.get('title'), form_info.get('inputs'))
-                    first = False
+                first = False
 
-                # Fill the first two visible text inputs (keyword, location) via JS
-                # to avoid placeholder-matching brittleness
-                page.evaluate("""([kw, loc]) => {
-                    const inputs = Array.from(document.querySelectorAll('input[type="text"], input:not([type])'))
-                                        .filter(el => el.offsetWidth > 0);
-                    const fire = (el, val) => {
-                        el.value = val;
-                        el.dispatchEvent(new Event('input', {bubbles: true}));
-                        el.dispatchEvent(new Event('change', {bubbles: true}));
-                    };
-                    if (inputs[0]) fire(inputs[0], kw);
-                    if (inputs[1]) fire(inputs[1], loc);
-                }""", [keyword, location])
-
-                # Click the Search submit button
-                page.locator('input[type="submit"]').first.click()
-                page.wait_for_load_state("networkidle", timeout=30_000)
+                # Use exact IDs identified from form inspection
+                page.locator('#univsearchtxtkeywordquick').fill(keyword)
+                page.locator('#ctl00_Main_content_univsearchlocation').fill(location)
+                page.locator('#ctl00_Main_content_btnSearch2').click()
+                # "load" not "networkidle" — VOS pages continuously poll and never fully idle
+                page.wait_for_load_state("load", timeout=30_000)
 
                 log.info("Employ Florida '%s'/'%s' results URL: %s", keyword, location, page.url)
 
