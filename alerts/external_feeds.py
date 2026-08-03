@@ -1,5 +1,6 @@
 """
-External job board fetchers: Himalayas, Remotive, We Work Remotely, Jooble.
+External job board fetchers: Himalayas, Remotive, We Work Remotely, Jooble,
+JSearch (Google Jobs via RapidAPI), JobsPipe (100+ boards via RapidAPI).
 
 Each fetcher normalises results to the same schema used by the ATS pipeline
 and applies the same keyword + location filters so only relevant roles appear.
@@ -12,7 +13,8 @@ Guaranteed keys on every returned job dict:
     application_url str
     date_posted     str  — ISO-8601 date ("YYYY-MM-DD") or ""
     salary          str  — raw salary string or ""
-    platform_source str  — "Himalayas" | "Remotive" | "We Work Remotely" | "Jooble"
+    platform_source str  — "Himalayas" | "Remotive" | "We Work Remotely" |
+                           "Jooble" | "JSearch (Google Jobs)" | "JobsPipe"
     is_verified     bool — always False; shown as "Unverified" in the UI
     first_seen      str  — ISO-8601 datetime set at fetch time
 """
@@ -32,6 +34,7 @@ from scrapers import filter_jobs
 log = logging.getLogger(__name__)
 
 _JOOBLE_KEY_ENV = "JOOBLE_API_KEY"
+_RAPIDAPI_KEY_ENV = "RAPIDAPI_KEY"
 _CUTOFF_DAYS = 7
 _TIMEOUT = 12  # seconds per request
 
@@ -405,12 +408,228 @@ def fetch_jooble() -> list[dict]:
     return filtered
 
 
+# ─────────────────────────── JSearch (Google Jobs via RapidAPI) ─────────────
+
+_RAPIDAPI_HEADERS = {
+    "User-Agent": _UA,
+    "Accept": "application/json",
+    "X-RapidAPI-Host": "jsearch.p.rapidapi.com",  # overridden per fetcher
+}
+
+_JSEARCH_REMOTE_QUERIES = [
+    "IT Director",
+    "IT Manager",
+    "Director of Infrastructure",
+    "Head of IT",
+    "VP of IT",
+]
+
+_JSEARCH_JAX_QUERIES = [
+    "IT Director Jacksonville FL",
+    "IT Manager Jacksonville FL",
+    "Director of IT Jacksonville FL",
+]
+
+
+def fetch_jsearch() -> list[dict]:
+    api_key = os.environ.get(_RAPIDAPI_KEY_ENV, "").strip()
+    if not api_key:
+        log.warning("RAPIDAPI_KEY not set — skipping JSearch")
+        return []
+
+    headers = {
+        **_RAPIDAPI_HEADERS,
+        "X-RapidAPI-Key": api_key,
+        "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
+    }
+    jobs: list[dict] = []
+    seen_urls: set[str] = set()
+
+    def _run_query(query: str, remote_only: bool) -> None:
+        params = {
+            "query": query,
+            "page": "1",
+            "num_pages": "1",
+            "date_posted": "week",
+            "employment_types": "FULLTIME",
+        }
+        if remote_only:
+            params["remote_jobs_only"] = "true"
+
+        try:
+            resp = requests.get(
+                "https://jsearch.p.rapidapi.com/search",
+                params=params,
+                headers=headers,
+                timeout=_TIMEOUT,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+        except Exception as exc:
+            log.warning("JSearch query %r failed: %s", query, exc)
+            return
+
+        for item in data.get("data", []):
+            url = (item.get("job_apply_link") or "").strip()
+            if not url or url in seen_urls:
+                continue
+
+            dt = _parse_iso(item.get("job_posted_at_datetime_utc", ""))
+            if not _is_recent(dt):
+                continue
+
+            if item.get("job_is_remote"):
+                location = "Remote"
+            else:
+                city = item.get("job_city") or ""
+                state = item.get("job_state") or ""
+                location = ", ".join(p for p in [city, state] if p) or item.get("job_country", "")
+
+            seen_urls.add(url)
+            jobs.append(_make_job(
+                source="JSearch (Google Jobs)",
+                title=item.get("job_title", ""),
+                company=item.get("employer_name", ""),
+                location=location,
+                url=url,
+                date_posted=_iso_date(dt),
+                salary=_salary_str(
+                    item.get("job_min_salary"),
+                    item.get("job_max_salary"),
+                    item.get("job_salary_period"),
+                ),
+            ))
+
+    for q in _JSEARCH_REMOTE_QUERIES:
+        _run_query(q, remote_only=True)
+    for q in _JSEARCH_JAX_QUERIES:
+        _run_query(q, remote_only=False)
+
+    filtered = filter_jobs(jobs)
+    log.info("JSearch: %d raw → %d after filter", len(jobs), len(filtered))
+    return filtered
+
+
+# ─────────────────────────── JobsPipe (100+ boards via RapidAPI) ─────────────
+
+_JOBSPIPE_REMOTE_QUERIES = [
+    "IT Director",
+    "IT Manager",
+    "Director of Infrastructure",
+    "Head of IT",
+    "VP of IT",
+]
+
+_JOBSPIPE_JAX_QUERIES = [
+    ("IT Director",          "Jacksonville, FL"),
+    ("IT Manager",           "Jacksonville, FL"),
+    ("Director of IT",       "Jacksonville, FL"),
+]
+
+
+def fetch_jobspipe() -> list[dict]:
+    api_key = os.environ.get(_RAPIDAPI_KEY_ENV, "").strip()
+    if not api_key:
+        log.warning("RAPIDAPI_KEY not set — skipping JobsPipe")
+        return []
+
+    headers = {
+        **_RAPIDAPI_HEADERS,
+        "X-RapidAPI-Key": api_key,
+        "X-RapidAPI-Host": "jobspipe.p.rapidapi.com",
+    }
+    jobs: list[dict] = []
+    seen_urls: set[str] = set()
+
+    def _extract_url(item: dict) -> str:
+        for key in ("url", "applyUrl", "apply_url", "jobUrl", "job_url", "link", "externalUrl"):
+            val = item.get(key, "")
+            if val:
+                return str(val).strip()
+        return ""
+
+    def _extract_date(item: dict) -> str:
+        for key in ("postedAt", "posted_at", "datePosted", "date_posted", "publishedAt", "published_at", "createdAt"):
+            val = item.get(key, "")
+            if val:
+                return str(val).strip()
+        return ""
+
+    def _extract_salary(item: dict) -> str:
+        for key in ("salary", "salaryRange", "salary_range", "compensation"):
+            val = item.get(key, "")
+            if val:
+                return str(val).strip()
+        return ""
+
+    def _run_query(query: str, location: str = "") -> None:
+        params: dict = {"q": query, "limit": "20", "datePosted": str(_CUTOFF_DAYS)}
+        if location:
+            params["location"] = location
+
+        try:
+            resp = requests.get(
+                "https://jobspipe.p.rapidapi.com/jobs",
+                params=params,
+                headers=headers,
+                timeout=_TIMEOUT,
+            )
+            # Log raw field names from first item so we can verify mapping
+            if resp.status_code == 200:
+                raw = resp.json()
+                items = raw if isinstance(raw, list) else raw.get("jobs", raw.get("data", raw.get("results", [])))
+                if items and not jobs:
+                    log.debug("JobsPipe first item keys: %s", list(items[0].keys()))
+            resp.raise_for_status()
+        except Exception as exc:
+            log.warning("JobsPipe query %r / %r failed: %s", query, location, exc)
+            return
+
+        raw = resp.json()
+        items = raw if isinstance(raw, list) else raw.get("jobs", raw.get("data", raw.get("results", [])))
+
+        for item in items:
+            url = _extract_url(item)
+            if not url or url in seen_urls:
+                continue
+
+            date_raw = _extract_date(item)
+            dt = _parse_iso(date_raw)
+            if not _is_recent(dt):
+                continue
+
+            loc = (
+                item.get("location") or item.get("jobLocation") or item.get("job_location")
+                or location or ""
+            )
+
+            seen_urls.add(url)
+            jobs.append(_make_job(
+                source="JobsPipe",
+                title=item.get("title") or item.get("jobTitle") or item.get("job_title") or "",
+                company=item.get("company") or item.get("companyName") or item.get("employer") or "",
+                location=str(loc).strip(),
+                url=url,
+                date_posted=_iso_date(dt),
+                salary=_extract_salary(item),
+            ))
+
+    for q in _JOBSPIPE_REMOTE_QUERIES:
+        _run_query(q)
+    for q, loc in _JOBSPIPE_JAX_QUERIES:
+        _run_query(q, loc)
+
+    filtered = filter_jobs(jobs)
+    log.info("JobsPipe: %d raw → %d after filter", len(jobs), len(filtered))
+    return filtered
+
+
 # ─────────────────────────── orchestrator ───────────────────────────────────
 
 
 def fetch_all_external() -> list[dict]:
     """
-    Fetch from all four external boards and return a single de-duplicated list.
+    Fetch from all external boards and return a single de-duplicated list.
 
     De-duplication is by application_url — if the same URL appears on multiple
     boards, the first occurrence wins.
@@ -418,7 +637,14 @@ def fetch_all_external() -> list[dict]:
     all_jobs: list[dict] = []
     seen_urls: set[str] = set()
 
-    for fetcher in (fetch_himalayas, fetch_remotive, fetch_wwr, fetch_jooble):
+    for fetcher in (
+        fetch_himalayas,
+        fetch_remotive,
+        fetch_wwr,
+        fetch_jooble,
+        fetch_jsearch,
+        fetch_jobspipe,
+    ):
         try:
             batch = fetcher()
         except Exception as exc:
