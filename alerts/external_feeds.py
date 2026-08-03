@@ -451,7 +451,7 @@ def fetch_jsearch() -> list[dict]:
                 "https://api.openwebninja.com/jsearch/search-v2",
                 params=params,
                 headers=headers,
-                timeout=_TIMEOUT,
+                timeout=30,
             )
             if not resp.ok:
                 log.warning(
