@@ -728,20 +728,26 @@ def fetch_employflorida() -> list[dict]:
                 # Extract all links to job detail pages
                 result_data = page.evaluate("""() => {
                     const items = [];
-                    document.querySelectorAll('a[href*="JobDetails"], a[href*="jobdetail"], a[href*="job_detail"]').forEach(a => {
+                    document.querySelectorAll('a[href*="JobDetails"], a[href*="jobdetail"], a[href*="job_detail"], a[href*="enc="]').forEach(a => {
+                        const href = a.href;
+                        if (!href.includes('JobBanks') && !href.includes('job')) return;
                         const row = a.closest('tr') || a.closest('li') || a.closest('div[class*="job"]') || a.parentElement;
                         items.push({
                             title: a.innerText.trim(),
-                            url: a.href,
+                            url: href,
                             rowText: row ? row.innerText.trim() : ''
                         });
                     });
-                    // Also count all links for diagnostics
-                    return {items, totalLinks: document.querySelectorAll('a').length};
+                    // Sample hrefs for diagnostics
+                    const sampleHrefs = Array.from(document.querySelectorAll('a[href*="vosnet"]')).slice(0, 5).map(a => a.href);
+                    return {items, totalLinks: document.querySelectorAll('a').length, sampleHrefs};
                 }""")
 
-                log.info("Employ Florida '%s'/'%s': %d job links (%d total links on page)",
-                         keyword, location, len(result_data.get('items', [])), result_data.get('totalLinks', 0))
+                log.info("Employ Florida '%s'/'%s': %d job links (%d total) sample hrefs: %s",
+                         keyword, location,
+                         len(result_data.get('items', [])),
+                         result_data.get('totalLinks', 0),
+                         result_data.get('sampleHrefs', [])[:3])
 
                 for item in result_data.get('items', []):
                     url = item.get("url", "").strip()
