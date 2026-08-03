@@ -464,7 +464,20 @@ def fetch_jsearch() -> list[dict]:
             log.warning("JSearch query %r failed: %s", query, exc)
             return
 
-        for item in data.get("data", []):
+        if not isinstance(data, dict):
+            log.warning("JSearch query %r — unexpected response type %s: %s", query, type(data).__name__, str(data)[:200])
+            return
+
+        raw_items = data.get("data") or data.get("jobs") or data.get("results") or []
+        if not isinstance(raw_items, list):
+            log.warning("JSearch query %r — unexpected items type %s, keys: %s", query, type(raw_items).__name__, list(data.keys()))
+            return
+        if raw_items and not jobs:
+            log.debug("JSearch first item keys: %s", list(raw_items[0].keys()) if isinstance(raw_items[0], dict) else type(raw_items[0]).__name__)
+
+        for item in raw_items:
+            if not isinstance(item, dict):
+                continue
             url = (item.get("job_apply_link") or "").strip()
             if not url or url in seen_urls:
                 continue
