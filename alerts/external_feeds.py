@@ -680,6 +680,7 @@ def fetch_employflorida() -> list[dict]:
         return []
 
     _BASE = "https://www.employflorida.com"
+    _SEARCH_PAGE = f"{_BASE}/vosnet/JobBanks/JobSearchCriteriaQuick.aspx?nf=1"
     jobs: list[dict] = []
     seen_urls: set[str] = set()
 
@@ -696,58 +697,64 @@ def fetch_employflorida() -> list[dict]:
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             },
         )
-        # Mask Playwright automation signals
         ctx.add_init_script(
             "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
         )
         page = ctx.new_page()
         first = True
 
-        # Warm up: visit the homepage first so we have cookies before searching
-        try:
-            page.goto(_BASE, wait_until="domcontentloaded", timeout=20_000)
-        except Exception:
-            pass
-
         for keyword, location in _EMPLOYFLORIDA_SEARCHES:
-            search_url = (
-                f"{_BASE}/vosnet/JobBanks/JobList.aspx"
-                f"?ky={requests.utils.quote(keyword)}"
-                f"&loc={requests.utils.quote(location)}"
-                "&rad=50&rad_units=miles&jtp=0&re=0"
-            )
             try:
-                page.goto(search_url, wait_until="networkidle", timeout=30_000)
-                current_url = page.url
+                # Load the search form fresh each time (VOS requires proper ViewState)
+                page.goto(_SEARCH_PAGE, wait_until="networkidle", timeout=30_000)
 
                 if first:
-                    preview = page.evaluate("() => document.body.innerText.slice(0, 400)")
-                    log.info("Employ Florida page URL: %s | preview: %s", current_url, preview)
+                    # Log form field names on first visit for diagnostics
+                    form_fields = page.evaluate("""() =>
+                        Array.from(document.querySelectorAll('input[type!=hidden], select'))
+                             .map(el => ({id: el.id, name: el.name, placeholder: el.placeholder, type: el.type}))
+                    """)
+                    log.info("Employ Florida form fields: %s", form_fields[:10])
+
+                # Fill keyword using the placeholder text shown on the form
+                kw = page.get_by_placeholder("Job Title, Company, Occupation or Military Code")
+                kw.fill(keyword)
+
+                loc = page.get_by_placeholder("City, State, County, Region or Zip")
+                loc.fill(location)
+
+                if first:
+                    preview = page.evaluate("() => document.body.innerText.slice(0, 200)")
+                    log.info("Employ Florida search form preview: %s", preview)
                     first = False
 
-                # Extract all links to job detail pages
+                # Submit the form
+                page.get_by_role("button", name="Search").click()
+                page.wait_for_load_state("networkidle", timeout=30_000)
+
+                log.info("Employ Florida '%s'/'%s' results URL: %s", keyword, location, page.url)
+
+                # Extract job detail links from the results page
                 result_data = page.evaluate("""() => {
                     const items = [];
-                    document.querySelectorAll('a[href*="JobDetails"], a[href*="jobdetail"], a[href*="job_detail"], a[href*="enc="]').forEach(a => {
-                        const href = a.href;
-                        if (!href.includes('JobBanks') && !href.includes('job')) return;
+                    document.querySelectorAll('a[href*="JobDetails"], a[href*="jobdetail"]').forEach(a => {
                         const row = a.closest('tr') || a.closest('li') || a.closest('div[class*="job"]') || a.parentElement;
                         items.push({
                             title: a.innerText.trim(),
-                            url: href,
+                            url: a.href,
                             rowText: row ? row.innerText.trim() : ''
                         });
                     });
-                    // Sample hrefs for diagnostics
-                    const sampleHrefs = Array.from(document.querySelectorAll('a[href*="vosnet"]')).slice(0, 5).map(a => a.href);
-                    return {items, totalLinks: document.querySelectorAll('a').length, sampleHrefs};
+                    const allHrefs = Array.from(document.querySelectorAll('a[href*="vosnet/JobBanks"]'))
+                                         .slice(0,5).map(a => a.href);
+                    return {items, totalLinks: document.querySelectorAll('a').length, sampleJobHrefs: allHrefs};
                 }""")
 
-                log.info("Employ Florida '%s'/'%s': %d job links (%d total) sample hrefs: %s",
+                log.info("Employ Florida '%s'/'%s': %d job links (%d total) sample: %s",
                          keyword, location,
                          len(result_data.get('items', [])),
                          result_data.get('totalLinks', 0),
-                         result_data.get('sampleHrefs', [])[:3])
+                         result_data.get('sampleJobHrefs', [])[:2])
 
                 for item in result_data.get('items', []):
                     url = item.get("url", "").strip()
