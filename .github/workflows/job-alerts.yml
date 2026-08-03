@@ -39,8 +39,9 @@ jobs:
       - name: Run job alert system
         id: alerts
         env:
-          JOOBLE_API_KEY: ${{ secrets.JOOBLE_API_KEY }}
-          RAPIDAPI_KEY:   ${{ secrets.RAPIDAPI_KEY }}
+          JOOBLE_API_KEY:       ${{ secrets.JOOBLE_API_KEY }}
+          OPENWEBNINJA_API_KEY: ${{ secrets.OPENWEBNINJA_API_KEY }}
+          JOBSPIPE_API_KEY:     ${{ secrets.JOBSPIPE_API_KEY }}
         run: |
           cd alerts
           python main.py
