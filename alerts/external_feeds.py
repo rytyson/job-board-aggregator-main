@@ -708,14 +708,6 @@ def fetch_employflorida() -> list[dict]:
                 # Load the search form fresh each time (VOS requires proper ViewState)
                 page.goto(_SEARCH_PAGE, wait_until="networkidle", timeout=30_000)
 
-                if first:
-                    # Log form field names on first visit for diagnostics
-                    form_fields = page.evaluate("""() =>
-                        Array.from(document.querySelectorAll('input[type!=hidden], select'))
-                             .map(el => ({id: el.id, name: el.name, placeholder: el.placeholder, type: el.type}))
-                    """)
-                    log.info("Employ Florida form fields: %s", form_fields[:10])
-
                 # Fill keyword using the placeholder text shown on the form
                 kw = page.get_by_placeholder("Job Title, Company, Occupation or Military Code")
                 kw.fill(keyword)
