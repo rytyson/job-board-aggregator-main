@@ -690,10 +690,24 @@ def fetch_employflorida() -> list[dict]:
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                 "AppleWebKit/537.36 (KHTML, like Gecko) "
                 "Chrome/125.0.0.0 Safari/537.36"
-            )
+            ),
+            extra_http_headers={
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            },
+        )
+        # Mask Playwright automation signals
+        ctx.add_init_script(
+            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
         )
         page = ctx.new_page()
         first = True
+
+        # Warm up: visit the homepage first so we have cookies before searching
+        try:
+            page.goto(_BASE, wait_until="domcontentloaded", timeout=20_000)
+        except Exception:
+            pass
 
         for keyword, location in _EMPLOYFLORIDA_SEARCHES:
             search_url = (
@@ -704,16 +718,17 @@ def fetch_employflorida() -> list[dict]:
             )
             try:
                 page.goto(search_url, wait_until="networkidle", timeout=30_000)
+                current_url = page.url
 
                 if first:
-                    preview = page.evaluate("() => document.body.innerText.slice(0, 600)")
-                    log.debug("Employ Florida page preview: %s", preview)
+                    preview = page.evaluate("() => document.body.innerText.slice(0, 400)")
+                    log.info("Employ Florida page URL: %s | preview: %s", current_url, preview)
                     first = False
 
                 # Extract all links to job detail pages
                 result_data = page.evaluate("""() => {
                     const items = [];
-                    document.querySelectorAll('a[href*="JobDetails"], a[href*="jobdetail"]').forEach(a => {
+                    document.querySelectorAll('a[href*="JobDetails"], a[href*="jobdetail"], a[href*="job_detail"]').forEach(a => {
                         const row = a.closest('tr') || a.closest('li') || a.closest('div[class*="job"]') || a.parentElement;
                         items.push({
                             title: a.innerText.trim(),
@@ -721,12 +736,14 @@ def fetch_employflorida() -> list[dict]:
                             rowText: row ? row.innerText.trim() : ''
                         });
                     });
-                    return items;
+                    // Also count all links for diagnostics
+                    return {items, totalLinks: document.querySelectorAll('a').length};
                 }""")
 
-                log.debug("Employ Florida '%s'/'%s': %d links", keyword, location, len(result_data))
+                log.info("Employ Florida '%s'/'%s': %d job links (%d total links on page)",
+                         keyword, location, len(result_data.get('items', [])), result_data.get('totalLinks', 0))
 
-                for item in result_data:
+                for item in result_data.get('items', []):
                     url = item.get("url", "").strip()
                     if not url or url in seen_urls:
                         continue
