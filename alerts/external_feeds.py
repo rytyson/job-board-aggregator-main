@@ -711,18 +711,20 @@ def fetch_employflorida() -> list[dict]:
                 log.info("Employ Florida '%s'/'%s': page loaded, URL=%s", keyword, location, page.url)
                 # Wait for the Quick Search form to be ready before filling
                 page.wait_for_selector('#univsearchtxtkeywordquick', timeout=10_000)
-                log.info("Employ Florida '%s'/'%s': form ready, filling fields", keyword, location)
+                log.info("Employ Florida '%s'/'%s': form ready, submitting via JS", keyword, location)
 
                 first = False
 
-                # Use exact IDs identified from form inspection
-                page.locator('#univsearchtxtkeywordquick').fill(keyword)
-                page.locator('#ctl00_Main_content_univsearchlocation').fill(location)
-                log.info("Employ Florida '%s'/'%s': fields filled, clicking submit", keyword, location)
-                page.locator('#ctl00_Main_content_btnSearch2').click()
-                log.info("Employ Florida '%s'/'%s': submit clicked, waiting for load", keyword, location)
-                # "load" not "networkidle" — VOS pages continuously poll and never fully idle
-                page.wait_for_load_state("load", timeout=30_000)
+                # Fill and click entirely in JS — Playwright's .click() blocks 30s waiting for
+                # actionability after the fill triggers VOS's internal form-state change
+                page.evaluate("""([kw, loc]) => {
+                    document.getElementById('univsearchtxtkeywordquick').value = kw;
+                    document.getElementById('ctl00_Main_content_univsearchlocation').value = loc;
+                    document.getElementById('ctl00_Main_content_btnSearch2').click();
+                }""", [keyword, location])
+                log.info("Employ Florida '%s'/'%s': JS submit fired, waiting for JobList", keyword, location)
+                # Wait for navigation to the results page (JobList.aspx)
+                page.wait_for_url("**/JobList**", timeout=30_000)
 
                 log.info("Employ Florida '%s'/'%s' results URL: %s", keyword, location, page.url)
 
