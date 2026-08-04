@@ -703,6 +703,7 @@ def fetch_employflorida() -> list[dict]:
         page = ctx.new_page()
         page.on("dialog", lambda d: (log.info("Employ Florida JS dialog: %s", d.message), d.dismiss()))
         first = True
+        first_diag = [True]
 
         for keyword, location in _EMPLOYFLORIDA_SEARCHES:
             try:
@@ -737,6 +738,29 @@ def fetch_employflorida() -> list[dict]:
                         radios[0].dispatchEvent(new Event('click', {bubbles: true}));
                     }
                 }""", [keyword, location])
+
+                if first_diag[0]:
+                    btn_info = page.evaluate("""() => {
+                        const btn = document.getElementById('ctl00_Main_content_btnSearch2');
+                        const r = btn.getBoundingClientRect();
+                        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+                        const atPoint = document.elementFromPoint(cx, cy);
+                        const form = btn.closest('form');
+                        return {
+                            btnOnclick: btn.getAttribute('onclick'),
+                            btnDisabled: btn.disabled,
+                            btnRect: {x: r.left, y: r.top, w: r.width, h: r.height},
+                            btnVisible: r.width > 0 && r.height > 0,
+                            atPointTag: atPoint ? atPoint.tagName : null,
+                            atPointId: atPoint ? atPoint.id : null,
+                            isSameElement: atPoint === btn,
+                            formAction: form ? form.action : null,
+                            formOnsubmit: form ? form.getAttribute('onsubmit') : null
+                        };
+                    }""")
+                    log.info("Employ Florida button diag: %s", btn_info)
+                    first_diag[0] = False
+
                 page.locator('#ctl00_Main_content_btnSearch2').click(force=True, timeout=5_000)
                 log.info("Employ Florida '%s'/'%s': submit clicked, waiting", keyword, location)
 
