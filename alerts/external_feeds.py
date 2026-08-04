@@ -706,16 +706,21 @@ def fetch_employflorida() -> list[dict]:
         for keyword, location in _EMPLOYFLORIDA_SEARCHES:
             try:
                 # Load the search form fresh each time (VOS requires proper ViewState)
+                log.info("Employ Florida '%s'/'%s': loading search page", keyword, location)
                 page.goto(_SEARCH_PAGE, wait_until="domcontentloaded", timeout=30_000)
+                log.info("Employ Florida '%s'/'%s': page loaded, URL=%s", keyword, location, page.url)
                 # Wait for the Quick Search form to be ready before filling
                 page.wait_for_selector('#univsearchtxtkeywordquick', timeout=10_000)
+                log.info("Employ Florida '%s'/'%s': form ready, filling fields", keyword, location)
 
                 first = False
 
                 # Use exact IDs identified from form inspection
                 page.locator('#univsearchtxtkeywordquick').fill(keyword)
                 page.locator('#ctl00_Main_content_univsearchlocation').fill(location)
+                log.info("Employ Florida '%s'/'%s': fields filled, clicking submit", keyword, location)
                 page.locator('#ctl00_Main_content_btnSearch2').click()
+                log.info("Employ Florida '%s'/'%s': submit clicked, waiting for load", keyword, location)
                 # "load" not "networkidle" — VOS pages continuously poll and never fully idle
                 page.wait_for_load_state("load", timeout=30_000)
 
