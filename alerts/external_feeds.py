@@ -701,6 +701,7 @@ def fetch_employflorida() -> list[dict]:
             "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
         )
         page = ctx.new_page()
+        page.on("dialog", lambda d: (log.info("Employ Florida JS dialog: %s", d.message), d.dismiss()))
         first = True
 
         for keyword, location in _EMPLOYFLORIDA_SEARCHES:
@@ -727,6 +728,14 @@ def fetch_employflorida() -> list[dict]:
                     };
                     fire(document.getElementById('univsearchtxtkeywordquick'), kw);
                     fire(document.getElementById('ctl00_Main_content_univsearchlocation'), loc);
+                    // "Keyword Type" radio group is likely required for search validation —
+                    // select the first option (Job Title) if none is already checked
+                    const radios = document.querySelectorAll('input[name="ctl00$Main_content$rblKeywordType"]');
+                    if (radios.length && !Array.from(radios).some(r => r.checked)) {
+                        radios[0].checked = true;
+                        radios[0].dispatchEvent(new Event('change', {bubbles: true}));
+                        radios[0].dispatchEvent(new Event('click', {bubbles: true}));
+                    }
                 }""", [keyword, location])
                 page.locator('#ctl00_Main_content_btnSearch2').click(force=True, timeout=5_000)
                 log.info("Employ Florida '%s'/'%s': submit clicked, waiting", keyword, location)
@@ -740,10 +749,15 @@ def fetch_employflorida() -> list[dict]:
                     errorText: (() => {
                         const el = document.querySelector('.validation-summary-errors, [id*=Validation], [class*=error], [class*=Error]');
                         return el ? el.innerText.trim().slice(0, 300) : null;
+                    })(),
+                    keywordTypeChecked: (() => {
+                        const r = document.querySelector('input[name="ctl00$Main_content$rblKeywordType"]:checked');
+                        return r ? r.value : null;
                     })()
                 })""")
-                log.info("Employ Florida '%s'/'%s' post-submit: url=%s title=%s error=%s",
-                         keyword, location, diag.get('url'), diag.get('title'), diag.get('errorText'))
+                log.info("Employ Florida '%s'/'%s' post-submit: url=%s title=%s error=%s kwType=%s",
+                         keyword, location, diag.get('url'), diag.get('title'), diag.get('errorText'),
+                         diag.get('keywordTypeChecked'))
 
                 log.info("Employ Florida '%s'/'%s' results URL: %s", keyword, location, page.url)
 
