@@ -715,16 +715,35 @@ def fetch_employflorida() -> list[dict]:
 
                 first = False
 
-                # Fill and click entirely in JS — Playwright's .click() blocks 30s waiting for
-                # actionability after the fill triggers VOS's internal form-state change
+                # Fill via JS (sets .value directly) but dispatch input/change events too,
+                # since ASP.NET client-side validators often key off those events, then
+                # click the real DOM button so its native onclick/postback handler runs.
                 page.evaluate("""([kw, loc]) => {
-                    document.getElementById('univsearchtxtkeywordquick').value = kw;
-                    document.getElementById('ctl00_Main_content_univsearchlocation').value = loc;
-                    document.getElementById('ctl00_Main_content_btnSearch2').click();
+                    const fire = (el, val) => {
+                        el.value = val;
+                        el.dispatchEvent(new Event('input', {bubbles: true}));
+                        el.dispatchEvent(new Event('change', {bubbles: true}));
+                        el.dispatchEvent(new Event('blur', {bubbles: true}));
+                    };
+                    fire(document.getElementById('univsearchtxtkeywordquick'), kw);
+                    fire(document.getElementById('ctl00_Main_content_univsearchlocation'), loc);
                 }""", [keyword, location])
-                log.info("Employ Florida '%s'/'%s': JS submit fired, waiting for JobList", keyword, location)
-                # Wait for navigation to the results page (JobList.aspx)
-                page.wait_for_url("**/JobList**", timeout=30_000)
+                page.locator('#ctl00_Main_content_btnSearch2').click(force=True, timeout=5_000)
+                log.info("Employ Florida '%s'/'%s': submit clicked, waiting", keyword, location)
+
+                # Don't require a specific URL — just wait a beat for the postback/redirect,
+                # then log what actually happened (URL, title, any validation errors).
+                page.wait_for_timeout(5_000)
+                diag = page.evaluate("""() => ({
+                    url: window.location.href,
+                    title: document.title,
+                    errorText: (() => {
+                        const el = document.querySelector('.validation-summary-errors, [id*=Validation], [class*=error], [class*=Error]');
+                        return el ? el.innerText.trim().slice(0, 300) : null;
+                    })()
+                })""")
+                log.info("Employ Florida '%s'/'%s' post-submit: url=%s title=%s error=%s",
+                         keyword, location, diag.get('url'), diag.get('title'), diag.get('errorText'))
 
                 log.info("Employ Florida '%s'/'%s' results URL: %s", keyword, location, page.url)
 
