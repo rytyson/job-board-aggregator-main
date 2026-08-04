@@ -761,8 +761,16 @@ def fetch_employflorida() -> list[dict]:
                     log.info("Employ Florida button diag: %s", btn_info)
                     first_diag[0] = False
 
-                page.locator('#ctl00_Main_content_btnSearch2').click(force=True, timeout=5_000)
-                log.info("Employ Florida '%s'/'%s': submit clicked, waiting", keyword, location)
+                # The button is visually covered by a DIV at its screen coordinates, so any
+                # coordinate-based click (Playwright's, even force:true) hits the DIV instead
+                # of the button. Dispatch the click event directly on the button node — this
+                # bypasses elementFromPoint hit-testing and fires the real onclick handler
+                # (checkForm() -> showPleaseWait() -> native form submit).
+                page.evaluate("""() => {
+                    const btn = document.getElementById('ctl00_Main_content_btnSearch2');
+                    btn.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
+                }""")
+                log.info("Employ Florida '%s'/'%s': submit dispatched, waiting", keyword, location)
 
                 # Don't require a specific URL — just wait a beat for the postback/redirect,
                 # then log what actually happened (URL, title, any validation errors).
