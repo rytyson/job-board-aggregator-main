@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-08-05T16:06:07.602733Z",
-  "total": 36,
-  "total_external": 26,
+  "last_updated": "2026-08-06T10:54:15.922754Z",
+  "total": 42,
+  "total_external": 27,
   "jobs": [
     {
       "job_id": "8a30b82ca30d0477",
@@ -10,16 +10,16 @@
       "company_slug": "amerilife",
       "location": "Clearwater, FL",
       "application_url": "https://amerilife.wd5.myworkdayjobs.com/external/job/Clearwater-FL/Director--IT---Business-Solutions-Partner_R5205",
-      "date_posted": null,
+      "date_posted": "2026-08-04",
       "platform_source": "Workday",
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Clearwater, FL",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-08-05",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "9eb2c94352b12760",
@@ -33,11 +33,29 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-08-04",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "0ac644015f23ad4c",
+      "title": "Senior Manager, Technical Support Engineering",
+      "company": "gomotive",
+      "company_slug": "gomotive",
+      "location": "Remote - Islamabad & Lahore",
+      "application_url": "https://job-boards.greenhouse.io/gomotive/jobs/8021088002",
+      "date_posted": null,
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "is_live": true,
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
+      "salary_posted": null,
+      "location_verified": null,
+      "first_seen": "2026-08-01",
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "f7812f69cbe02e97",
@@ -53,9 +71,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-07-30",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "53d04a3af73ba4d4",
@@ -71,9 +89,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-07-30",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "6207e000f957e06c",
@@ -89,9 +107,27 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Delray Beach, FL (hybrid)",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-07-29",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "db19a3d3407e24dd",
+      "title": "Senior Service Delivery Manager- Large Market",
+      "company": "bswift",
+      "company_slug": "bswift",
+      "location": "Remote- US",
+      "application_url": "https://job-boards.greenhouse.io/bswift/jobs/4698533006",
+      "date_posted": null,
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "is_live": true,
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
+      "salary_posted": "$90,000 – $120,000",
+      "location_verified": null,
+      "first_seen": "2026-07-29",
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "a16cdee24714f685",
@@ -107,27 +143,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote - eligible US locations",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-07-28",
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "ceca33ec216fa8f4",
-      "title": "Senior Director of Managed Services, Network and Security-Advizex",
-      "company": "myriad360",
-      "company_slug": "myriad360",
-      "location": "Remote",
-      "application_url": "https://boards.greenhouse.io/myriad360/jobs/8649121002?gh_jid=8649121002",
-      "date_posted": "2026-07-24",
-      "platform_source": "Greenhouse",
-      "skill_level": "senior",
-      "is_recruiter": false,
-      "is_live": true,
-      "salary_posted": null,
-      "location_verified": "Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
-      "first_seen": "2026-07-25",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "5b7da91b69a2f471",
@@ -143,9 +161,45 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote - United States ",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-07-25",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "ceca33ec216fa8f4",
+      "title": "Senior Director of Managed Services, Network and Security-Advizex",
+      "company": "myriad360",
+      "company_slug": "myriad360",
+      "location": "Remote",
+      "application_url": "https://boards.greenhouse.io/myriad360/jobs/8649121002?gh_jid=8649121002",
+      "date_posted": "2026-07-24",
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "is_live": true,
+      "salary_posted": null,
+      "location_verified": "Remote",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
+      "first_seen": "2026-07-25",
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "debbeadbae41a6d7",
+      "title": "Director of Information Technology",
+      "company": "storycannabis",
+      "company_slug": "storycannabis",
+      "location": "Phoenix, Arizona, United States; Remote - Maryland; Remote - Ohio",
+      "application_url": "https://job-boards.greenhouse.io/storycannabis/jobs/5367397008",
+      "date_posted": null,
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "is_live": true,
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
+      "salary_posted": "$160,000 – $170,000",
+      "location_verified": null,
+      "first_seen": "2026-07-23",
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "e25c28f93e26b897",
@@ -161,27 +215,27 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "US (remote)",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-07-22",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
-      "job_id": "1f76d2723aec30a8",
-      "title": "Senior Manager, IT Support",
-      "company": "oura",
-      "company_slug": "oura",
-      "location": "Remote - United States",
-      "application_url": "https://job-boards.greenhouse.io/oura/jobs/4324826009",
+      "job_id": "2607c21e757ea601",
+      "title": "Senior IT Manager",
+      "company": "pomelocare",
+      "company_slug": "pomelocare",
+      "location": "United States",
+      "application_url": "https://job-boards.greenhouse.io/pomelocare/jobs/6119923004",
       "date_posted": null,
       "platform_source": "Greenhouse",
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
-      "salary_posted": null,
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
+      "salary_posted": "$165,000 – $195,000",
       "location_verified": null,
-      "first_seen": "2026-07-22",
-      "last_seen": "2026-08-05"
+      "first_seen": "2026-07-21",
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "8f5a81f7b194f45e",
@@ -197,9 +251,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-07-18",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "2ef7aba95a1cb57d",
@@ -215,9 +269,27 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-07-18",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "6f0d9caa02715fa9",
+      "title": "Director, IT",
+      "company": "life360",
+      "company_slug": "life360",
+      "location": "Remote, USA",
+      "application_url": "https://job-boards.greenhouse.io/life360/jobs/8636922002",
+      "date_posted": null,
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "is_live": true,
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
+      "salary_posted": "$167,000",
+      "location_verified": null,
+      "first_seen": "2026-07-17",
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "3e92e5e9b9e69760",
@@ -231,11 +303,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-07-15",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "2960ef6ffd8dc7fd",
@@ -251,9 +323,27 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "US Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-07-14",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "e470716721018353",
+      "title": "Senior Manager, Service Delivery- Enterprise",
+      "company": "bswift",
+      "company_slug": "bswift",
+      "location": "Remote- US",
+      "application_url": "https://job-boards.greenhouse.io/bswift/jobs/4696251006",
+      "date_posted": null,
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "is_live": true,
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
+      "salary_posted": "$90,000 – $120,000",
+      "location_verified": null,
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "35a2f0f634d6dacd",
@@ -269,9 +359,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "US FL Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-07-11",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "8c89feb807f290f3",
@@ -287,9 +377,27 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "United States",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-07-07",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "7768c8fde978e0ab",
+      "title": "Senior Manager, IT Systems / Platform Engineering",
+      "company": "oura",
+      "company_slug": "oura",
+      "location": "Remote - New York, New York",
+      "application_url": "https://job-boards.greenhouse.io/oura/jobs/4304368009",
+      "date_posted": null,
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "is_live": true,
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
+      "salary_posted": null,
+      "location_verified": null,
+      "first_seen": "2026-07-02",
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "70e5573213a3c11d",
@@ -305,9 +413,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote - United States",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-07-01",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "40899e11de7a48f0",
@@ -323,9 +431,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote - Georgia",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-30",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "876caeeafde58bfd",
@@ -339,11 +447,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-06-30",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "875a304baa075560",
@@ -357,11 +465,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "salary_posted": "$149,000 – $262,000",
       "location_verified": null,
       "first_seen": "2026-06-25",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "f9fb682e836f63eb",
@@ -377,9 +485,27 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-25",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "b30e9fd40377d6c7",
+      "title": "Senior Manager, Infrastructure Protection Operations",
+      "company": "focusfinancialpartners",
+      "company_slug": "focusfinancialpartners",
+      "location": "St. Louis, MO / Remote",
+      "application_url": "https://job-boards.greenhouse.io/focusfinancialpartners/jobs/6007539004",
+      "date_posted": null,
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "is_live": true,
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
+      "salary_posted": "$150,000",
+      "location_verified": null,
+      "first_seen": "2026-06-23",
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "69522f30ef817625",
@@ -395,9 +521,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Miami, FL",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-20",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "75bfb701b5bf4f5c",
@@ -411,11 +537,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
-      "salary_posted": null,
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
+      "salary_posted": "$115,000 – $135,000",
       "location_verified": null,
       "first_seen": "2026-06-20",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "b0b4749118b15377",
@@ -431,27 +557,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "US (Remote)",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-17",
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "da163a234d9a0472",
-      "title": "IT Operations Manager",
-      "company": "accreditedlabs",
-      "company_slug": "accreditedlabs",
-      "location": "Remote",
-      "application_url": "https://job-boards.greenhouse.io/accreditedlabs/jobs/4243139009",
-      "date_posted": null,
-      "platform_source": "Greenhouse",
-      "skill_level": "senior",
-      "is_recruiter": false,
-      "is_live": true,
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
-      "salary_posted": null,
-      "location_verified": null,
-      "first_seen": "2026-06-15",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "f3ab48b3e3a68674",
@@ -467,9 +575,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote - United States",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "d1e85dd18dcec4ad",
@@ -485,9 +593,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "15553e7fa638607b",
@@ -503,9 +611,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote, USA",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "b63c3c0732fd6fd6",
@@ -521,9 +629,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "b4c02b1f41ae061f",
@@ -539,27 +647,27 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Orlando, Florida",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
-      "job_id": "cc6922703e4fe52f",
-      "title": "Global Head of IT",
-      "company": "koboldmetals",
-      "company_slug": "koboldmetals",
-      "location": "Remote - US",
-      "application_url": "https://job-boards.greenhouse.io/koboldmetals/jobs/4683079005",
+      "job_id": "653e2d6afd931cf5",
+      "title": "Head of IT and Cybersecurity",
+      "company": "hut8",
+      "company_slug": "hut8",
+      "location": "Miami, FL",
+      "application_url": "https://job-boards.greenhouse.io/hut8/jobs/4884950008",
       "date_posted": null,
       "platform_source": "Greenhouse",
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-06-14",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "c37fee1c2a005c1d",
@@ -575,9 +683,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "d52f036f35bba886",
@@ -593,9 +701,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "US Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "ed79235ca11f6214",
@@ -604,34 +712,34 @@
       "company_slug": "guidepointsecurity",
       "location": "Remote",
       "application_url": "https://boards.greenhouse.io/guidepointsecurity/jobs/6017658004?gh_jid=6017658004",
-      "date_posted": "2026-06-17",
+      "date_posted": "2026-08-05",
       "platform_source": "Greenhouse",
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
-      "job_id": "a9d90aa0aaa922f1",
-      "title": "Sr. IT Systems Operations Manager",
-      "company": "extrahopnetworks",
-      "company_slug": "extrahopnetworks",
+      "job_id": "df27fab9b72af4c3",
+      "title": "Director of IT",
+      "company": "goodwaygroup",
+      "company_slug": "goodwaygroup",
       "location": "Remote",
-      "application_url": "https://job-boards.greenhouse.io/extrahopnetworks/jobs/6016297004",
+      "application_url": "https://job-boards.greenhouse.io/goodwaygroup/jobs/5991809004",
       "date_posted": null,
       "platform_source": "Greenhouse",
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-06-14",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "604510ef44c34d28",
@@ -647,9 +755,139 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote - USA",
-      "liveness_checked_at": "2026-08-05T16:00:18.239314+00:00",
+      "liveness_checked_at": "2026-08-06T10:51:26.078022+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "03508455ab1725be",
+      "title": "Director of Infrastructure Engineering",
+      "company": "micro1",
+      "location": "United States",
+      "application_url": "https://himalayas.app/companies/micro1/jobs/director-of-infrastructure-engineering",
+      "date_posted": "2026-08-06",
+      "first_seen": "2026-08-06",
+      "salary_posted": "$350,000–$500,000/annual",
+      "platform_source": "Himalayas",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "126748db59349e6c",
+      "title": "[Hiring] IT Director, Master Data Management @Careers and Highline Warren",
+      "company": "Careers and Highline Warren",
+      "location": "Remote",
+      "application_url": "https://remotive.com/remote/jobs/all-others/it-director-master-data-management-5456625",
+      "date_posted": "2026-08-06",
+      "first_seen": "2026-08-06",
+      "salary_posted": "",
+      "platform_source": "JSearch (Google Jobs)",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "69dc12162c4d92c5",
+      "title": "IT Director (Remote from reputed company in CO)",
+      "company": "vacancy global pro",
+      "location": "Remote",
+      "application_url": "https://vacancyglobalpro.up.railway.app/job/it-director-remote-from-reputed-company-in-co-4",
+      "date_posted": "2026-08-05",
+      "first_seen": "2026-08-06",
+      "salary_posted": "",
+      "platform_source": "JSearch (Google Jobs)",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "ca3af1d5ec81042c",
+      "title": "IT Manager",
+      "company": "SAFT",
+      "location": "Jacksonville, FL",
+      "application_url": "https://jooble.org/away/6129918300000493243?p=1&pos=3&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=28&brelb=10&scr=231.0877&bscr=231.0877&aq=-7287756631322440711&elckey=308066322316440994",
+      "date_posted": "2026-08-05",
+      "first_seen": "2026-08-06",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "3fe512fac28870e2",
+      "title": "IT Manager",
+      "company": "SAFT",
+      "location": "Jacksonville, FL",
+      "application_url": "https://jooble.org/away/6129918300000493243?p=1&pos=15&rgn=9348&cid=13154&ckey=Director+of+Infrastructure&jobAge=28&brelb=10&scr=47.54753&bscr=47.54753&aq=3974847265917574995&elckey=-3533381483662262651",
+      "date_posted": "2026-08-05",
+      "first_seen": "2026-08-06",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "92631699a80ebb70",
+      "title": "Director of Information Technology",
+      "company": "Norlee Group",
+      "location": "Jacksonville, FL",
+      "application_url": "https://jooble.org/away/5198066324302139648?p=1&pos=6&rgn=9348&cid=13154&ckey=IT+Director&jobAge=28&brelb=10&scr=88.26957&bscr=88.26957&aq=2068892587206807257&elckey=-7710405680157396822",
+      "date_posted": "2026-08-05",
+      "first_seen": "2026-08-06",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "662b48709b95945e",
+      "title": "Director of Infrastructure Engineering",
+      "company": "micro1",
+      "location": "Remote",
+      "application_url": "https://www.indeed.com/viewjob?jk=8183b9b8415d820e",
+      "date_posted": "2026-08-05",
+      "first_seen": "2026-08-06",
+      "salary_posted": "$230,000–$500,000/year",
+      "platform_source": "JobsPipe",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "30512663cca55141",
+      "title": "IT Manager",
+      "company": "Florida Blue",
+      "location": "Jacksonville, FL",
+      "application_url": "https://jooble.org/away/-1841404190289744442?p=1&pos=2&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=28&brelb=10&scr=238.35214&bscr=238.35214&aq=-7287756631322440711&elckey=308066322316440994",
+      "date_posted": "2026-08-05",
+      "first_seen": "2026-08-06",
+      "salary_posted": "$119.4k - $149.2k",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "153fd78b6439c5c5",
+      "title": "IT Manager",
+      "company": "Florida Blue",
+      "location": "Jacksonville, FL",
+      "application_url": "https://jooble.org/away/-1841404190289744442?p=1&pos=13&rgn=9348&cid=13154&ckey=Director+of+Infrastructure&jobAge=28&brelb=10&scr=49.039364&bscr=49.039364&aq=3974847265917574995&elckey=-3533381483662262651",
+      "date_posted": "2026-08-05",
+      "first_seen": "2026-08-06",
+      "salary_posted": "$119.4k - $149.2k",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "6b0ba4518f8de4dc",
+      "title": "Director, IT Risk and Compliance",
+      "company": "Cook Systems",
+      "location": "Jacksonville, FL",
+      "application_url": "https://www.monster.com/job-openings/director-it-risk-and-compliance-jacksonville-fl--4a0cdfb8-035c-4452-8774-2c2879a8cc37",
+      "date_posted": "2026-08-05",
+      "first_seen": "2026-08-05",
+      "salary_posted": "",
+      "platform_source": "JSearch (Google Jobs)",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "9b600e4d6376577a",
@@ -662,33 +900,7 @@
       "salary_posted": "$130,000–$160,000/year",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "069ef4dbc98fb289",
-      "title": "IT Manager/Director",
-      "company": "RedAwning.com",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/-2377448259232933328?p=1&pos=17&rgn=55157&cid=13154&ckey=IT+Director&jobAge=25&brelb=10&scr=132.17384&bscr=132.17384&aq=-4416357495321625436&elckey=-2625998489141398704",
-      "date_posted": "2026-08-04",
-      "first_seen": "2026-08-05",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "1a375ccb20202347",
-      "title": "IT Manager/Director",
-      "company": "RedAwning.com",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/-2377448259232933328?p=1&pos=2&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=25&brelb=10&scr=138.92372&bscr=138.92372&aq=-284482928164993011&elckey=-6358718390559355128",
-      "date_posted": "2026-08-04",
-      "first_seen": "2026-08-05",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "44f1e0d45a41bf56",
@@ -701,20 +913,20 @@
       "salary_posted": "",
       "platform_source": "JSearch (Google Jobs)",
       "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
-      "job_id": "6a01429aa84550eb",
+      "job_id": "4c2502166e6d65ec",
       "title": "Director of IT Innovation & AI",
       "company": "Ethos Life",
       "location": "Remote",
-      "application_url": "https://jooble.org/away/1090322512126042755?p=1&pos=19&rgn=55157&cid=13154&ckey=Head+of+IT&jobAge=34&brelb=15&scr=34.561573&bscr=34.561573&aq=-4371999264836215475&elckey=-2823852201458339730",
+      "application_url": "https://jooble.org/away/1090322512126042755?p=1&pos=19&rgn=55157&cid=13154&ckey=Head+of+IT&jobAge=52&brelb=15&scr=34.931053&bscr=34.931053&aq=5085055799568484035&elckey=1143667853798539291",
       "date_posted": "2026-08-04",
-      "first_seen": "2026-08-05",
+      "first_seen": "2026-08-06",
       "salary_posted": "$149k - $262k",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "982c32f4ed462e7f",
@@ -727,7 +939,7 @@
       "salary_posted": "",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "3f33de596b4fc1c5",
@@ -740,20 +952,20 @@
       "salary_posted": "$75,000–$85,000/year",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
-      "job_id": "a860e9b5bde0d1c2",
+      "job_id": "14ffb08005bff8bf",
       "title": "Director of Information Technology",
       "company": "Talently",
       "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/-6259532054026200853?p=1&pos=7&rgn=9348&cid=13154&ckey=IT+Director&jobAge=58&brelb=10&scr=86.306274&bscr=86.306274&aq=-8908902763608952177&elckey=6768818338295275773",
+      "application_url": "https://jooble.org/away/-6259532054026200853?p=1&pos=7&rgn=9348&cid=13154&ckey=IT+Director&jobAge=76&brelb=10&scr=88.01333&bscr=88.01333&aq=2068892587206807257&elckey=-7710405680157396822",
       "date_posted": "2026-08-03",
-      "first_seen": "2026-08-05",
+      "first_seen": "2026-08-06",
       "salary_posted": "$150k - $200k",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "d2947ecad8011be3",
@@ -766,7 +978,7 @@
       "salary_posted": "",
       "platform_source": "Himalayas",
       "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "352a50ccce64b4cb",
@@ -779,59 +991,7 @@
       "salary_posted": "",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "36ebfc345b3816e2",
-      "title": "IT Manager: Lead Cloud, Networking & IT Operations",
-      "company": "PAX Technology",
-      "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/-587711095605947074?p=1&pos=4&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=82&brelb=10&scr=130.78638&bscr=130.78638&aq=1837107116061983534&elckey=-3659453732940438027",
-      "date_posted": "2026-08-02",
-      "first_seen": "2026-08-05",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "99968c2695590efa",
-      "title": "IT Manager",
-      "company": "Jimerson Birr",
-      "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/6513466261831444416?p=1&pos=1&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=82&brelb=10&scr=233.34496&bscr=233.34496&aq=1837107116061983534&elckey=-3659453732940438027",
-      "date_posted": "2026-08-02",
-      "first_seen": "2026-08-05",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "5d3eeee9b133a953",
-      "title": "IT Manager",
-      "company": "Jimerson Birr",
-      "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/6513466261831444416?p=1&pos=13&rgn=9348&cid=13154&ckey=Director+of+Infrastructure&jobAge=82&brelb=10&scr=48.542416&bscr=48.542416&aq=6078287711128739557&elckey=-4510921070420607944",
-      "date_posted": "2026-08-02",
-      "first_seen": "2026-08-05",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "1c2add818953eec7",
-      "title": "IT Operations Manager",
-      "company": "Fortegra",
-      "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/3681140105941183741?p=1&pos=20&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=82&brelb=10&scr=66.39141&bscr=66.39141&aq=1837107116061983534&elckey=-3659453732940438027",
-      "date_posted": "2026-08-02",
-      "first_seen": "2026-08-05",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "ede3a5163a23b458",
@@ -839,12 +999,25 @@
       "company": "remote zest jobs",
       "location": "Remote",
       "application_url": "https://remotezest.up.railway.app/job/reputed-company-it-director-remote-from-reputed-company-in-co",
-      "date_posted": "2026-08-01",
+      "date_posted": "2026-08-02",
       "first_seen": "2026-08-05",
       "salary_posted": "",
       "platform_source": "JSearch (Google Jobs)",
       "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "d1fcbafd6d69b9d3",
+      "title": "IT Manager: Lead Cloud, Networking & IT Operations",
+      "company": "PAX Technology",
+      "location": "Jacksonville, FL",
+      "application_url": "https://jooble.org/away/-587711095605947074?p=1&pos=4&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=100&brelb=10&scr=142.96056&bscr=142.96056&aq=-7287756631322440711&elckey=308066322316440994",
+      "date_posted": "2026-08-02",
+      "first_seen": "2026-08-06",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "76171458209287bb",
@@ -852,77 +1025,64 @@
       "company": "Norlee Group (NLG)",
       "location": "Jacksonville, FL",
       "application_url": "https://aeh.ma/list/job/director-of-information-technology-at-norlee-group-nlg-jacksonville-fl-eHN0Mi9JMm5DOTc3a0s1bEMxT0ZsekE1ZEE9PQ==",
-      "date_posted": "2026-08-01",
+      "date_posted": "2026-08-02",
       "first_seen": "2026-08-04",
       "salary_posted": "",
       "platform_source": "JSearch (Google Jobs)",
       "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
-      "job_id": "4b0706fc78643f5b",
+      "job_id": "d7e6a69ba91b1441",
+      "title": "IT Manager",
+      "company": "Jimerson Birr",
+      "location": "Jacksonville, FL",
+      "application_url": "https://jooble.org/away/6513466261831444416?p=1&pos=1&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=100&brelb=10&scr=239.62103&bscr=239.62103&aq=-7287756631322440711&elckey=308066322316440994",
+      "date_posted": "2026-08-02",
+      "first_seen": "2026-08-06",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "9bb9bc86eb34fb7b",
+      "title": "IT Manager",
+      "company": "Jimerson Birr",
+      "location": "Jacksonville, FL",
+      "application_url": "https://jooble.org/away/6513466261831444416?p=1&pos=12&rgn=9348&cid=13154&ckey=Director+of+Infrastructure&jobAge=100&brelb=10&scr=49.32442&bscr=49.32442&aq=3974847265917574995&elckey=-3533381483662262651",
+      "date_posted": "2026-08-02",
+      "first_seen": "2026-08-06",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-08-06"
+    },
+    {
+      "job_id": "d242a1885cd6f65b",
       "title": "Director OF Infrastructure",
       "company": "Gartner",
       "location": "United States",
-      "application_url": "https://jooble.org/away/-4561553129154271562?p=1&pos=3&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=106&brelb=10&scr=140.02654&bscr=140.02654&aq=2998736539224252827&elckey=2260868963542025571",
+      "application_url": "https://jooble.org/away/-4561553129154271562?p=1&pos=3&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=124&brelb=10&scr=140.14561&bscr=140.14561&aq=8707411821071571575&elckey=6228389018798904592",
       "date_posted": "2026-08-01",
-      "first_seen": "2026-08-05",
+      "first_seen": "2026-08-06",
       "salary_posted": "",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
-      "job_id": "a76cfbe7176243aa",
-      "title": "IT Manager",
-      "company": "SAFT",
-      "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/6129918300000493243?p=1&pos=3&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=130&brelb=10&scr=223.662&bscr=223.662&aq=1837107116061983534&elckey=-3659453732940438027",
+      "job_id": "66a6a32a5afc4416",
+      "title": "Director of Infrastructure Engineering",
+      "company": "Outschool Inc",
+      "location": "Remote",
+      "application_url": "https://www.monster.com/job-openings/director-of-infrastructure-engineering-beverly-hills-ca--918b8c9a-b5a6-449f-91c3-66f4dfa5c516",
       "date_posted": "2026-07-31",
-      "first_seen": "2026-08-05",
-      "salary_posted": "",
-      "platform_source": "Jooble",
+      "first_seen": "2026-08-06",
+      "salary_posted": "$220,000–$275,000/YEAR",
+      "platform_source": "JSearch (Google Jobs)",
       "is_verified": false,
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "290a7421343d5673",
-      "title": "IT Manager",
-      "company": "SAFT",
-      "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/6129918300000493243?p=1&pos=18&rgn=9348&cid=13154&ckey=Director+of+Infrastructure&jobAge=130&brelb=10&scr=46.524853&bscr=46.524853&aq=6078287711128739557&elckey=-4510921070420607944",
-      "date_posted": "2026-07-31",
-      "first_seen": "2026-08-05",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "4b0e88a412609a39",
-      "title": "IT Manager",
-      "company": "Florida Blue",
-      "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/-1841404190289744442?p=1&pos=2&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=130&brelb=10&scr=230.59067&bscr=230.59067&aq=1837107116061983534&elckey=-3659453732940438027",
-      "date_posted": "2026-07-31",
-      "first_seen": "2026-08-05",
-      "salary_posted": "$119.4k - $149.2k",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "2c6a12d43b666dc0",
-      "title": "IT Manager",
-      "company": "Florida Blue",
-      "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/-1841404190289744442?p=1&pos=15&rgn=9348&cid=13154&ckey=Director+of+Infrastructure&jobAge=130&brelb=10&scr=47.96944&bscr=47.96944&aq=6078287711128739557&elckey=-4510921070420607944",
-      "date_posted": "2026-07-31",
-      "first_seen": "2026-08-05",
-      "salary_posted": "$119.4k - $149.2k",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "654badca06c5d389",
@@ -935,7 +1095,7 @@
       "salary_posted": "$9,459–$16,551/year",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     },
     {
       "job_id": "f92683b503fcb739",
@@ -948,46 +1108,7 @@
       "salary_posted": "$7,569–$13,248/year",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "44dfcc465c03548c",
-      "title": "Head of Infrastructure and Employee Services",
-      "company": "Zoom",
-      "location": "Remote",
-      "application_url": "https://www.tealhq.com/job/head-of-infrastructure-and-employee-services_7ea1a8377f87cb1d56697fc1f4f5074dacb26",
-      "date_posted": "2026-07-30",
-      "first_seen": "2026-08-03",
-      "salary_posted": "",
-      "platform_source": "JSearch (Google Jobs)",
-      "is_verified": false,
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "be4438c4c6413ddf",
-      "title": "IT Manager",
-      "company": "Equiti",
-      "location": "Remote",
-      "application_url": "https://www.indeed.com/viewjob?jk=a67acdfbba40b76d",
-      "date_posted": "2026-07-30",
-      "first_seen": "2026-08-03",
-      "salary_posted": "",
-      "platform_source": "JobsPipe",
-      "is_verified": false,
-      "last_seen": "2026-08-05"
-    },
-    {
-      "job_id": "d3bce87497ebcb7e",
-      "title": "Senior Director of Managed Services, Infrastructure - Advizex",
-      "company": "Myriad360",
-      "location": "United States",
-      "application_url": "https://himalayas.app/companies/myriad360/jobs/senior-director-of-managed-services-infrastructure-advizex",
-      "date_posted": "2026-07-29",
-      "first_seen": "2026-07-30",
-      "salary_posted": "$175,000–$275,000/annual",
-      "platform_source": "Himalayas",
-      "is_verified": false,
-      "last_seen": "2026-08-05"
+      "last_seen": "2026-08-06"
     }
   ]
 }
