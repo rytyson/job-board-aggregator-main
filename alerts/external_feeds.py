@@ -749,21 +749,35 @@ def fetch_employflorida() -> list[dict]:
                         radios[0].dispatchEvent(new Event('click', {bubbles: true}));
                     }
                     const fire = (el, val) => {
+                        if (!el) return;
                         el.value = val;
                         el.dispatchEvent(new Event('input', {bubbles: true}));
                         el.dispatchEvent(new Event('change', {bubbles: true}));
                         el.dispatchEvent(new Event('blur', {bubbles: true}));
                     };
+                    // The page has TWO keyword/location widgets: the "Main_content" quick-
+                    // search box we've been filling, and a separate top-nav multi-search
+                    // widget ("univsearchtxtkeyword"/"univsearchlocation" — no "quick"
+                    // suffix, no "Main_content" prefix). The identical results/enc= hash
+                    // on every prior run suggests checkForm() actually reads the SECOND
+                    // pair, not the first — so fill both to be safe.
                     fire(document.getElementById('univsearchtxtkeywordquick'), kw);
                     fire(document.getElementById('ctl00_Main_content_univsearchlocation'), loc);
+                    fire(document.getElementById('univsearchtxtkeyword'), kw);
+                    fire(document.getElementById('univsearchlocation'), loc);
                 }""", [keyword, location])
 
-                # Read back the actual field values right before submit — confirms
-                # nothing downstream (radio handler, validator) wiped them again.
-                pre_submit = page.evaluate("""() => ({
-                    kw: document.getElementById('univsearchtxtkeywordquick').value,
-                    loc: document.getElementById('ctl00_Main_content_univsearchlocation').value
-                })""")
+                # Read back ALL FOUR fields right before submit — confirms which pair(s)
+                # actually hold our values, and whether anything wiped them again.
+                pre_submit = page.evaluate("""() => {
+                    const val = id => { const el = document.getElementById(id); return el ? el.value : '(missing)'; };
+                    return {
+                        quick_kw: val('univsearchtxtkeywordquick'),
+                        quick_loc: val('ctl00_Main_content_univsearchlocation'),
+                        nav_kw: val('univsearchtxtkeyword'),
+                        nav_loc: val('univsearchlocation'),
+                    };
+                }""")
                 log.info("Employ Florida '%s'/'%s': pre-submit field values: %s",
                          keyword, location, pre_submit)
 
