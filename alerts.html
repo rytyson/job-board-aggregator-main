@@ -301,6 +301,8 @@
     .src-jsearch    { background: #1e2838; color: #70b0ff; border: 1px solid #2e3848; }
     .src-jobspipe         { background: #2e1e38; color: #c080ff; border: 1px solid #4e3e58; }
     .src-employflorida    { background: #1a2e20; color: #4ecf70; border: 1px solid #2a4e30; }
+    .src-indeed     { background: #1e3038; color: #4fc3f7; border: 1px solid #2e4a58; }
+    .src-dice       { background: #2a1e30; color: #e070c0; border: 1px solid #4a2e50; }
     .src-other      { border: 1px solid var(--border); color: var(--muted); }
     .ext-search-bar {
       display: flex;
@@ -422,7 +424,7 @@
     <div class="ext-banner">
       ⚠ Unverified — links open source board; confirm listing is live before applying
     </div>
-    <p class="ext-desc">Sourced from Himalayas, Remotive, We Work Remotely, and Jooble · Past 7 days · Title-filtered, not ATS-verified</p>
+    <p class="ext-desc">Sourced from Himalayas, Remotive, We Work Remotely, Jooble, JSearch, JobsPipe, Employ Florida, Indeed, and Dice · Past 7 days · Title-filtered, not ATS-verified</p>
   </div>
 
   <div class="ext-search-bar">
@@ -436,6 +438,8 @@
       <option value="Remotive">Remotive</option>
       <option value="We Work Remotely">We Work Remotely</option>
       <option value="Employ Florida">Employ Florida</option>
+      <option value="Indeed">Indeed</option>
+      <option value="Dice">Dice</option>
     </select>
   </div>
 
@@ -572,6 +576,8 @@
     if (s.includes('jsearch') || s.includes('google jobs')) return 'source-pill src-jsearch';
     if (s === 'jobspipe')             return 'source-pill src-jobspipe';
     if (s.includes('employ florida')) return 'source-pill src-employflorida';
+    if (s === 'indeed')               return 'source-pill src-indeed';
+    if (s === 'dice')                 return 'source-pill src-dice';
     return 'source-pill src-other';
   }
 
