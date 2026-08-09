@@ -737,10 +737,17 @@ def fetch_employflorida() -> list[dict]:
 
                 first = False
 
-                # Fill via JS (sets .value directly) but dispatch input/change events too,
-                # since ASP.NET client-side validators often key off those events, then
-                # click the real DOM button so its native onclick/postback handler runs.
+                # Select "Keyword Type" FIRST — its change handler resets/clears the
+                # keyword text field, which is why every prior run silently searched
+                # with a blank keyword and got back an unfiltered "browse all" list.
+                # Fill the text fields only AFTER that reset has already happened.
                 page.evaluate("""([kw, loc]) => {
+                    const radios = document.querySelectorAll('input[name="ctl00$Main_content$rblKeywordType"]');
+                    if (radios.length && !Array.from(radios).some(r => r.checked)) {
+                        radios[0].checked = true;
+                        radios[0].dispatchEvent(new Event('change', {bubbles: true}));
+                        radios[0].dispatchEvent(new Event('click', {bubbles: true}));
+                    }
                     const fire = (el, val) => {
                         el.value = val;
                         el.dispatchEvent(new Event('input', {bubbles: true}));
@@ -749,15 +756,16 @@ def fetch_employflorida() -> list[dict]:
                     };
                     fire(document.getElementById('univsearchtxtkeywordquick'), kw);
                     fire(document.getElementById('ctl00_Main_content_univsearchlocation'), loc);
-                    // "Keyword Type" radio group is likely required for search validation —
-                    // select the first option (Job Title) if none is already checked
-                    const radios = document.querySelectorAll('input[name="ctl00$Main_content$rblKeywordType"]');
-                    if (radios.length && !Array.from(radios).some(r => r.checked)) {
-                        radios[0].checked = true;
-                        radios[0].dispatchEvent(new Event('change', {bubbles: true}));
-                        radios[0].dispatchEvent(new Event('click', {bubbles: true}));
-                    }
                 }""", [keyword, location])
+
+                # Read back the actual field values right before submit — confirms
+                # nothing downstream (radio handler, validator) wiped them again.
+                pre_submit = page.evaluate("""() => ({
+                    kw: document.getElementById('univsearchtxtkeywordquick').value,
+                    loc: document.getElementById('ctl00_Main_content_univsearchlocation').value
+                })""")
+                log.info("Employ Florida '%s'/'%s': pre-submit field values: %s",
+                         keyword, location, pre_submit)
 
                 if first_diag[0]:
                     btn_info = page.evaluate("""() => {
