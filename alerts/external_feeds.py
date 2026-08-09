@@ -1,6 +1,7 @@
 """
 External job board fetchers: Himalayas, Remotive, We Work Remotely, Jooble,
-JSearch (Google Jobs), JobsPipe, Employ Florida.
+JSearch (Google Jobs), JobsPipe, Employ Florida, Indeed (via Apify), Dice
+(via Apify).
 
 Each fetcher normalises results to the same schema used by the ATS pipeline
 and applies the same keyword + location filters so only relevant roles appear.
@@ -15,7 +16,7 @@ Guaranteed keys on every returned job dict:
     salary          str  — raw salary string or ""
     platform_source str  — "Himalayas" | "Remotive" | "We Work Remotely" |
                            "Jooble" | "JSearch (Google Jobs)" | "JobsPipe" |
-                           "Employ Florida"
+                           "Employ Florida" | "Indeed" | "Dice"
     is_verified     bool — always False; shown as "Unverified" in the UI
     first_seen      str  — ISO-8601 datetime set at fetch time
 """
@@ -101,6 +102,25 @@ def _parse_rss_date(raw: str) -> datetime | None:
         return parsedate_to_datetime(raw)
     except Exception:
         return None
+
+
+def _parse_relative_date(raw: str) -> datetime | None:
+    """Parse relative date strings like 'Today', '3 days ago', 'Yesterday', '30+ days ago'."""
+    if not raw:
+        return None
+    text = raw.strip().lower()
+    now = _now()
+    if text in ("today", "just posted", "new", "just now", "active today"):
+        return now
+    if "yesterday" in text:
+        return now - timedelta(days=1)
+    m = re.match(r"(\d+)\+?\s*hour", text)
+    if m:
+        return now - timedelta(hours=int(m.group(1)))
+    m = re.match(r"(\d+)\+?\s*day", text)
+    if m:
+        return now - timedelta(days=int(m.group(1)))
+    return None
 
 
 def _salary_str(min_sal, max_sal, period=None) -> str:
@@ -853,6 +873,185 @@ def fetch_employflorida() -> list[dict]:
     return filtered
 
 
+# ─────────────────────────── Indeed (via Apify) ──────────────────────────────
+#
+# Indeed has no public job-search API (only employer-side posting APIs). We use
+# Apify's "misceres/indeed-scraper" actor, a managed scraper that handles
+# Indeed's bot detection for us — pay-per-result, from $3.00/1,000 listings.
+# One APIFY_API_TOKEN covers every Apify actor on the account (Indeed + Dice).
+
+_APIFY_TOKEN_ENV = "APIFY_API_TOKEN"
+_APIFY_INDEED_ACTOR = "misceres~indeed-scraper"
+
+# Indeed's real search box supports boolean OR syntax in the title query —
+# this actor passes `position` straight through as Indeed's own "q" param.
+_INDEED_QUERY = (
+    '"IT Director" OR "IT Manager" OR "Director of Infrastructure" OR '
+    '"Director of IT" OR "Head of IT" OR "VP of IT" OR '
+    '"Chief Information Officer" OR "CIO"'
+)
+
+_INDEED_SEARCHES = [
+    (_INDEED_QUERY, "Remote"),
+    (_INDEED_QUERY, "Jacksonville, FL"),
+]
+
+
+def fetch_indeed() -> list[dict]:
+    api_token = os.environ.get(_APIFY_TOKEN_ENV, "").strip()
+    if not api_token:
+        log.warning("APIFY_API_TOKEN not set — skipping Indeed")
+        return []
+
+    jobs: list[dict] = []
+    seen_urls: set[str] = set()
+
+    for query, location in _INDEED_SEARCHES:
+        try:
+            resp = requests.post(
+                f"https://api.apify.com/v2/acts/{_APIFY_INDEED_ACTOR}/run-sync-get-dataset-items",
+                params={"token": api_token},
+                json={
+                    "position": query,
+                    "location": location,
+                    "country": "US",
+                    "maxItemsPerSearch": 50,
+                },
+                headers={"Content-Type": "application/json"},
+                timeout=90,
+            )
+            if not resp.ok:
+                log.warning("Indeed (Apify) %r → HTTP %s — body: %s",
+                            location, resp.status_code, resp.text[:300])
+                continue
+            items = resp.json()
+            if not isinstance(items, list):
+                log.warning("Indeed (Apify) %r → unexpected response shape: %s",
+                             location, str(items)[:300])
+                continue
+        except Exception as exc:
+            log.warning("Indeed (Apify) %r failed: %s", location, exc)
+            continue
+
+        if items:
+            log.debug("Indeed (Apify) first item keys: %s", list(items[0].keys()))
+
+        for item in items:
+            url = (item.get("url") or "").strip()
+            if not url or url in seen_urls:
+                continue
+
+            dt = _parse_relative_date(item.get("postedAt", ""))
+            if not _is_recent(dt):
+                continue
+
+            salary_val = item.get("salary")
+            salary = salary_val if isinstance(salary_val, str) else ""
+
+            seen_urls.add(url)
+            jobs.append(_make_job(
+                source="Indeed",
+                title=item.get("positionName", ""),
+                company=item.get("company", ""),
+                location=item.get("location", "") or location,
+                url=url,
+                date_posted=_iso_date(dt) if dt else "",
+                salary=salary,
+            ))
+
+    filtered = filter_jobs(jobs)
+    log.info("Indeed: %d raw → %d after filter", len(jobs), len(filtered))
+    return filtered
+
+
+# ─────────────────────────── Dice (via Apify) ─────────────────────────────────
+#
+# Dice has no public API either. Uses Apify's "worldunboxer/dice-jobs-scraper"
+# actor — pay-per-result, from $0.07/1,000 results (much cheaper than Indeed's
+# actor). Same APIFY_API_TOKEN as fetch_indeed().
+
+_APIFY_DICE_ACTOR = "worldunboxer~dice-jobs-scraper"
+
+_DICE_TITLES = [
+    "IT Director",
+    "IT Manager",
+    "Director of Infrastructure",
+    "Director of IT",
+    "VP of IT",
+    "CIO",
+]
+
+_DICE_SEARCHES = (
+    [(t, "Remote") for t in _DICE_TITLES]
+    + [(t, "Jacksonville, FL") for t in ("IT Director", "IT Manager", "Director of IT")]
+)
+
+
+def fetch_dice() -> list[dict]:
+    api_token = os.environ.get(_APIFY_TOKEN_ENV, "").strip()
+    if not api_token:
+        log.warning("APIFY_API_TOKEN not set — skipping Dice")
+        return []
+
+    jobs: list[dict] = []
+    seen_urls: set[str] = set()
+
+    for keyword, location in _DICE_SEARCHES:
+        try:
+            resp = requests.post(
+                f"https://api.apify.com/v2/acts/{_APIFY_DICE_ACTOR}/run-sync-get-dataset-items",
+                params={"token": api_token},
+                json={
+                    "keyword": keyword,
+                    "location": location,
+                    "radius": 0 if location == "Remote" else 50,
+                    "unit": "mi",
+                    "limit": 20,
+                },
+                headers={"Content-Type": "application/json"},
+                timeout=90,
+            )
+            if not resp.ok:
+                log.warning("Dice (Apify) %r/%r → HTTP %s — body: %s",
+                            keyword, location, resp.status_code, resp.text[:300])
+                continue
+            items = resp.json()
+            if not isinstance(items, list):
+                log.warning("Dice (Apify) %r/%r → unexpected response shape: %s",
+                             keyword, location, str(items)[:300])
+                continue
+        except Exception as exc:
+            log.warning("Dice (Apify) %r/%r failed: %s", keyword, location, exc)
+            continue
+
+        if items:
+            log.debug("Dice (Apify) first item keys: %s", list(items[0].keys()))
+
+        for item in items:
+            url = (item.get("details_page_url") or item.get("url") or "").strip()
+            if not url or url in seen_urls:
+                continue
+
+            dt = _parse_relative_date(item.get("posted_date", ""))
+            if not _is_recent(dt):
+                continue
+
+            seen_urls.add(url)
+            jobs.append(_make_job(
+                source="Dice",
+                title=item.get("title", ""),
+                company=item.get("company", ""),
+                location=item.get("location", "") or location,
+                url=url,
+                date_posted=_iso_date(dt) if dt else "",
+                salary=item.get("salary", "") or "",
+            ))
+
+    filtered = filter_jobs(jobs)
+    log.info("Dice: %d raw → %d after filter", len(jobs), len(filtered))
+    return filtered
+
+
 # ─────────────────────────── orchestrator ───────────────────────────────────
 
 
@@ -874,6 +1073,8 @@ def fetch_all_external() -> list[dict]:
         fetch_jsearch,
         fetch_jobspipe,
         fetch_employflorida,
+        fetch_indeed,
+        fetch_dice,
     ):
         try:
             batch = fetcher()
