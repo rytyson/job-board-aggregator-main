@@ -814,6 +814,9 @@ def fetch_employflorida() -> list[dict]:
                          len(result_data.get('items', [])),
                          result_data.get('totalLinks', 0),
                          result_data.get('sampleJobHrefs', [])[:2])
+                for it in result_data.get('items', [])[:3]:
+                    log.info("Employ Florida item sample: title=%r url=%r rowText=%r",
+                             it.get('title'), it.get('url'), it.get('rowText', '')[:200])
 
                 for item in result_data.get('items', []):
                     url = item.get("url", "").strip()
