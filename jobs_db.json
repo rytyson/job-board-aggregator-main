@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-09-20T17:16:01.879460Z",
-  "total": 45,
-  "total_external": 23,
+  "last_updated": "2026-09-21T15:13:09.323152Z",
+  "total": 44,
+  "total_external": 26,
   "jobs": [
     {
       "job_id": "538c97776395c404",
@@ -15,11 +15,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-09-18",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "d1537c2dc9bde054",
@@ -33,11 +33,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-09-16",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "8d417e143cdf7eaa",
@@ -53,9 +53,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Jacksonville, Florida, United States of America",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-16",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "c0383c639d2461c6",
@@ -71,9 +71,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-16",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "3d85420c72576042",
@@ -89,9 +89,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote/Boston/San Francisco",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-16",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "c70534411861b00e",
@@ -105,11 +105,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "salary_posted": "$175,000 – $200,000",
       "location_verified": null,
       "first_seen": "2026-09-15",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "6c860c24d83c77dc",
@@ -125,9 +125,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "US-FL-REMOTE",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-15",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "de941189cc01915c",
@@ -143,9 +143,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "St. Petersburg/Tampa, FL",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-14",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "f4ae529b94e1746c",
@@ -161,9 +161,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-12",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "cc9072f36305c78c",
@@ -179,9 +179,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "USA (remote)",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-11",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "cb67428b95a0ae7b",
@@ -197,27 +197,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote – United States",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-11",
-      "last_seen": "2026-09-20"
-    },
-    {
-      "job_id": "fce4031e374da3a1",
-      "title": "Head of Infrastructure and DevOps",
-      "company": "smartcatplatforminc",
-      "company_slug": "smartcatplatforminc",
-      "location": "Georgia - Remote",
-      "application_url": "https://www.smartcat.com/career/?gh_jid=6187488004",
-      "date_posted": "2026-09-09",
-      "platform_source": "Greenhouse",
-      "skill_level": "senior",
-      "is_recruiter": false,
-      "is_live": true,
-      "salary_posted": null,
-      "location_verified": "Georgia - Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
-      "first_seen": "2026-09-10",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "814d71b4cb95e7fb",
@@ -233,9 +215,27 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Serbia - Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-10",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
+    },
+    {
+      "job_id": "fce4031e374da3a1",
+      "title": "Head of Infrastructure and DevOps",
+      "company": "smartcatplatforminc",
+      "company_slug": "smartcatplatforminc",
+      "location": "Georgia - Remote",
+      "application_url": "https://www.smartcat.com/career/?gh_jid=6187488004",
+      "date_posted": "2026-09-09",
+      "platform_source": "Greenhouse",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "is_live": true,
+      "salary_posted": null,
+      "location_verified": "Georgia - Remote",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
+      "first_seen": "2026-09-10",
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "0e0f731c33ab3303",
@@ -251,9 +251,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-09",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "e7a73a0c706badbf",
@@ -269,9 +269,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "San Francisco- Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-08",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "d0eec3f5b2df882c",
@@ -285,11 +285,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "salary_posted": "$250,000 – $270,000",
       "location_verified": null,
       "first_seen": "2026-09-04",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "73c8d5c99afcc440",
@@ -305,9 +305,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-02",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "7cb4f4ce076b4ea4",
@@ -323,9 +323,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-09-01",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "b54a562065b8258b",
@@ -341,9 +341,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-08-31",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "94de58a1a2b36594",
@@ -359,9 +359,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Coral Gables, FL",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-08-29",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "5984a939b48a8d36",
@@ -377,9 +377,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "United States",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-08-27",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "0e2bcf7318942bac",
@@ -395,9 +395,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-08-25",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "1ae6f588b28ec60e",
@@ -411,11 +411,11 @@
       "skill_level": "senior",
       "is_recruiter": true,
       "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-08-25",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "e338d6c01fd6fa36",
@@ -431,9 +431,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "United States",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-08-19",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "0edd3ba33756b7e6",
@@ -449,9 +449,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote, United States",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-08-18",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "f28eaa92b884a675",
@@ -467,9 +467,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Clearwater, FL",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "8a30b82ca30d0477",
@@ -485,9 +485,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Clearwater, FL",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-08-05",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "9eb2c94352b12760",
@@ -501,11 +501,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-08-04",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "e8ab7128f65bee09",
@@ -514,16 +514,16 @@
       "company_slug": "lattice",
       "location": "US Remote - EST",
       "application_url": "https://lattice.com/job?gh_jid=8618117002",
-      "date_posted": "2026-08-06",
+      "date_posted": "2026-09-21",
       "platform_source": "Greenhouse",
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
       "salary_posted": null,
       "location_verified": "US Remote - EST",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-08-01",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "0ac644015f23ad4c",
@@ -537,11 +537,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-08-01",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "a16cdee24714f685",
@@ -557,9 +557,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Long Beach, CA; Remote - eligible US locations",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-07-28",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "5b7da91b69a2f471",
@@ -575,9 +575,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote - United States ",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-07-25",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "ceca33ec216fa8f4",
@@ -593,27 +593,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-07-25",
-      "last_seen": "2026-09-20"
-    },
-    {
-      "job_id": "debbeadbae41a6d7",
-      "title": "Director of Information Technology",
-      "company": "storycannabis",
-      "company_slug": "storycannabis",
-      "location": "Phoenix, Arizona, United States; Remote - Maryland; Remote - Ohio",
-      "application_url": "https://job-boards.greenhouse.io/storycannabis/jobs/5367397008",
-      "date_posted": null,
-      "platform_source": "Greenhouse",
-      "skill_level": "senior",
-      "is_recruiter": false,
-      "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
-      "salary_posted": "$160,000 – $170,000",
-      "location_verified": null,
-      "first_seen": "2026-07-23",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "2607c21e757ea601",
@@ -627,11 +609,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "salary_posted": "$165,000 – $195,000",
       "location_verified": null,
       "first_seen": "2026-07-21",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "2ef7aba95a1cb57d",
@@ -645,11 +627,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
       "salary_posted": null,
-      "location_verified": null,
+      "location_verified": "Remote",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-07-18",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "6f0d9caa02715fa9",
@@ -663,11 +645,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "salary_posted": "$167,000",
       "location_verified": null,
       "first_seen": "2026-07-17",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "b30e9fd40377d6c7",
@@ -681,11 +663,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "salary_posted": "$150,000",
       "location_verified": null,
       "first_seen": "2026-06-23",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "b0b4749118b15377",
@@ -701,9 +683,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "US (Remote)",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-06-17",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "15553e7fa638607b",
@@ -719,9 +701,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote, USA",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "b63c3c0732fd6fd6",
@@ -737,9 +719,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "c37fee1c2a005c1d",
@@ -755,9 +737,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "ed79235ca11f6214",
@@ -773,9 +755,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "df27fab9b72af4c3",
@@ -789,11 +771,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-06-14",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "604510ef44c34d28",
@@ -809,9 +791,87 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote - USA",
-      "liveness_checked_at": "2026-09-20T17:14:26.741952+00:00",
+      "liveness_checked_at": "2026-09-21T15:11:42.705337+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
+    },
+    {
+      "job_id": "7f0cc13da897c346",
+      "title": "IT Director",
+      "company": "The Pipeline Group",
+      "location": "United States",
+      "application_url": "https://jooble.org/away/343602119274160222?p=1&pos=7&rgn=55157&cid=13154&ckey=IT+Director&jobAge=9&brelb=10&scr=160.16852&bscr=160.16852&aq=-4640499604194459876&elckey=4545891676063846792",
+      "date_posted": "2026-09-21",
+      "first_seen": "2026-09-21",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-09-21"
+    },
+    {
+      "job_id": "55336673585502ef",
+      "title": "IT Manager",
+      "company": "PopStroke",
+      "location": "Orlando, FL",
+      "application_url": "https://jooble.org/away/227801303285864786?p=1&pos=20&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=9&brelb=10&scr=120.70426&bscr=120.70426&aq=-5539318069205984822&elckey=813171774645890368",
+      "date_posted": "2026-09-21",
+      "first_seen": "2026-09-21",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-09-21"
+    },
+    {
+      "job_id": "90ab5b7caa0c5fa6",
+      "title": "Treasury, Cash and Travel Platforms IT Manager",
+      "company": "Ladders",
+      "location": "Remote",
+      "application_url": "https://www.linkedin.com/jobs/view/treasury-cash-and-travel-platforms-it-manager-at-ladders-4467381663",
+      "date_posted": "2026-09-21",
+      "first_seen": "2026-09-21",
+      "salary_posted": "$163,200 – $224,400",
+      "platform_source": "JobsPipe",
+      "is_verified": false,
+      "last_seen": "2026-09-21"
+    },
+    {
+      "job_id": "739c579b28f9f7cc",
+      "title": "Technology Director, IT Infrastructure, Cyber and Service Delivery",
+      "company": "",
+      "location": "Jacksonville FL",
+      "application_url": "https://www.employflorida.com/vosnet/jobbanks/jobdetails.aspx?enc=9B8/uT7EfbEIDLIMZ8rhowzqyZjsNU1dBVrIZPNl61aLdeYEgg50x36hjNUp+PGji6/Zx+S0U1aqdjNJuWi02wgk+qQG8sKREL0c7fo07W7CaMdIy2LkHBXMP5+dprM0haTyx4A7jCQ1j1/N8RypAhuCOf4YQMtm4pzx4Gk/f7bXNfUGjIW91gD1hl/L2Ke9CI3G3Eb1gb3Pho60h4W8BtcScE4aNJE1cOX1U6tE5t0xGuylklFwXNfPdSY3fkLMjYFBc5lYD5Q9tQhbTJKaYGIeiDhPlzPiMWCjbBKOgG7RcIMjbv2vBtI8LyGsO0mjG7ed8AF/ZUEmWtuftGqy6UjqEsGPZFC0bzja6PtaNnzkARBDR9wEh8kzMHkJ6XRBgXbzP/4K9FDnWn1nn4Uo295Pl1gI8DgtzXw48PAmjv2ivtesN99krW/taEq5DA0//yRJtw5bTbnK607wO0U+m88Xy3MpLtNNx/sNx6b1jOw50C9HVAa4FW5jEnEccjvRf1KDe4WL3k2bOOhPz0BK3eM+II5rJTgLrwc6BuEC/Y+/f2bueZMZ25dK/ltHoVkuaqqbwFsv/IZeDgWmww/wdOajMAUuInFWKk78UpAmgnVXaabD+KTILArL3HKQ4iN8DxfsKPWYz4liZfOAth51iQxmpflFplQixwhcbrMO9QrpYrJCaMGtrg5Vhiud/eymGIC0NtT/wlzyakETKI61mGR67ap6aZrOYeatTHpEFGE=",
+      "date_posted": "",
+      "first_seen": "2026-09-21",
+      "salary_posted": "",
+      "platform_source": "Employ Florida",
+      "is_verified": false,
+      "last_seen": "2026-09-21"
+    },
+    {
+      "job_id": "322a346b5aedcf14",
+      "title": "IT Manager",
+      "company": "SeaHill Consulting Group",
+      "location": "United States",
+      "application_url": "https://jooble.org/away/2775391082495190038?p=1&pos=10&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=33&brelb=10&scr=121.00341&bscr=121.00341&aq=-5539318069205984822&elckey=813171774645890368",
+      "date_posted": "2026-09-20",
+      "first_seen": "2026-09-21",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-09-21"
+    },
+    {
+      "job_id": "56e0c9a2cb773904",
+      "title": "IT Manager",
+      "company": "FetchJobs.co",
+      "location": "Remote",
+      "application_url": "https://www.linkedin.com/jobs/view/it-manager-at-fetchjobs-co-4469820233",
+      "date_posted": "2026-09-20",
+      "first_seen": "2026-09-21",
+      "salary_posted": "",
+      "platform_source": "JobsPipe",
+      "is_verified": false,
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "56a18ae08c76a2e7",
@@ -824,33 +884,72 @@
       "salary_posted": "",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
-      "job_id": "c9b40108a76af9dc",
+      "job_id": "b18f1fcce6d07541",
+      "title": "Head of Infrastructure & Security",
+      "company": "Albert Invent",
+      "location": "United States",
+      "application_url": "https://himalayas.app/companies/albert-invent/jobs/head-of-infrastructure-security",
+      "date_posted": "2026-09-20",
+      "first_seen": "2026-08-27",
+      "salary_posted": "",
+      "platform_source": "Himalayas",
+      "is_verified": false,
+      "last_seen": "2026-09-21"
+    },
+    {
+      "job_id": "614f458d924b8461",
+      "title": "IT Manager",
+      "company": "Virtual Vocations Inc",
+      "location": "United States",
+      "application_url": "https://jooble.org/away/2448024481169493993?p=1&pos=14&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=57&brelb=10&scr=120.99863&bscr=120.99863&aq=-5539318069205984822&elckey=813171774645890368",
+      "date_posted": "2026-09-19",
+      "first_seen": "2026-09-21",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-09-21"
+    },
+    {
+      "job_id": "6a859a440a9af8eb",
+      "title": "IT Manager",
+      "company": "UnitedHealth Group",
+      "location": "United States",
+      "application_url": "https://jooble.org/away/991342268517027767?p=1&pos=15&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=39&brelb=10&scr=120.99863&bscr=120.99863&aq=-5539318069205984822&elckey=813171774645890368",
+      "date_posted": "2026-09-19",
+      "first_seen": "2026-09-21",
+      "salary_posted": "$91.7k - $163.7k",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-09-21"
+    },
+    {
+      "job_id": "814e36325ac38137",
       "title": "IT Director",
       "company": "South Florida Tech Hub",
       "location": "Palm Beach Gardens, FL",
-      "application_url": "https://jooble.org/away/-7754845822274981192?p=1&pos=9&rgn=55157&cid=13154&ckey=IT+Director&jobAge=34&brelb=10&scr=164.49951&bscr=164.49951&aq=-4801451334419349324&elckey=-8827968949619735576",
+      "application_url": "https://jooble.org/away/-7754845822274981192?p=1&pos=8&rgn=55157&cid=13154&ckey=IT+Director&jobAge=56&brelb=10&scr=157.86917&bscr=157.86917&aq=-4640499604194459876&elckey=4545891676063846792",
       "date_posted": "2026-09-19",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "salary_posted": "",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
-      "job_id": "c383687f5fbd0955",
+      "job_id": "7899f3a4f58b5c82",
       "title": "IT Manager",
       "company": "Saft America, Inc.",
       "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/2448540314537678306?p=1&pos=4&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=35&brelb=100&scr=185.84055&bscr=185.84055&aq=-6987746665112499786&elckey=8585319880290776717",
+      "application_url": "https://jooble.org/away/2448540314537678306?p=1&pos=4&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=57&brelb=100&scr=190.76654&bscr=190.76654&aq=8691241183494443640&elckey=3512436432264807469",
       "date_posted": "2026-09-19",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "salary_posted": "",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "96b963e35d2a0ff9",
@@ -863,20 +962,33 @@
       "salary_posted": "$143,000.00 - $243,000.00",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
-      "job_id": "4f269399abe03b54",
+      "job_id": "ae55be0d8ddd5a0f",
       "title": "IT Manager",
-      "company": "Carparts Inc",
-      "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/3627093164848370787?p=1&pos=2&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=17&brelb=10&scr=246.6561&bscr=246.6561&aq=-6987746665112499786&elckey=8585319880290776717",
+      "company": "Ferguson Enterprises",
+      "location": "United States",
+      "application_url": "https://jooble.org/away/7421974657577864125?p=1&pos=17&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=57&brelb=10&scr=120.70426&bscr=120.70426&aq=-5539318069205984822&elckey=813171774645890368",
       "date_posted": "2026-09-19",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "salary_posted": "",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
+    },
+    {
+      "job_id": "3e92e197e774ed6d",
+      "title": "IT Manager",
+      "company": "Carparts Inc",
+      "location": "Jacksonville, FL",
+      "application_url": "https://jooble.org/away/3627093164848370787?p=1&pos=2&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=39&brelb=10&scr=239.23035&bscr=239.23035&aq=8691241183494443640&elckey=3512436432264807469",
+      "date_posted": "2026-09-19",
+      "first_seen": "2026-09-21",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "c9fcd3f110a72272",
@@ -889,7 +1001,7 @@
       "salary_posted": "$87,781–$129,593/annual",
       "platform_source": "Himalayas",
       "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "e2baa1565c910f2c",
@@ -902,33 +1014,20 @@
       "salary_posted": "$120,000–$130,000/year",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
-      "job_id": "4185df11f44b88f0",
+      "job_id": "36cea15dcb0c2fc5",
       "title": "IT Manager",
       "company": "Jimerson Birr",
       "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/-4573699538230738571?p=1&pos=3&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=59&brelb=100&scr=185.84055&bscr=185.84055&aq=-6987746665112499786&elckey=8585319880290776717",
+      "application_url": "https://jooble.org/away/-4573699538230738571?p=1&pos=3&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=81&brelb=100&scr=190.76654&bscr=190.76654&aq=8691241183494443640&elckey=3512436432264807469",
       "date_posted": "2026-09-18",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "salary_posted": "",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-09-20"
-    },
-    {
-      "job_id": "414bf941e76baac4",
-      "title": "IT Manager",
-      "company": "BuiltIn Integration Sandbox",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/5488773974209579753?p=1&pos=13&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=36&brelb=10&scr=124.60678&bscr=124.60678&aq=-3947068382087389975&elckey=5886055222671859616",
-      "date_posted": "2026-09-18",
-      "first_seen": "2026-09-20",
-      "salary_posted": "$65k - $85k",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "9fab292827de31de",
@@ -941,33 +1040,20 @@
       "salary_posted": "$141,750–$172,462.5/annual",
       "platform_source": "Himalayas",
       "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
-      "job_id": "9d051943576aeee0",
-      "title": "Technology Director, IT Infrastructure, Cyber and Service Delivery",
-      "company": "",
-      "location": "Jacksonville FL",
-      "application_url": "https://www.employflorida.com/vosnet/jobbanks/jobdetails.aspx?enc=9B8/uT7EfbEIDLIMZ8rhowzqyZjsNU1dBVrIZPNl61aLdeYEgg50x36hjNUp+PGji6/Zx+S0U1aqdjNJuWi02wgk+qQG8sKREL0c7fo07W7CaMdIy2LkHBXMP5+dprM0haTyx4A7jCQ1j1/N8RypAhuCOf4YQMtm4pzx4Gk/f7bXNfUGjIW91gD1hl/L2Ke9CI3G3Eb1gb3Pho60h4W8BtcScE4aNJE1cOX1U6tE5t0xGuylklFwXNfPdSY3fkLMjYFBc5lYD5Q9tQhbTJKaYGIeiDhPlzPiMWCjbBKOgG7RcIMjbv2vBtI8LyGsO0mjG7ed8AF/ZUEmWtuftGqy6UjqEsGPZFC0bzja6PtaNnzkARBDR9wEh8kzMHkJ6XRBgXbzP/4K9FDnWn1nn4Uo295Pl1gI8DgtzXw48PAmjv2ivtesN99krW/taEq5DA0//yRJtw5bTbnK607wO0U+m88Xy3MpLtNNx/sNx6b1jOw50C9HVAa4FW5jEnEccjvRf1KDe4WL3k2bOOhPz0BK3eM+II5rJTgLrwc6BuEC/Y/ECGM1Q7nhLgTUPN9t0AZBxx6JFNcZmrO5EmyHgeLHPgygSzyX18Cy7OJhTmHi6aYdQef8WBGjH3hMucPxOzpmksVKsQ/EcHzxMVKnE2ctXfdJe/HKRXx3MkV9i0Z4DqJ9oX1TINo8gRhu7PYVjjBME7yHt0kmsHSTJCySbHR+3wVAuR/VsNNvAq0AiqO6RwI=",
-      "date_posted": "",
-      "first_seen": "2026-09-18",
-      "salary_posted": "",
-      "platform_source": "Employ Florida",
-      "is_verified": false,
-      "last_seen": "2026-09-20"
-    },
-    {
-      "job_id": "00ab1d622ed7840e",
+      "job_id": "8316158d36f565f9",
       "title": "Director of Infrastructure Engineering",
       "company": "Virtual Vocations Inc",
       "location": "United States",
-      "application_url": "https://jooble.org/away/-7870029319794089011?p=1&pos=2&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=83&brelb=10&scr=160.81364&bscr=160.81364&aq=-7840486688254454150&elckey=-3941101496936311301",
+      "application_url": "https://jooble.org/away/-7870029319794089011?p=1&pos=2&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=105&brelb=10&scr=155.89394&bscr=155.89394&aq=-5002604286444066523&elckey=-9013984944962280549",
       "date_posted": "2026-09-17",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "salary_posted": "",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "858a239797a675ca",
@@ -980,7 +1066,20 @@
       "salary_posted": "$120,000.00",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
+    },
+    {
+      "job_id": "c78d8856ad7b8ca4",
+      "title": "Director of IT Infrastructure",
+      "company": "Loews Hotels & Resorts",
+      "location": "Orlando, FL",
+      "application_url": "https://jooble.org/away/-7205998454835171181?p=1&pos=11&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=105&brelb=15&scr=91.74854&bscr=91.74854&aq=-5002604286444066523&elckey=-9013984944962280549",
+      "date_posted": "2026-09-17",
+      "first_seen": "2026-09-21",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "ab39f7e5b2a42aae",
@@ -993,46 +1092,20 @@
       "salary_posted": "",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
-      "job_id": "7c63083d7ab2e392",
+      "job_id": "ba0074cfcaad8b04",
       "title": "IT Manager",
       "company": "J&J Family of Companies",
       "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/-7458036323787378384?p=1&pos=1&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=83&brelb=10&scr=249.36018&bscr=249.36018&aq=-6987746665112499786&elckey=8585319880290776717",
+      "application_url": "https://jooble.org/away/-7458036323787378384?p=1&pos=1&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=105&brelb=10&scr=241.02397&bscr=241.02397&aq=8691241183494443640&elckey=3512436432264807469",
       "date_posted": "2026-09-17",
-      "first_seen": "2026-09-20",
+      "first_seen": "2026-09-21",
       "salary_posted": "$102k - $177.1k",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-09-20"
-    },
-    {
-      "job_id": "ddd2b0d6cbcaaec2",
-      "title": "IT Manager",
-      "company": "Insight Global",
-      "location": "Miami, FL",
-      "application_url": "https://jooble.org/away/8122528463144472123?p=1&pos=16&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=83&brelb=10&scr=124.32117&bscr=124.32117&aq=-3947068382087389975&elckey=5886055222671859616",
-      "date_posted": "2026-09-17",
-      "first_seen": "2026-09-20",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-09-20"
-    },
-    {
-      "job_id": "907521ddd4314b7b",
-      "title": "IT Director",
-      "company": "The Pipeline Group",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/343602119274160222?p=1&pos=8&rgn=55157&cid=13154&ckey=IT+Director&jobAge=107&brelb=10&scr=165.15959&bscr=165.15959&aq=-4801451334419349324&elckey=-8827968949619735576",
-      "date_posted": "2026-09-16",
-      "first_seen": "2026-09-20",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "5c26252c1395c906",
@@ -1045,20 +1118,7 @@
       "salary_posted": "$163,200–$224,400/year",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-09-20"
-    },
-    {
-      "job_id": "57fef2d3f5840259",
-      "title": "IT Manager",
-      "company": "Libra Software Group",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/2873785066618582628?p=1&pos=19&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=90&brelb=10&scr=124.32117&bscr=124.32117&aq=-3947068382087389975&elckey=5886055222671859616",
-      "date_posted": "2026-09-16",
-      "first_seen": "2026-09-20",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     },
     {
       "job_id": "d8f5698f6b8c6e93",
@@ -1071,46 +1131,7 @@
       "salary_posted": "$180,000 - $225,000",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-09-20"
-    },
-    {
-      "job_id": "7a16fb74b56f54ea",
-      "title": "IT Manager",
-      "company": "SeaHill Consulting Group",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/2775391082495190038?p=1&pos=4&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=131&brelb=10&scr=125.58433&bscr=125.58433&aq=-3947068382087389975&elckey=5886055222671859616",
-      "date_posted": "2026-09-15",
-      "first_seen": "2026-09-20",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-09-20"
-    },
-    {
-      "job_id": "04b11f4bd2afa419",
-      "title": "Director of IT Infrastructure",
-      "company": "Lakewood Regional Support Bldg",
-      "location": "Orlando, FL",
-      "application_url": "https://jooble.org/away/-7807138001327546800?p=1&pos=13&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=131&brelb=110&scr=80.36533&bscr=80.36533&aq=-7840486688254454150&elckey=-3941101496936311301",
-      "date_posted": "2026-09-15",
-      "first_seen": "2026-09-20",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-09-20"
-    },
-    {
-      "job_id": "a0db537484bb6875",
-      "title": "Vice President, IT and Security",
-      "company": "Automox",
-      "location": "United States",
-      "application_url": "https://himalayas.app/companies/automox/jobs/vice-president-it-and-security-6492762477",
-      "date_posted": "2026-09-14",
-      "first_seen": "2026-09-14",
-      "salary_posted": "$250,000–$270,000/annual",
-      "platform_source": "Himalayas",
-      "is_verified": false,
-      "last_seen": "2026-09-20"
+      "last_seen": "2026-09-21"
     }
   ]
 }
