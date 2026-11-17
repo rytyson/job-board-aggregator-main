@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-11-16T23:12:34.498996Z",
-  "total": 20,
-  "total_external": 39,
+  "last_updated": "2026-11-17T17:05:11.125305Z",
+  "total": 22,
+  "total_external": 30,
   "jobs": [
     {
       "job_id": "82b2d92a0604d847",
@@ -15,11 +15,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "salary_posted": null,
       "location_verified": "Jacksonville - Home Office - South Main, United States of America",
       "first_seen": "2026-10-24",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "ee34ee906ea9b64b",
@@ -33,11 +33,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "salary_posted": null,
-      "location_verified": "New Jersey (Remote)",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "location_verified": "New Jersey (Remote), United States of America",
       "first_seen": "2026-10-24",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "e96ece8165656980",
@@ -51,11 +51,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
       "salary_posted": null,
-      "location_verified": null,
+      "location_verified": "Remote",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "first_seen": "2026-10-22",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "82f3aa83b206bd03",
@@ -69,11 +69,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-10-21",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "538fa8f35a6f32d2",
@@ -89,9 +89,27 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "United States",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "first_seen": "2026-10-21",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
+    },
+    {
+      "job_id": "575da9d095c3535e",
+      "title": "Director of IT Applications",
+      "company": "suddath",
+      "company_slug": "suddath",
+      "location": "Jacksonville,Florida: United States of America",
+      "application_url": "https://suddath.wd5.myworkdayjobs.com/suddath/job/JacksonvilleFlorida-United-States-of-America/Director--Product-Development---Commercial_R12208",
+      "date_posted": "2026-10-16",
+      "platform_source": "Workday",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "is_live": true,
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
+      "salary_posted": null,
+      "location_verified": "Jacksonville - Home Office - South Main, United States of America",
+      "first_seen": "2026-10-17",
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "846ffcc09facb6ff",
@@ -107,9 +125,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "first_seen": "2026-10-15",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "2cbe2c12fcf3ad56",
@@ -125,9 +143,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "US, Remote",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "first_seen": "2026-10-15",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "c7277d6ed4e16e97",
@@ -143,9 +161,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote, USA",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "first_seen": "2026-10-12",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "2f38e0061f1181c6",
@@ -154,16 +172,16 @@
       "company_slug": "marmon",
       "location": "USA_OH_Remote",
       "application_url": "https://marmon.wd501.myworkdayjobs.com/marmon_careers/job/USA_OH_Remote/IT-Manager_JR0000046145",
-      "date_posted": null,
+      "date_posted": "2026-10-02",
       "platform_source": "Workday",
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "salary_posted": null,
-      "location_verified": "USA_OH_Remote",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "location_verified": "USA_OH_Remote, United States of America",
       "first_seen": "2026-10-03",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "9eb0e0c4ab00ca1b",
@@ -177,11 +195,29 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "salary_posted": "$150,000",
       "location_verified": null,
       "first_seen": "2026-09-30",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
+    },
+    {
+      "job_id": "a5fa5e133c33d01f",
+      "title": "Service Delivery Director",
+      "company": "agilent",
+      "company_slug": "agilent",
+      "location": "US-WI-Remote Location",
+      "application_url": "https://agilent.wd5.myworkdayjobs.com/agilent_careers/job/US-WI-Remote-Location/Service-Delivery-Director_4039705",
+      "date_posted": "2026-09-24",
+      "platform_source": "Workday",
+      "skill_level": "senior",
+      "is_recruiter": false,
+      "is_live": true,
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
+      "salary_posted": "$174,525",
+      "location_verified": "US-WI-Remote Location, United States of America",
+      "first_seen": "2026-09-25",
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "16bf6ab421bd4c39",
@@ -195,11 +231,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "salary_posted": "$130,000 – $150,000",
       "location_verified": null,
       "first_seen": "2026-09-23",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "c0383c639d2461c6",
@@ -215,9 +251,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "first_seen": "2026-09-16",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "cc9072f36305c78c",
@@ -233,9 +269,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "USA (remote)",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "first_seen": "2026-09-11",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "1ae6f588b28ec60e",
@@ -249,11 +285,11 @@
       "skill_level": "senior",
       "is_recruiter": true,
       "is_live": true,
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-08-25",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "0edd3ba33756b7e6",
@@ -269,9 +305,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote, United States",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "first_seen": "2026-08-18",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "0ac644015f23ad4c",
@@ -285,11 +321,11 @@
       "skill_level": "senior",
       "is_recruiter": false,
       "is_live": true,
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "salary_posted": null,
       "location_verified": null,
       "first_seen": "2026-08-01",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "5b7da91b69a2f471",
@@ -305,9 +341,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote - United States ",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "first_seen": "2026-07-25",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "ceca33ec216fa8f4",
@@ -323,9 +359,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote - United States ",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "first_seen": "2026-07-25",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "2ef7aba95a1cb57d",
@@ -341,9 +377,9 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "first_seen": "2026-07-18",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "c37fee1c2a005c1d",
@@ -359,22 +395,35 @@
       "is_live": true,
       "salary_posted": null,
       "location_verified": "Remote",
-      "liveness_checked_at": "2026-11-16T23:10:26.909684+00:00",
+      "liveness_checked_at": "2026-11-17T17:02:24.095076+00:00",
       "first_seen": "2026-06-14",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
-      "job_id": "7f87e133cd2b4ee1",
-      "title": "Director of Infrastructure",
-      "company": "Virtual Vocations Inc",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/5871311632310735162?p=1&pos=8&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=17&brelb=10&scr=161.19913&bscr=161.19913&aq=-2605853846078447596&elckey=-6417397995097741241",
+      "job_id": "6f16881d00eb1388",
+      "title": "Head of IT, Security",
+      "company": "Fullbay",
+      "location": "Remote",
+      "application_url": "https://www.remoterocketship.com/us/company/fullbay/jobs/head-of-it-security-arizona-remote/",
+      "date_posted": "",
+      "first_seen": "2026-11-17",
+      "salary_posted": "$151,465–$185,545/YEAR",
+      "platform_source": "JSearch (Google Jobs)",
+      "is_verified": false,
+      "last_seen": "2026-11-17"
+    },
+    {
+      "job_id": "1f4fbd8b1057bb88",
+      "title": "Director of Information Technology",
+      "company": "Talently",
+      "location": "Jacksonville, FL",
+      "application_url": "https://jooble.org/desc/-6259532054026200853?ckey=IT+Director&rgn=9348&pos=18&groupId=260&elckey=-4196072081244879677&p=1&aq=8063340737154985251&cid=13154&jobAge=35&brelb=10&bscr=103.291306&scr=103.291306",
       "date_posted": "2026-11-16",
-      "first_seen": "2026-11-16",
-      "salary_posted": "",
+      "first_seen": "2026-11-17",
+      "salary_posted": "$150k - $200k",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "4c57539e0e2835c4",
@@ -387,7 +436,7 @@
       "salary_posted": "",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "41072d2f61ee70ed",
@@ -400,7 +449,7 @@
       "salary_posted": "",
       "platform_source": "We Work Remotely",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "ec4069377f48c61d",
@@ -413,20 +462,85 @@
       "salary_posted": "",
       "platform_source": "JSearch (Google Jobs)",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
-      "job_id": "fd3db9e326be67d1",
+      "job_id": "788c6de53f246bf3",
+      "title": "IT Manager",
+      "company": "Mortgage Management Consultants",
+      "location": "Remote",
+      "application_url": "https://www.indeed.com/viewjob?jk=05fcff420c2a2e9d",
+      "date_posted": "2026-11-16",
+      "first_seen": "2026-11-17",
+      "salary_posted": "",
+      "platform_source": "JobsPipe",
+      "is_verified": false,
+      "last_seen": "2026-11-17"
+    },
+    {
+      "job_id": "a58d95aebd9bd3ea",
+      "title": "IT Manager",
+      "company": "Luminary Hospice",
+      "location": "Remote",
+      "application_url": "https://jooble.org/away/-5084936966106765639?p=1&pos=3&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=35&brelb=15&scr=150.64024&bscr=150.64024&aq=-4589309065188374058&elckey=1123135263610041038",
+      "date_posted": "2026-11-16",
+      "first_seen": "2026-11-17",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-11-17"
+    },
+    {
+      "job_id": "4fe636974a228334",
+      "title": "IT Manager",
+      "company": "Luminary Hospice",
+      "location": "Remote",
+      "application_url": "https://job-boards.greenhouse.io/luminaryhospice/jobs/5484025008",
+      "date_posted": "2026-11-16",
+      "first_seen": "2026-11-17",
+      "salary_posted": "",
+      "platform_source": "JobsPipe",
+      "is_verified": false,
+      "last_seen": "2026-11-17"
+    },
+    {
+      "job_id": "c3ffec25c4e29071",
       "title": "Director of IT and Infrastructure - FinTech",
       "company": "Jobot",
       "location": "United States",
-      "application_url": "https://jooble.org/away/8965328418220260006?p=1&pos=11&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=17&brelb=100&scr=130.91576&bscr=130.91576&aq=-2605853846078447596&elckey=-6417397995097741241",
+      "application_url": "https://jooble.org/away/8965328418220260006?p=1&pos=6&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=35&brelb=100&scr=130.64005&bscr=130.64005&aq=7171334188939084297&elckey=-8704021455998129879",
       "date_posted": "2026-11-16",
-      "first_seen": "2026-11-16",
+      "first_seen": "2026-11-17",
       "salary_posted": "$180k - $225k",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
+    },
+    {
+      "job_id": "dc7247975badba9d",
+      "title": "Director of IT",
+      "company": "Jobgether",
+      "location": "Remote",
+      "application_url": "https://jooble.org/away/4620136013636416099?p=1&pos=15&rgn=55157&cid=13154&ckey=IT+Director&jobAge=35&brelb=15&scr=99.26748&bscr=99.26748&aq=384213536857186292&elckey=4855855165027997462",
+      "date_posted": "2026-11-16",
+      "first_seen": "2026-11-17",
+      "salary_posted": "$175k - $250k",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-11-17"
+    },
+    {
+      "job_id": "66b933be0390ca98",
+      "title": "Director of IT",
+      "company": "Jobgether",
+      "location": "Remote",
+      "application_url": "https://jooble.org/away/4620136013636416099?p=1&pos=13&rgn=55157&cid=13154&ckey=Head+of+IT&jobAge=35&brelb=15&scr=40.598747&bscr=40.598747&aq=2185463475164803785&elckey=4658001452711056436",
+      "date_posted": "2026-11-16",
+      "first_seen": "2026-11-17",
+      "salary_posted": "$175k - $250k",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "1fcb5486e622f46b",
@@ -439,7 +553,7 @@
       "salary_posted": "$175,000–$250,000",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "270241cbc3a8ab22",
@@ -452,72 +566,7 @@
       "salary_posted": "$135,000–$164,000/year",
       "platform_source": "JobsPipe",
       "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "9e1c25df13ffaef6",
-      "title": "IT Director",
-      "company": "Swooped",
-      "location": "Remote",
-      "application_url": "https://www.linkedin.com/jobs/view/it-director-at-swooped-4491210307",
-      "date_posted": "2026-11-15",
-      "first_seen": "2026-11-15",
-      "salary_posted": "",
-      "platform_source": "JobsPipe",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "641c631c0a8e57b9",
-      "title": "IT Director",
-      "company": "Smart Tech Contracting LLC",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/5845371437089415294?p=1&pos=3&rgn=55157&cid=13154&ckey=IT+Director&jobAge=41&brelb=10&scr=184.65378&bscr=184.65378&aq=42935108366328818&elckey=7142478625928386100",
-      "date_posted": "2026-11-15",
-      "first_seen": "2026-11-16",
-      "salary_posted": "$140k - $180k",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "3a5afd273e76613a",
-      "title": "Director of Infrastructure Engineering",
-      "company": "ESR Healthcare",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/8536886152603476170?p=1&pos=4&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=41&brelb=10&scr=173.02393&bscr=173.02393&aq=-2605853846078447596&elckey=-6417397995097741241",
-      "date_posted": "2026-11-15",
-      "first_seen": "2026-11-16",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "fdd8158ea228e454",
-      "title": "IT Manager Cloud Platform Services",
-      "company": "Enterprise Mobility",
-      "location": "Remote",
-      "application_url": "https://www.resume-library.com/job/266326526/it-manager-cloud-platform-services",
-      "date_posted": "2026-11-15",
-      "first_seen": "2026-11-15",
-      "salary_posted": "",
-      "platform_source": "JobsPipe",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "7d44e38fc0f5ebeb",
-      "title": "IT Manager Workforce Technology",
-      "company": "Enterprise Mobility",
-      "location": "Remote",
-      "application_url": "https://www.resume-library.com/job/266326191/it-manager-workforce-technology",
-      "date_posted": "2026-11-15",
-      "first_seen": "2026-11-15",
-      "salary_posted": "",
-      "platform_source": "JobsPipe",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "9a9770cd6ccf14dc",
@@ -530,20 +579,33 @@
       "salary_posted": "",
       "platform_source": "JSearch (Google Jobs)",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
-      "job_id": "ffe910360189f259",
+      "job_id": "bc228f0a61d0a1b0",
       "title": "Director of Infrastructure Engineering",
       "company": "Virtual Vocations Inc",
       "location": "United States",
-      "application_url": "https://jooble.org/away/3645006439455387549?p=1&pos=1&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=65&brelb=10&scr=177.23677&bscr=177.23677&aq=-2605853846078447596&elckey=-6417397995097741241",
+      "application_url": "https://jooble.org/away/3645006439455387549?p=1&pos=1&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=83&brelb=10&scr=178.22441&bscr=178.22441&aq=7171334188939084297&elckey=-8704021455998129879",
       "date_posted": "2026-11-14",
-      "first_seen": "2026-11-16",
+      "first_seen": "2026-11-17",
       "salary_posted": "",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
+    },
+    {
+      "job_id": "079744e91e8bc692",
+      "title": "Head of IT PMO - Remote Leadership in Strategic Tech",
+      "company": "V T CORPORATE RESOURCE CTR",
+      "location": "United States",
+      "application_url": "https://jooble.org/away/-7569740193981366?p=1&pos=1&rgn=55157&cid=13154&ckey=Head+of+IT&jobAge=83&brelb=10&scr=197.08623&bscr=197.08623&aq=2185463475164803785&elckey=4658001452711056436",
+      "date_posted": "2026-11-14",
+      "first_seen": "2026-11-17",
+      "salary_posted": "",
+      "platform_source": "Jooble",
+      "is_verified": false,
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "f721c02032fd4b4f",
@@ -556,59 +618,59 @@
       "salary_posted": "$101,000–$119,000/annual",
       "platform_source": "Himalayas",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
-      "job_id": "9953de20ae25424b",
-      "title": "IT Manager - Infrastructure Operations + Automation",
-      "company": "OhioHealth",
-      "location": "Remote",
-      "application_url": "https://www.theladders.com/job/it-manager-infrastructure-operations-automation-ohiohealth-virtual-travel_89870967",
+      "job_id": "3b511ed37f2bc5bd",
+      "title": "Director of Infrastructure",
+      "company": "Sysdig",
+      "location": "United States",
+      "application_url": "https://jooble.org/away/-7493928855436964066?p=1&pos=4&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=83&brelb=10&scr=162.92259&bscr=162.92259&aq=7171334188939084297&elckey=-8704021455998129879",
       "date_posted": "2026-11-14",
-      "first_seen": "2026-11-15",
-      "salary_posted": "$110,000–$130,000/YEAR",
-      "platform_source": "JSearch (Google Jobs)",
+      "first_seen": "2026-11-17",
+      "salary_posted": "",
+      "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
-      "job_id": "79f8d3ef28d51374",
-      "title": "Director of IT",
-      "company": "NEX Inc.",
-      "location": "Remote",
-      "application_url": "https://www.indeed.com/viewjob?jk=272c6abef57a5486",
+      "job_id": "609d1febce851cf8",
+      "title": "IT Manager",
+      "company": "Revel Staffing",
+      "location": "Jacksonville, FL",
+      "application_url": "https://jooble.org/away/-6948072232798749726?p=1&pos=1&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=83&brelb=10&scr=263.85507&bscr=263.85507&aq=2535590044206928925&elckey=3822399921228958139",
       "date_posted": "2026-11-14",
-      "first_seen": "2026-11-14",
-      "salary_posted": "$175,000–$250,000/year",
-      "platform_source": "JobsPipe",
+      "first_seen": "2026-11-17",
+      "salary_posted": "",
+      "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
-      "job_id": "ab1e83ecd9c30c05",
+      "job_id": "7d89f6518b415a51",
       "title": "Director of IT",
       "company": "Nex",
       "location": "Remote",
-      "application_url": "https://jooble.org/away/4800647625716136330?p=1&pos=16&rgn=55157&cid=13154&ckey=IT+Director&jobAge=65&brelb=15&scr=97.940895&bscr=97.940895&aq=42935108366328818&elckey=7142478625928386100",
+      "application_url": "https://jooble.org/away/4800647625716136330?p=1&pos=16&rgn=55157&cid=13154&ckey=IT+Director&jobAge=83&brelb=15&scr=98.949936&bscr=98.949936&aq=384213536857186292&elckey=4855855165027997462",
       "date_posted": "2026-11-14",
-      "first_seen": "2026-11-16",
+      "first_seen": "2026-11-17",
       "salary_posted": "$175k - $250k",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
-      "job_id": "f73c732b96908e39",
+      "job_id": "061d4eceafe7a799",
       "title": "Director of IT",
       "company": "Nex",
       "location": "Remote",
-      "application_url": "https://jooble.org/away/4800647625716136330?p=1&pos=17&rgn=55157&cid=13154&ckey=Head+of+IT&jobAge=65&brelb=15&scr=40.203518&bscr=40.203518&aq=-1558466208334180099&elckey=6944624913611445074",
+      "application_url": "https://jooble.org/away/4800647625716136330?p=1&pos=14&rgn=55157&cid=13154&ckey=Head+of+IT&jobAge=83&brelb=15&scr=40.468845&bscr=40.468845&aq=2185463475164803785&elckey=4658001452711056436",
       "date_posted": "2026-11-14",
-      "first_seen": "2026-11-16",
+      "first_seen": "2026-11-17",
       "salary_posted": "$175k - $250k",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "4785de2067822785",
@@ -621,98 +683,59 @@
       "salary_posted": "",
       "platform_source": "JSearch (Google Jobs)",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
-      "job_id": "fd706ae3da3eecb9",
-      "title": "Director of Infrastructure Engineering",
-      "company": "ManTech",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/-3543499367942956795?p=1&pos=3&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=65&brelb=10&scr=173.31627&bscr=173.31627&aq=-2605853846078447596&elckey=-6417397995097741241",
-      "date_posted": "2026-11-14",
-      "first_seen": "2026-11-16",
-      "salary_posted": "$152.2k - $273.9k",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "c1fc427b2d3ccf46",
-      "title": "IT Manager – Front Office Business Applications",
-      "company": "Forescout Technologies Inc.",
-      "location": "Remote",
-      "application_url": "https://www.linkedin.com/jobs/view/it-manager-%E2%80%93-front-office-business-applications-at-forescout-technologies-inc-4465372260",
-      "date_posted": "2026-11-14",
-      "first_seen": "2026-11-14",
-      "salary_posted": "",
-      "platform_source": "JobsPipe",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "865003b731ca26b4",
+      "job_id": "1ece197ac9ead9bd",
       "title": "IT Director",
       "company": "Virtual Vocations Inc",
       "location": "United States",
-      "application_url": "https://jooble.org/away/-4515136548686749779?p=1&pos=2&rgn=55157&cid=13154&ckey=IT+Director&jobAge=89&brelb=10&scr=187.50253&bscr=187.50253&aq=42935108366328818&elckey=7142478625928386100",
+      "application_url": "https://jooble.org/away/-4233852856083733479?p=1&pos=2&rgn=55157&cid=13154&ckey=IT+Director&jobAge=107&brelb=10&scr=191.09471&bscr=191.09471&aq=384213536857186292&elckey=4855855165027997462",
       "date_posted": "2026-11-13",
-      "first_seen": "2026-11-16",
+      "first_seen": "2026-11-17",
       "salary_posted": "",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
-      "job_id": "1cc2bed1e028cdd8",
+      "job_id": "bde986c10fca958f",
       "title": "IT Manager",
       "company": "Virtual Vocations Inc",
       "location": "United States",
-      "application_url": "https://jooble.org/away/-868159516817350799?p=1&pos=12&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=89&brelb=10&scr=137.47792&bscr=137.47792&aq=-8070496832885465102&elckey=3409758724510429676",
+      "application_url": "https://jooble.org/away/-868159516817350799?p=1&pos=11&rgn=55157&cid=13154&ckey=IT+Manager&jobAge=107&brelb=10&scr=140.70163&bscr=140.70163&aq=-4589309065188374058&elckey=1123135263610041038",
       "date_posted": "2026-11-13",
-      "first_seen": "2026-11-16",
+      "first_seen": "2026-11-17",
       "salary_posted": "",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
-      "job_id": "5d7beb5ec37a93f2",
-      "title": "Head of IT",
-      "company": "Tekmetric",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/-7039835453218721677?p=1&pos=2&rgn=55157&cid=13154&ckey=Head+of+IT&jobAge=89&brelb=10&scr=196.30353&bscr=196.30353&aq=-1558466208334180099&elckey=6944624913611445074",
-      "date_posted": "2026-11-13",
-      "first_seen": "2026-11-16",
-      "salary_posted": "$300 per month",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "9b9344e4e709e84f",
-      "title": "Head of IT",
-      "company": "Micro IT Global",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/-5382895178366826851?p=1&pos=4&rgn=55157&cid=13154&ckey=Head+of+IT&jobAge=89&brelb=10&scr=194.03497&bscr=194.03497&aq=-1558466208334180099&elckey=6944624913611445074",
-      "date_posted": "2026-11-13",
-      "first_seen": "2026-11-16",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "7478a40632af706a",
+      "job_id": "f2cf5569c5bcb763",
       "title": "IT Director",
-      "company": "MAG - MyAmazon Guy.",
+      "company": "Virtual Vocations Inc",
       "location": "United States",
-      "application_url": "https://jooble.org/away/-4946083603606756461?p=1&pos=6&rgn=55157&cid=13154&ckey=IT+Director&jobAge=89&brelb=10&scr=178.495&bscr=178.495&aq=42935108366328818&elckey=7142478625928386100",
+      "application_url": "https://jooble.org/away/-4233852856083733479?p=1&pos=20&rgn=55157&cid=13154&ckey=Head+of+IT&jobAge=107&brelb=10&scr=39.079136&bscr=39.079136&aq=2185463475164803785&elckey=4658001452711056436",
       "date_posted": "2026-11-13",
-      "first_seen": "2026-11-16",
+      "first_seen": "2026-11-17",
       "salary_posted": "",
       "platform_source": "Jooble",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
+    },
+    {
+      "job_id": "36b8714584086376",
+      "title": "IT Director",
+      "company": "Smart Tech Contracting",
+      "location": "United States",
+      "application_url": "https://himalayas.app/companies/smart-tech-contracting/jobs/it-director?utm_source=api",
+      "date_posted": "2026-11-12",
+      "first_seen": "2026-11-12",
+      "salary_posted": "$140,000–$180,000/annual",
+      "platform_source": "Himalayas",
+      "is_verified": false,
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "e45c84e153c44a5e",
@@ -725,7 +748,7 @@
       "salary_posted": "",
       "platform_source": "JSearch (Google Jobs)",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "f8372f87fa092ce2",
@@ -738,46 +761,7 @@
       "salary_posted": "",
       "platform_source": "Himalayas",
       "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "31367b9b88cce235",
-      "title": "Head of IT Systems Engineering",
-      "company": "Asana",
-      "location": "Remote",
-      "application_url": "https://jooble.org/desc/-5545398761117135780?ckey=Head+of+IT&rgn=55157&pos=11&groupId=40365&elckey=6944624913611445074&p=1&aq=-1558466208334180099&cid=13154&jobAge=113&brelb=100&bscr=47.86921&scr=47.86921",
-      "date_posted": "2026-11-12",
-      "first_seen": "2026-11-16",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "6286f63ad7be7bcb",
-      "title": "Director, Head of IT – Data, Analytics, Information Management, Automation, AI",
-      "company": "Lantheus",
-      "location": "Remote",
-      "application_url": "https://www.remoterocketship.com/us/company/lantheus/jobs/director-head-of-it-data-analytics-information-management-automation-ai-massachusetts-remote/",
-      "date_posted": "",
-      "first_seen": "2026-11-11",
-      "salary_posted": "$172,000–$287,000/YEAR",
-      "platform_source": "JSearch (Google Jobs)",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "f4fd9131e7447d53",
-      "title": "Director of Infrastructure",
-      "company": "EXPO",
-      "location": "United States",
-      "application_url": "https://jooble.org/away/-1670493437145365717?p=1&pos=7&rgn=55157&cid=13154&ckey=Director+of+Infrastructure&jobAge=123&brelb=10&scr=166.22646&bscr=166.22646&aq=-2605853846078447596&elckey=-6417397995097741241",
-      "date_posted": "2026-11-11",
-      "first_seen": "2026-11-16",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "bf6b6ac58a9e40a3",
@@ -790,72 +774,7 @@
       "salary_posted": "$206,500–$250,000/annual",
       "platform_source": "Himalayas",
       "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "5dd0c4a365182c84",
-      "title": "IT Manager",
-      "company": "Revel Staffing",
-      "location": "Jacksonville, FL",
-      "application_url": "https://jooble.org/away/6643966202407733725?p=1&pos=2&rgn=9348&cid=13154&ckey=IT+Manager&jobAge=161&brelb=110&scr=201.97525&bscr=201.97525&aq=-7363257153220284492&elckey=6109023382129346777",
-      "date_posted": "2026-11-10",
-      "first_seen": "2026-11-16",
-      "salary_posted": "",
-      "platform_source": "Jooble",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "3944cc5326a984c5",
-      "title": "Head of Technology & Product (US or Europe, remote)",
-      "company": "Extenteam Careers",
-      "location": "Remote",
-      "application_url": "https://www.ziprecruiter.com/c/extenteam-careers/Job/Head-of-Technology-&-Product-(US-or-Europe,-remote)/-in-Remote,US?jid=a0ee1d96bd2c8f39",
-      "date_posted": "",
-      "first_seen": "2026-11-10",
-      "salary_posted": "",
-      "platform_source": "JSearch (Google Jobs)",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "7ffff1d0b272a73b",
-      "title": "IT Manager",
-      "company": "Center for Orthopedic Research and Educa",
-      "location": "Jacksonville, FL",
-      "application_url": "https://www.indeed.com/viewjob?jk=b021b5a8731550ad",
-      "date_posted": "",
-      "first_seen": "2026-11-10",
-      "salary_posted": "",
-      "platform_source": "JSearch (Google Jobs)",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "ce41aca6b3623f2c",
-      "title": "Head of IT Delivery",
-      "company": "SiriusPoint",
-      "location": "Remote",
-      "application_url": "https://www.tealhq.com/job/head-of-it-delivery_7ea1ad28b3c19cefb96cd30f643d05f3a96ef",
-      "date_posted": "",
-      "first_seen": "2026-11-07",
-      "salary_posted": "$265,000–$285,000/YEAR",
-      "platform_source": "JSearch (Google Jobs)",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
-    },
-    {
-      "job_id": "04531491e5f89716",
-      "title": "Head of IT - Connected Care",
-      "company": "Philips",
-      "location": "Remote",
-      "application_url": "https://www.ziprecruiter.com/c/phillips-research/Job/Head-of-IT-Connected-Care/-in-Cambridge,MA?jid=aae6b19d70c233c7",
-      "date_posted": "",
-      "first_seen": "2026-11-07",
-      "salary_posted": "",
-      "platform_source": "JSearch (Google Jobs)",
-      "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     },
     {
       "job_id": "44f1e0d45a41bf56",
@@ -868,7 +787,7 @@
       "salary_posted": "",
       "platform_source": "JSearch (Google Jobs)",
       "is_verified": false,
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-17"
     }
   ]
 }
